@@ -1,23 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
+import AdminDespachoView from './pages/admin/admin_view_despacho';
+//import ModalComponent from './components/list.component';
+import MyTabs from './pages/admin/admin_view_index';
+import LoginForm from './pages/log_index';
+//import AdminDespachoView from './pages/admin/admin_view_despacho';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <LoginForm/>
     </div>
   );
 }
