@@ -9,43 +9,26 @@ import ListFact from "../../components/configComponents/Facturas.component";
 export function ConfigPage() {
   const [valueP, setValueP] = useState('');
 
-  const selected = (event) =>{
-    setValueP(event.target.value);
+  const selected = (event, value) => {
+    setValueP(value);
   }
 
   return (
     <>
       <div className="card" style={{ margin: "0.5rem" }}>
-        <div className="col-12">
-          <div className="card">
-            <div className="card-body border-bottom py-3">
-              <div className="d-flex">
-                <div style={{ display: "flex" }}>
-                  <div className="col-6 col-sm-4 col-md-2 col-xl mb-3">
-                    <button className="btn btn-primary w-auto" >
-                      ACTUALIZAR
-                    </button>
-                  </div>
-                  <div className="mb-auto" style={{ marginRight: "10px", marginLeft: "10px" }}>
-                    <select name="countries" id="select-countries" className="form-select" onChange={selected}>
-                      <option value="0">--MASTER--</option>
-                      <option value="1">TRANSPORTISTAS</option>
-                      <option value="2">CAMIONES</option>
-                      <option value="3">USUARIOS</option>
-                      <option value="4">FACTURAS</option>
-                    </select>
-                  </div>
-                </div>
-
-              </div>
-            </div>
+        <div style={{width : '50%'}}>
+          <div className="navbar navbar-expand-md navbar-light d-print-none">
+            <button className="btn btn-ghost-primary active w-25" onClick={(event) => selected(event, '1')}>TRANSPORTISTAS</button>
+            <button className="btn btn-ghost-primary w-25" onClick={(event) => selected(event, '2')}>CAMIONES</button>
+            <button className="btn btn-ghost-primary w-25" onClick={(event) => selected(event, '3')}>USUARIOS</button>
+            <button className="btn btn-ghost-primary w-25" onClick={(event) => selected(event, '4')}>FACTURAS</button>
           </div>
-          {valueP === '4' ? <ListFact /> : null}
-          {valueP === '1' ? <ListTransportistas/> : null}
-          {valueP === '2' ? <ListaCamiones/>: null}
-          {valueP === '3' ? <ListUsuarios/> : null}
-
         </div>
+        {valueP === '1' ? <ListTransportistas /> : null}
+        {valueP === '2' ? <ListaCamiones /> : null}
+        {valueP === '3' ? <ListUsuarios /> : null}
+        {valueP === '4' ? <ListFact /> : null}
+
       </div>
     </>
   )

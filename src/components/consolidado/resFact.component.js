@@ -25,9 +25,10 @@ function ResumenFacturas() {
 
   return (
     <>
-      <div className="card">
+      <div className="card" style={{ margin: "0.5rem" }}>
         <div className="col-6 col-sm-4 col-md-2 col-xl mb-3">
           <button className="btn btn-primary w-auto" style={{ marginTop: '0.5rem', marginBottom: '0rem' }} onClick={getFacs}>
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></svg>
             ACTUALIZAR
           </button>
         </div>
@@ -75,8 +76,10 @@ function ResumenFacturas() {
             </tr>
           </thead>
           <tbody>
-            {data.map((item) => (
-              <tr key={item.id}>
+            {data.map((item) => {
+              let valor = item.state_name === 'EN TRANSITO' ? '#48C9B0' : '#CD6155' 
+              return(
+              <tr key={item.id} style={{backgroundColor : valor}}>
                 <td><span className="text-muted">{item.ref_factura}</span></td>
                 <td><a href="invoice.html" className="text-reset" tabindex="-1">{item.lista_empaque}</a></td>
                 <td>{item.cliente}</td>
@@ -89,8 +92,8 @@ function ResumenFacturas() {
                 <td>{item.state_name}</td>
                 <td>{item.nombre}</td>
                 <td>{item.placa}</td>
-              </tr>
-            ))}
+              </tr>)
+            })}
           </tbody>
         </table>
       </div>
