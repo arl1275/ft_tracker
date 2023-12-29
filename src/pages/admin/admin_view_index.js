@@ -4,6 +4,7 @@ import AdminDespachoView from './admin_view_despacho';
 //import ResumenFacturas from '../../components/resFact.component';
 import ResumenFacturas from '../../components/consolidado/resFact.component';
 import { ConfigPage } from '../configViews/config.page';
+import { ResumenHistorico } from '../../components/Historico/hisotico.view';
 
 //styles from plantilla
 
@@ -42,7 +43,8 @@ function MyTabs() {
                           <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><circle cx="7" cy="17" r="2" /><circle cx="17" cy="17" r="2" /><path d="M5 17h-2v-11a1 1 0 0 1 1 -1h9v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5" /></svg>
                           </span>
-                          DESPACHO</button>
+                          DESPACHO
+                          </button>
                       </span>
                     </a>
                   </li>
@@ -53,20 +55,20 @@ function MyTabs() {
                           <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M16 6h3a1 1 0 0 1 1 1v11a2 2 0 0 1 -4 0v-13a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1v12a3 3 0 0 0 3 3h11" /><line x1="8" y1="8" x2="12" y2="8" /><line x1="8" y1="12" x2="12" y2="12" /><line x1="8" y1="16" x2="12" y2="16" /></svg>
                           </span>
-                          RESUMEN</button>
+                          RESUMEN DE ACTIVOS</button>
                       </span>
                     </a>
                   </li>
 
                   <li class="nav-item">
-                    <a class="nav-link" href="./form-elements.html" >
+                    
+                    <button class="btn" onClick={() => { setPage("HISTO") }} style={{borderWidth : 0}}>
                       <span class="nav-link-icon d-md-none d-lg-inline-block">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18" /><line x1="13" y1="8" x2="15" y2="8" /><line x1="13" y1="12" x2="15" y2="12" /></svg>
                       </span>
-                      <span class="nav-link-title">
                         HISTORICO
-                      </span>
-                    </a>
+                      </button>
+                    
                   </li>
                 </ul>
               </div>
@@ -78,6 +80,7 @@ function MyTabs() {
         {page == "DESPACHO" && <AdminDespachoView />}
         {page == "RESUMEN" && <ResumenFacturas />}
         {page == "CONFIG" && <ConfigPage />}
+        {page == "HISTO" && <ResumenHistorico/>}
       </body>
     </>
   );

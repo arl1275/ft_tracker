@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { bk_dir } from "../../conf/configuration.file";
 import ListaCamiones from "../../components/configComponents/Camiones.component";
 import ListUsuarios from "../../components/configComponents/Usuarios.components";
 import ListTransportistas from "../../components/configComponents/Transportistas.components";
