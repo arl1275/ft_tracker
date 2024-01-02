@@ -8,7 +8,8 @@ import { AlterFact } from "./modals/AlterFact.modal";
 function ListFact() {
     const [data, setData] = useState([]);
     const [factShow, setFactShow] = useState(null);
-    const [showFotos, setShowFotos] = useState('');         // this is the refers to FotosView      // this is to open the FotosView
+    const [showFotos, setShowFotos] = useState('');         // this is the refers to FotosView
+    const [fotoid, setFotoid] = useState(0);
 
     const formatDate = (inputDate) => {
         return new Date(inputDate).toISOString().replace('T', ' ').replace(/\.\d+Z$/, '');
@@ -26,6 +27,10 @@ function ListFact() {
         } catch (err) {
             console.log('error al obtener los datos : ', err);
         }
+    }
+
+    const handleIdFotos = (val) => {
+        setFotoid(val);
     }
 
     return (
@@ -54,7 +59,7 @@ function ListFact() {
                                     <td style={{padding: '8px', border: '1px solid #ddd',}}>{item.state_name}</td>
                                     <td style={{padding: '8px', border: '1px solid #ddd',}}>{item.nombre}</td>
                                     <td style={{padding: '8px', border: '1px solid #ddd',}}>{item.placa}</td>
-                                    <td style={{padding: '8px', border: '1px solid #ddd',}} data-toggle="modal" data-target="#modal-simple1"
+                                    <td style={{padding: '8px', border: '1px solid #ddd',}} data-toggle="modal" data-target="#modal-full-witdh"
                                     onClick={()=>{}}>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                                             stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -83,7 +88,7 @@ function ListFact() {
                                     <div style={{ marginLeft: 'auto' }}>
                                     <button style={{borderWidth: 0, backgroundColor: '#084670'}} 
                                         data-toggle="modal" data-target="#modal-simple"
-                                        onClick={()=>setShowFotos(factShow.ref_factura)}> 
+                                        onClick={()=>{handleIdFotos(factShow.id); }}> 
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" color='white' width="24" height="24" viewBox="0 0 24 24"
                                             stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" /><rect x="3" y="4" width="18" height="16" rx="3" />
@@ -189,14 +194,14 @@ function ListFact() {
                 <div className="modal-dialog modal-dialog-centered" >
                 <div className="modal-content"  style={{width : '800px'}}>
                             <div className="modal-header" style={{backgroundColor : '#02395E'}}>
-                                <h4 style={{color : 'white'}}>FACTURA : {showFotos}</h4>
+                                <h4 style={{color : 'white'}}>FACTURA : {fotoid}</h4>
                             </div>
-                            <FotosView props={showFotos}/>
+                            <FotosView props={fotoid}/>
                         </div>
                 </div>
             </div>
 
-            <div class="modal modal-blur fade" id="modal-simple1" tabindex="-1" role="dialog" aria-hidden="true" >
+            <div class="modal modal-blur fade" id="modal-full-witdh" tabindex="-1" role="dialog" aria-hidden="true" >
                 <div className="modal-dialog modal-dialog-centered" >
                 <div className="modal-content"  style={{width : '4000px'}}>
                             <div className="modal-header" style={{backgroundColor : '#C12007'}}>
