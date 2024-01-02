@@ -20,7 +20,8 @@ function ListTransportistas() {
       }
 
     return (
-        <div class="col-12">
+        <div>
+        <div class="col-12" style={{width : '50%', margin : 10}}>
             <div class="card">
                 <div class="table-responsive">
                     <table class="table table-vcenter card-table">
@@ -55,7 +56,7 @@ function ListTransportistas() {
                 </div>
             </div>
         </div>
-                                
+        </div>         
     )
 
 }

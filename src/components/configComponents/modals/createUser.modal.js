@@ -32,8 +32,8 @@ export const CreateUser = () => {
     return (
         <>
             <div className="card">
-                <div className="modal-header">
-                    <h2>CREAR USUARIO</h2>
+                <div className="modal-header" style={{backgroundColor : '#02395E'}}>
+                    <h2 style={{color : 'white'}}>CREAR USUARIO</h2>
                 </div>
 
                 <div className="modal-body">

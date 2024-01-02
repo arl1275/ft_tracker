@@ -48,11 +48,9 @@ function ListUsuarios() {
                                 <thead>
                                     <tr>
                                         <th>
-                                            <button data-toggle="modal" data-target="#modal-simple">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" /><line x1="12" y1="5" x2="12" y2="19" />
-                                                    <line x1="5" y1="12" x2="19" y2="12" />
-                                                </svg>
+                                            <button data-toggle="modal" data-target="#modal-simple" 
+                                            style={{backgroundColor : 'green', borderWidth : 0, width : '100%', height : 'auto'}}>
+                                                <div style={{color : 'white'}}>CREAR</div>
                                             </button>
                                         </th>
                                         <th>NOMBRE</th>
@@ -128,13 +126,11 @@ function ListUsuarios() {
             </div>
 
 
-            <div class="modal modal-blur fade" id="modal-simple" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal modal-blur fade" id="modal-simple" tabindex="-1" role="dialog" aria-hidden="true" >
                 <div className="modal-dialog modal-sm modal-dialog-centered" role="document">
-                    <div className="modal-content" style={{ width: 'auto' }}>
-                        <div className="modal-body">
+                <div className="modal-content">
                             <CreateUser />
-                        </div>
-                    </div>
+                </div>
                 </div>
             </div>
 

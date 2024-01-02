@@ -60,7 +60,7 @@ export const ConfigUser = ({dat}) => {
                 <h3>CONFIGURAR USUARIO</h3>
 
                 {isEditing ?
-                    <div style={{display : 'flex', flexDirection : 'row'}}>
+                    <div style={{display : 'flex', flexDirection : 'row', marginLeft : '40%'}}>
                         <button style={{ marginLeft: '5px', alignSelf : 'end'}} className="btn btn-dark w-auto" onClick={()=>{handleEdit(); updateUser()}}>
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                                 stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -104,7 +104,7 @@ export const ConfigUser = ({dat}) => {
                                     </tr>
                                     <tr>
                                         <td>Password:</td>
-                                        <td>******************</td>
+                                        <td>###</td>
                                     </tr>
                                     <tr>
                                         <td>QR:</td>
