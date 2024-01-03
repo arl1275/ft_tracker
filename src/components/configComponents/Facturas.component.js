@@ -40,12 +40,12 @@ function ListFact() {
                 <table className="table-responsive">
                     <thead style={{ backgroundColor: '#084670', color: 'white',fontWeight: 'bold',}}>
                         <tr>
-                            <th style={{padding: '8px', border: '1px solid #ddd',}}>FACTURA</th>
-                            <th style={{padding: '8px', border: '1px solid #ddd',}}>CLIENTE</th>
-                            <th style={{padding: '8px', border: '1px solid #ddd',}}>LISTA DE EMPAQUE</th>
-                            <th style={{padding: '8px', border: '1px solid #ddd',}}>ESTADO</th>
-                            <th style={{padding: '8px', border: '1px solid #ddd',}}>NOMBRE</th>
-                            <th style={{padding: '8px', border: '1px solid #ddd',}}>PLACA</th>
+                            <th style={{padding: '8px', border: '1px solid #ddd'}}>FACTURA</th>
+                            <th style={{padding: '8px', border: '1px solid #ddd'}}>CLIENTE</th>
+                            <th style={{padding: '8px', border: '1px solid #ddd'}}>LISTA DE EMPAQUE</th>
+                            <th style={{padding: '8px', border: '1px solid #ddd'}}>ESTADO</th>
+                            <th style={{padding: '8px', border: '1px solid #ddd'}}>NOMBRE</th>
+                            <th style={{padding: '8px', border: '1px solid #ddd'}}>PLACA</th>
                             <th/>
                         </tr>
                     </thead>
@@ -53,14 +53,13 @@ function ListFact() {
                         {
                             data.map((item) => (
                                 <tr onClick={() => { setFactShow(item) }}>
-                                    <td style={{padding: '8px', border: '1px solid #ddd',}}>{item.ref_factura}</td>
-                                    <td style={{padding: '8px', border: '1px solid #ddd',}}>{item.cliente}</td>
-                                    <td style={{padding: '8px', border: '1px solid #ddd',}}>{item.lista_empaque}</td>
-                                    <td style={{padding: '8px', border: '1px solid #ddd',}}>{item.state_name}</td>
-                                    <td style={{padding: '8px', border: '1px solid #ddd',}}>{item.nombre}</td>
-                                    <td style={{padding: '8px', border: '1px solid #ddd',}}>{item.placa}</td>
-                                    <td style={{padding: '8px', border: '1px solid #ddd',}} data-toggle="modal" data-target="#modal-full-witdh"
-                                    onClick={()=>{}}>
+                                    <td style={{padding: '8px', border: '1px solid #ddd'}}>{item.ref_factura}</td>
+                                    <td style={{padding: '8px', border: '1px solid #ddd'}}>{item.cliente}</td>
+                                    <td style={{padding: '8px', border: '1px solid #ddd'}}>{item.lista_empaque}</td>
+                                    <td style={{padding: '8px', border: '1px solid #ddd'}}>{item.state_name}</td>
+                                    <td style={{padding: '8px', border: '1px solid #ddd'}}>{item.nombre}</td>
+                                    <td style={{padding: '8px', border: '1px solid #ddd'}}>{item.placa}</td>
+                                    <td style={{padding: '8px', border: '1px solid #ddd'}} data-toggle="modal" data-target="#modal-full-width">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                                             stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -201,14 +200,14 @@ function ListFact() {
                 </div>
             </div>
 
-            <div class="modal modal-blur fade" id="modal-full-witdh" tabindex="-1" role="dialog" aria-hidden="true" >
-                <div className="modal-dialog modal-dialog-centered" >
-                <div className="modal-content"  style={{width : '4000px'}}>
-                            <div className="modal-header" style={{backgroundColor : '#C12007'}}>
-                                <h4 style={{color : 'white'}}>AJUSTES DE FACTURA</h4>
-                            </div>
-                            <AlterFact props={showFotos}/>
-                        </div>
+            <div class="modal modal-blur fade" id="modal-full-width" tabindex="-1" role="dialog" aria-hidden="true" >
+                <div className="modal-dialog centered w-75">
+                <div className="modal-content" style={{width : '100%'}}>
+                    <div className="modal-header" style={{backgroundColor : '#C12007'}}>
+                        <h4 style={{color : 'white'}}>AJUSTES DE FACTURA</h4>
+                    </div>
+                        <AlterFact props={showFotos}/>
+                    </div>
                 </div>
             </div>
 
