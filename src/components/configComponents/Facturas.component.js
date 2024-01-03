@@ -7,9 +7,9 @@ import { AlterFact } from "./modals/AlterFact.modal";
 
 function ListFact() {
     const [data, setData] = useState([]);
-    const [factShow, setFactShow] = useState(null);
-    const [showFotos, setShowFotos] = useState('');         // this is the refers to FotosView
-    const [fotoid, setFotoid] = useState(0);
+    const [factShow, setFactShow] = useState(null);         // this is to show little resumen data
+    const [showFotos, setShowFotos] = useState(null);       // FACT TO SHOW TABLE    
+    const [fotoid, setFotoid] = useState(0);                // this is the refers to FotosView
 
     const formatDate = (inputDate) => {
         return new Date(inputDate).toISOString().replace('T', ' ').replace(/\.\d+Z$/, '');
@@ -35,31 +35,31 @@ function ListFact() {
 
     return (
         <div className="card" style={{ display: 'flex', margin: '1rem', flexDirection: 'row', backgroundColor: '#F4F6F6' }}>
-            
-            <div className="card" style={{ margin: '0.5rem', width : '70%'}}>
+
+            <div className="card" style={{ margin: '0.5rem', width: '70%' }}>
                 <table className="table-responsive">
-                    <thead style={{ backgroundColor: '#084670', color: 'white',fontWeight: 'bold',}}>
+                    <thead style={{ backgroundColor: '#084670', color: 'white', fontWeight: 'bold', }}>
                         <tr>
-                            <th style={{padding: '8px', border: '1px solid #ddd'}}>FACTURA</th>
-                            <th style={{padding: '8px', border: '1px solid #ddd'}}>CLIENTE</th>
-                            <th style={{padding: '8px', border: '1px solid #ddd'}}>LISTA DE EMPAQUE</th>
-                            <th style={{padding: '8px', border: '1px solid #ddd'}}>ESTADO</th>
-                            <th style={{padding: '8px', border: '1px solid #ddd'}}>NOMBRE</th>
-                            <th style={{padding: '8px', border: '1px solid #ddd'}}>PLACA</th>
-                            <th/>
+                            <th style={{ padding: '8px', border: '1px solid #ddd' }}>FACTURA</th>
+                            <th style={{ padding: '8px', border: '1px solid #ddd' }}>CLIENTE</th>
+                            <th style={{ padding: '8px', border: '1px solid #ddd' }}>LISTA DE EMPAQUE</th>
+                            <th style={{ padding: '8px', border: '1px solid #ddd' }}>ESTADO</th>
+                            <th style={{ padding: '8px', border: '1px solid #ddd' }}>NOMBRE</th>
+                            <th style={{ padding: '8px', border: '1px solid #ddd' }}>PLACA</th>
+                            <th />
                         </tr>
                     </thead>
                     <tbody>
                         {
                             data.map((item) => (
                                 <tr onClick={() => { setFactShow(item) }}>
-                                    <td style={{padding: '8px', border: '1px solid #ddd'}}>{item.ref_factura}</td>
-                                    <td style={{padding: '8px', border: '1px solid #ddd'}}>{item.cliente}</td>
-                                    <td style={{padding: '8px', border: '1px solid #ddd'}}>{item.lista_empaque}</td>
-                                    <td style={{padding: '8px', border: '1px solid #ddd'}}>{item.state_name}</td>
-                                    <td style={{padding: '8px', border: '1px solid #ddd'}}>{item.nombre}</td>
-                                    <td style={{padding: '8px', border: '1px solid #ddd'}}>{item.placa}</td>
-                                    <td style={{padding: '8px', border: '1px solid #ddd'}} data-toggle="modal" data-target="#modal-full-width">
+                                    <td style={{ padding: '8px', border: '1px solid #ddd' }}>{item.ref_factura}</td>
+                                    <td style={{ padding: '8px', border: '1px solid #ddd' }}>{item.cliente}</td>
+                                    <td style={{ padding: '8px', border: '1px solid #ddd' }}>{item.lista_empaque}</td>
+                                    <td style={{ padding: '8px', border: '1px solid #ddd' }}>{item.state_name}</td>
+                                    <td style={{ padding: '8px', border: '1px solid #ddd' }}>{item.nombre}</td>
+                                    <td style={{ padding: '8px', border: '1px solid #ddd' }}>{item.placa}</td>
+                                    <td style={{ padding: '8px', border: '1px solid #ddd' }} data-toggle="modal" data-target="#modal-report" onClick={()=>{setShowFotos(item)}}>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                                             stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -73,42 +73,42 @@ function ListFact() {
                     </tbody>
                 </table>
             </div>
-              
 
-            <div style={{ margin: '0.5rem'}}>
+
+            <div style={{ margin: '0.5rem' }}>
                 <div className="card">
-                    <div className="card-header" style={{ backgroundColor : '#084670'}}>
+                    <div className="card-header" style={{ backgroundColor: '#084670' }}>
                         {
                             factShow ? (
-                                <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
 
-                                    <h4 style={{ color: 'white', margin: '0'}}>FACTURA NUMERO : {factShow.ref_factura}</h4>
+                                    <h4 style={{ color: 'white', margin: '0' }}>FACTURA NUMERO : {factShow.ref_factura}</h4>
 
                                     <div style={{ marginLeft: 'auto' }}>
-                                    <button style={{borderWidth: 0, backgroundColor: '#084670'}} 
-                                        data-toggle="modal" data-target="#modal-simple"
-                                        onClick={()=>{handleIdFotos(factShow.id); }}> 
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" color='white' width="24" height="24" viewBox="0 0 24 24"
-                                            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" /><rect x="3" y="4" width="18" height="16" rx="3" />
-                                            <circle cx="9" cy="10" r="2" /><line x1="15" y1="8" x2="17" y2="8" /><line x1="15" y1="12" x2="17" y2="12" />
-                                            <line x1="7" y1="16" x2="17" y2="16" />
-                                        </svg>
-                                    </button>
+                                        <button style={{ borderWidth: 0, backgroundColor: '#084670' }}
+                                            data-toggle="modal" data-target="#modal-simple"
+                                            onClick={() => { handleIdFotos(factShow.id); }}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" color='white' width="24" height="24" viewBox="0 0 24 24"
+                                                stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" /><rect x="3" y="4" width="18" height="16" rx="3" />
+                                                <circle cx="9" cy="10" r="2" /><line x1="15" y1="8" x2="17" y2="8" /><line x1="15" y1="12" x2="17" y2="12" />
+                                                <line x1="7" y1="16" x2="17" y2="16" />
+                                            </svg>
+                                        </button>
                                     </div>
 
                                 </div>
 
                             ) : (
-                                <h4 style={{color : 'white'}}>DETALLE DE FACTURAS</h4>
+                                <h4 style={{ color: 'white' }}>DETALLE DE FACTURAS</h4>
                             )
                         }
                     </div>
                     {
                         factShow ? (
                             <div className="card-body">
-                                <div className="table-responsive" style={{width : '100%'}}>
-                                    <div className="table table-vcenter card-table" > 
+                                <div className="table-responsive" style={{ width: '100%' }}>
+                                    <div className="table table-vcenter card-table" >
                                         <thead>
                                             <tr>
                                                 <th>id : {factShow.id}</th>
@@ -163,27 +163,27 @@ function ListFact() {
                                     </div>
                                 </div>
                             </div>
-                        ) 
-                        :
-                        (
-                            <div className="card"
-                                style={{
-                                    width: '90%', height: 'auto',
-                                    alignSelf: 'center', margin: 20, flexDirection: 'row'
-                                }}>
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="icon" width="24" height="24"
-                                    viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round"
-                                    stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"
-                                        fill="none" />
-                                    <circle cx="12" cy="12" r="9" />
-                                    <line x1="12" y1="8" x2="12.01" y2="8" />
-                                    <polyline points="11 12 12 12 12 16 13 16" />
-                                </svg>
-                                <p>Seleccione una factura, para ver la información aqui</p>
-                            </div>
                         )
+                            :
+                            (
+                                <div className="card"
+                                    style={{
+                                        width: '90%', height: 'auto',
+                                        alignSelf: 'center', margin: 20, flexDirection: 'row'
+                                    }}>
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        class="icon" width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="2"
+                                        stroke="currentColor" fill="none" stroke-linecap="round"
+                                        stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"
+                                            fill="none" />
+                                        <circle cx="12" cy="12" r="9" />
+                                        <line x1="12" y1="8" x2="12.01" y2="8" />
+                                        <polyline points="11 12 12 12 12 16 13 16" />
+                                    </svg>
+                                    <p>Seleccione una factura, para ver la información aqui</p>
+                                </div>
+                            )
                     }
 
                 </div>
@@ -191,22 +191,25 @@ function ListFact() {
 
             <div class="modal modal-blur fade" id="modal-simple" tabindex="-1" role="dialog" aria-hidden="true" >
                 <div className="modal-dialog modal-dialog-centered" >
-                <div className="modal-content"  style={{width : '800px'}}>
-                            <div className="modal-header" style={{backgroundColor : '#02395E'}}>
-                                <h4 style={{color : 'white'}}>FACTURA : {fotoid}</h4>
-                            </div>
-                            <FotosView props={fotoid}/>
+                    <div className="modal-content" style={{ width: '800px' }}>
+                        <div className="modal-header" style={{ backgroundColor: '#02395E' }}>
+                            <h4 style={{ color: 'white' }}>FACTURA : {fotoid}</h4>
                         </div>
+                        <FotosView props={fotoid} />
+                    </div>
                 </div>
             </div>
 
-            <div class="modal modal-blur fade" id="modal-full-width" tabindex="-1" role="dialog" aria-hidden="true" >
-                <div className="modal-dialog centered w-75">
-                <div className="modal-content" style={{width : '100%'}}>
-                    <div className="modal-header" style={{backgroundColor : '#C12007'}}>
-                        <h4 style={{color : 'white'}}>AJUSTES DE FACTURA</h4>
-                    </div>
-                        <AlterFact props={showFotos}/>
+            <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header" style={{backgroundColor : '#C13311'}}>
+                            <h5 class="modal-title" style={{color : 'white'}}>AJUSTES DE FACTURA</h5>
+                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" style={{width : 'auto'}}>
+                            <AlterFact props={showFotos}/>
+                        </div>
                     </div>
                 </div>
             </div>

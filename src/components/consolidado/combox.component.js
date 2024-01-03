@@ -54,7 +54,7 @@ export function EntregadorCombox({ EntregadorHand }) {
       setData(data.data);
       console.log(data.data);
     } catch (error) {
-      console.log("err")
+      console.log("err");
     }
   }
 
