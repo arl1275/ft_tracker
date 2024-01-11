@@ -14,8 +14,9 @@ export function ConfigPage() {
   return (
     <>
       <div className="card" style={{ margin: "0.5rem" }}>
-        <div style={{width : '50%'}}>
+        <div style={{width : 'auto'}}>
           <div className="navbar navbar-expand-md navbar-light d-print-none">
+          <button className="btn btn-ghost-primary w-25" onClick={(event) => selected(event, '0')}>DECLARACIONES DE ENVIO</button>
           <button className="btn btn-ghost-primary w-25" onClick={(event) => selected(event, '4')}>FACTURAS</button>
           <button className="btn btn-ghost-primary w-25" onClick={(event) => selected(event, '3')}>USUARIOS</button>
           <button className="btn btn-ghost-primary w-25" onClick={(event) => selected(event, '2')}>CAMIONES</button>

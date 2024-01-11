@@ -51,7 +51,7 @@ export const FotosView = ({ props }) => {
                     :
                     <div style={{ display: 'flex', flexDirection: 'row', alignContent : 'space-between'}}>
                         <div className="card">
-                            {isLink(Data[0].firmanpic) ?
+                            {isLink(Data[0]?.firmanpic) ?
                                 <img src={Data[0].firmanpic} style={{ margin: 30, width: '400px', height: '400px' }} /> 
                                 :
                                 <p>NO TIENE DATOS PARA MOSTRAR</p>
@@ -59,7 +59,7 @@ export const FotosView = ({ props }) => {
                             
                         </div>
                             {
-                                isLink(Data[0].fotopic) ? 
+                                isLink(Data[0]?.fotopic) ? 
                                 <div className="card">
                                 <img src={Data[0].fotopic} style={{ margin: 30, width: '400px', height: '400px' }} />
                                 </div>

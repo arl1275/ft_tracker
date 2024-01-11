@@ -4,6 +4,8 @@ import { bk_dir } from "../../conf/configuration.file";
 
 function ResumenFacturas() {
   const [data, setData] = useState([]);
+  const [ver_facts_or_envios, setFactsOrEnvios] = useState(null);
+
   useEffect(() => {
     getFacs();
   }, []);
@@ -25,11 +27,18 @@ function ResumenFacturas() {
 
   return (
     <>
-      <div className="card" style={{ margin: "0.5rem" }}>
+      <div className="card" style={{ display : 'flex', flexDirection : 'row',margin: "0.5rem" }}>
         <div className="col-6 col-sm-4 col-md-2 col-xl mb-3">
           <button className="btn btn-primary w-auto" style={{ marginTop: '0.5rem', marginBottom: '0rem' }} onClick={getFacs}>
           <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></svg>
-            ACTUALIZAR LISTA
+            VER FACTURAS
+          </button>
+        </div>
+
+        <div className="col-6 col-sm-4 col-md-2 col-xl mb-3">
+          <button className="btn btn-primary w-auto" style={{ marginTop: '0.5rem', marginBottom: '0rem' }} onClick={getFacs}>
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></svg>
+            VER DECLARACIONES DE ENVIO
           </button>
         </div>
       </div>
@@ -40,6 +49,8 @@ function ResumenFacturas() {
           <thead>
             <tr>
               <th className="w-auto">FACTURA</th>
+              <th>PEDIDO VENTA</th>
+              <th>ALBARAN</th>
               <th>LISTA DE ENTREGA</th>
               <th>
                 <div className="mb-auto">
@@ -81,6 +92,8 @@ function ResumenFacturas() {
               return(
               <tr key={item.id} style={{backgroundColor : valor}}>
                 <td><div style={{color : 'black', textAlign : 'left'}}>{item.ref_factura}</div></td>
+                <td><div style={{color : 'black', textAlign : 'left'}}>{item.pedidoventa}</div></td>
+                <td><div style={{color : 'black', textAlign : 'left'}}>{item.albaran}</div></td>
                 <td><div style={{color : 'black', textAlign : 'left'}}>{item.lista_empaque}</div></td>
                 <td><div style={{color : 'black', textAlign : 'left'}}>{item.cliente}</div></td>
                 <td><div style={{color : 'black', textAlign : 'left'}}>{item.cant_cajas}</div></td>

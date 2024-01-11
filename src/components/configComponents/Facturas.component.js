@@ -12,7 +12,11 @@ function ListFact() {
     const [fotoid, setFotoid] = useState(0);                // this is the refers to FotosView
 
     const formatDate = (inputDate) => {
-        return new Date(inputDate).toISOString().replace('T', ' ').replace(/\.\d+Z$/, '');
+        if(inputDate == null){
+            return 'VALOR INVALIDO'
+        }else{
+            return new Date(inputDate).toISOString().replace('T', ' ').replace(/\.\d+Z$/, '');
+        }
     }
 
     useEffect(() => {
@@ -35,17 +39,20 @@ function ListFact() {
 
     return (
         <div className="card" style={{ display: 'flex', margin: '1rem', flexDirection: 'row', backgroundColor: '#F4F6F6' }}>
-
+            <div>
+                
+            </div>
             <div className="card" style={{ margin: '0.5rem', width: '70%' }}>
                 <table className="table-responsive">
                     <thead style={{ backgroundColor: '#084670', color: 'white', fontWeight: 'bold', }}>
                         <tr>
+                            <th style={{ padding: '8px', border: '1px solid #ddd' }}>NUM# ENVIO</th>
                             <th style={{ padding: '8px', border: '1px solid #ddd' }}>FACTURA</th>
                             <th style={{ padding: '8px', border: '1px solid #ddd' }}>CLIENTE</th>
                             <th style={{ padding: '8px', border: '1px solid #ddd' }}>LISTA DE EMPAQUE</th>
+                            <th style={{ padding: '8px', border: '1px solid #ddd' }}>PEDIDO</th>
+                            <th style={{ padding: '8px', border: '1px solid #ddd' }}>ALBARAN</th>
                             <th style={{ padding: '8px', border: '1px solid #ddd' }}>ESTADO</th>
-                            <th style={{ padding: '8px', border: '1px solid #ddd' }}>NOMBRE</th>
-                            <th style={{ padding: '8px', border: '1px solid #ddd' }}>PLACA</th>
                             <th />
                         </tr>
                     </thead>
@@ -53,12 +60,13 @@ function ListFact() {
                         {
                             data.map((item) => (
                                 <tr onClick={() => { setFactShow(item) }}>
+                                    <td style={{ padding: '8px', border: '1px solid #ddd' }}>N/A</td>
                                     <td style={{ padding: '8px', border: '1px solid #ddd' }}>{item.ref_factura}</td>
-                                    <td style={{ padding: '8px', border: '1px solid #ddd' }}>{item.cliente}</td>
+                                    <td style={{ padding: '8px', border: '1px solid #ddd' }}>{item.cliente_nombre}</td>
                                     <td style={{ padding: '8px', border: '1px solid #ddd' }}>{item.lista_empaque}</td>
+                                    <td style={{ padding: '8px', border: '1px solid #ddd' }}>{item.pedidoventa}</td>
+                                    <td style={{ padding: '8px', border: '1px solid #ddd' }}>{item.albaran}</td>
                                     <td style={{ padding: '8px', border: '1px solid #ddd' }}>{item.state_name}</td>
-                                    <td style={{ padding: '8px', border: '1px solid #ddd' }}>{item.nombre}</td>
-                                    <td style={{ padding: '8px', border: '1px solid #ddd' }}>{item.placa}</td>
                                     <td style={{ padding: '8px', border: '1px solid #ddd' }} data-toggle="modal" data-target="#modal-report" onClick={()=>{setShowFotos(item)}}>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                                             stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -118,7 +126,7 @@ function ListFact() {
                                         <tbody>
                                             <tr>
                                                 <td>CLIENTE :</td>
-                                                <td>{factShow.cliente}</td>
+                                                <td>{factShow.cliente_nombre}</td>
                                             </tr>
                                             <tr>
                                                 <td>LISTA EMPRAQUE :</td>
@@ -126,20 +134,20 @@ function ListFact() {
                                             </tr>
                                             <tr>
                                                 <td>NOMBRE TRANSPORTISTA :</td>
-                                                <td>{factShow.nombre}</td>
+                                                <td>{factShow.nombre != null ? factShow.nombre : 'FALTA ASIGNACION'}</td>
                                             </tr>
                                             <tr>
                                                 <td>PLACA DE CAMION :</td>
-                                                <td>{factShow.placa}</td>
+                                                <td>{factShow.placa != null? factShow.placa : 'FALTA ASIGNACION'}</td>
                                             </tr>
                                             <tr>
                                                 <td>ESTADO : </td>
-                                                <td>{factShow.state_name}</td>
+                                                <td>{factShow.state_name != null ? factShow.state_name : 'FALTA ASIGNACION'}</td>
                                             </tr>
                                             {/*------------- AQUI SE MUESTRAN LOS DATOS DE LOS TIEMPOS ---------------------*/}
                                             <tr>
                                                 <td>Factura creada:</td>
-                                                <td>{factShow.create_at === null ? 'SIN DATA' : formatDate(factShow.create_at)}</td>
+                                                <td>{factShow.created_at === null ? 'SIN DATA' : formatDate(factShow.created_at)}</td>
                                             </tr>
                                             <tr>
                                                 <td>TOMA PREPARACION :</td>
