@@ -1,34 +1,46 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { bk_dir } from "../../conf/configuration.file.js";
-
 import ResumenConsolidado from "../../components/consolidado/resumeconsolidation.component.js";
+
 
 function AdminDespachoView() {
   const [data, setData] = useState([]);
   const [selected_facturas, setSelectedFacturas] = useState([]);
+  //---------------------------------------------------------------------------
+  // para el escaneo invisible de facturas
+  //---------------------------------------------------------------------------
+  const inputRef = useRef(null);
 
-// para el escaneo invisible de facturas
-const [scannedCode, setScannedCode] = useState('');
-const [foundItems, setFoundItems] = useState([]);
-const inputRef = useRef(null); 
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
   }, []);
 
-  const handleInputChange = (e) => {
-    const inputCode = e.target.value;
-    setScannedCode(inputCode);
-
-    const foundItem = data.find((item) => item.ref_factura === scannedCode);
-    if (foundItem) {
-      setFoundItems([...foundItems, foundItem]);
+  const handleKeydown = (e) => {
+    const new_val = e.replace(/'/g, '-');
+    const match = new_val.match(/(?:[^-]*-){3}(\d+)/);
+    if (match && match[1]) {
+      let valor = match[1];
+      //console.log('valor : ', valor)
+      if (data.some((item) => item.ref_factura === valor) === false) {
+        console.log('Factura no existe: ', valor);
+      } else {
+        let data_fact = data.filter((item) => item.ref_factura === valor);
+        //console.log('data in keydownFunc : ', data_fact);
+        get_selected_facturas(data_fact[0]);
+      }
     }
-    console.log('VALORES ESCANEADOS : ', foundItems);
-  };
-//---------------------------------------------------------------------------
+  }
+
+  useEffect(() => {
+    inputRef.current?.focus()
+  }, [])
+
+  //---------------------------------------------------------------------------
+
+  //---------------------------------------------------------------------------
   useEffect(() => {
     getFacturas();
   }, []);
@@ -43,6 +55,7 @@ const inputRef = useRef(null);
   };
 
   const get_selected_facturas = (fact) => {
+    console.log('FROM SCANER : ', fact);
     setSelectedFacturas((prevSelectedFacturas) => {
       const index = prevSelectedFacturas.findIndex((item) => item.id === fact.id);
       if (index === -1) {
@@ -97,13 +110,43 @@ const inputRef = useRef(null);
                     <ResumenConsolidado props={selected_facturas} />
                   </div>
                 </div>
+
                 <input
                   type="text"
                   autoFocus
-                  value={scannedCode}
                   ref={inputRef}
-                  onChange={handleInputChange}
+                  style={{ opacity: 0 }}
+                  onBlur={() => inputRef.current?.focus()}
+                  onKeyDown={(Event) => {
+                    if (Event.key === 'Enter') {
+                      handleKeydown(inputRef.current.value);
+                      inputRef.current.value = '';
+                    }
+                  }}
                 />
+
+                <div>
+                  {
+                    selected_facturas.length == 0 ?
+                      <div className="card" style={{ backgroundColor: '#A93226', width: 'auto' }}>
+                        <h3 style={{ margin: 10, color: 'white' }}>SIN FACTURAS PARA CONSOLIDAR</h3>
+                      </div>
+                      :
+                      <div className="card" style={{ backgroundColor: '#02395E', width: 'auto', display : 'flex', flexDirection : 'row'}}>
+                        <div style={{display : 'flex', flexDirection : 'row'}}>
+                          <h4 style={{ margin: 10, color: 'white' }}>Fact Escaneada :</h4>
+                          <h4 style={{ margin: 10, color: 'white' }}>{selected_facturas[selected_facturas.length - 1].ref_factura}</h4>
+                        </div>
+
+                        <div style={{display : 'flex', flexDirection : 'row'}}>
+                          <h4 style={{ margin: 10, color: 'white' }}>cant_facts:</h4>
+                          <h4 style={{ margin: 10, color: 'red', fontWeight : 'bold'}}>{selected_facturas.length}</h4>
+                        </div>
+
+                      </div>
+                  }
+                </div>
+
               </div>
             </div>
           </div>

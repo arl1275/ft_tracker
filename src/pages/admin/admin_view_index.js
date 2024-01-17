@@ -16,7 +16,7 @@ function MyTabs() {
     <>
       <div class="navbar-expand-md">
         <div class="collapse navbar-collapse" id="navbar-menu" >
-          <div class="navbar navbar-light" style={{backgroundColor : '#02395E '}}>
+          <div class="navbar navbar-light" style={{backgroundColor : '#02395E'}}>
             <div style={{ position: 'absolute'}}>
               <div class="container-xl">
 

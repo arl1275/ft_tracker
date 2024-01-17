@@ -32,9 +32,6 @@ function LoginForm() {
 
   if (page === null) {
     return (
-      // <html lang="en">
-      //   <body className="antialiased border-top-wide border-primary d-flex flex-column">
-      //     <div className="flex-fill d-flex flex-column justify-content-center py-4">
       <div className="container-tight py-6">
         <div className="text-center mb-4">
           <a href="."><img src="./static/logo.svg" height="36" alt="" /></a>
