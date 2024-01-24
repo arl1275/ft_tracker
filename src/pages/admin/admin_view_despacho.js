@@ -3,7 +3,6 @@ import axios from "axios";
 import { bk_dir } from "../../conf/configuration.file.js";
 import ResumenConsolidado from "../../components/consolidado/resumeconsolidation.component.js";
 
-
 function AdminDespachoView() {
   const [data, setData] = useState([]);
   const [selected_facturas, setSelectedFacturas] = useState([]);
@@ -24,10 +23,10 @@ function AdminDespachoView() {
     if (match && match[1]) {
       let valor = match[1];
       //console.log('valor : ', valor)
-      if (data.some((item) => item.ref_factura === valor) === false) {
+      if (data.some((item) => item.factura === valor) === false) {
         console.log('Factura no existe: ', valor);
       } else {
-        let data_fact = data.filter((item) => item.ref_factura === valor);
+        let data_fact = data.filter((item) => item.factura === valor);
         //console.log('data in keydownFunc : ', data_fact);
         get_selected_facturas(data_fact[0]);
       }
@@ -35,40 +34,39 @@ function AdminDespachoView() {
   }
 
   useEffect(() => {
-    inputRef.current?.focus()
+    inputRef.current?.focus();
   }, [])
 
   //---------------------------------------------------------------------------
 
   //---------------------------------------------------------------------------
-  useEffect(() => {
-    getFacturas();
-  }, []);
+   useEffect(() => {
+     getFacturas();
+   }, []);
 
   const getFacturas = async () => {
     try {
-      var data = await axios.get(bk_dir + '/fact/get_all_facturas_in_null_state').then(e => e.data);
+      var data = await axios.get(bk_dir + '/facturas/get_all_facturas').then(e => e.data);
       setData(data.data);
     } catch (error) {
-      console.log("err")
+      console.log("err : ", error)
     }
   };
 
   const get_selected_facturas = (fact) => {
     console.log('FROM SCANER : ', fact);
     setSelectedFacturas((prevSelectedFacturas) => {
-      const index = prevSelectedFacturas.findIndex((item) => item.id === fact.id);
+      const index = prevSelectedFacturas.findIndex((item) => item.factura === fact.factura);
       if (index === -1) {
         return [...prevSelectedFacturas, fact]; // Add the new item
       } else {
-        return prevSelectedFacturas.filter((item) => item.id !== fact.id);
+        return prevSelectedFacturas.filter((item) => item.factura !== fact.factura);
       }
     });
   };
 
   let set_fecha_format = (date) => {
     const fecha = new Date(date);
-    //Obtiene solo la parte de la fecha en formato YYYY-MM-DD
     const soloFecha = fecha.toISOString().split('T')[0];
     return soloFecha;
   }
@@ -132,15 +130,15 @@ function AdminDespachoView() {
                         <h3 style={{ margin: 10, color: 'white' }}>SIN FACTURAS PARA CONSOLIDAR</h3>
                       </div>
                       :
-                      <div className="card" style={{ backgroundColor: '#02395E', width: 'auto', display : 'flex', flexDirection : 'row'}}>
-                        <div style={{display : 'flex', flexDirection : 'row'}}>
+                      <div className="card" style={{ backgroundColor: '#02395E', width: 'auto', display: 'flex', flexDirection: 'row' }}>
+                        <div style={{ display: 'flex', flexDirection: 'row' }}>
                           <h4 style={{ margin: 10, color: 'white' }}>Fact Escaneada :</h4>
-                          <h4 style={{ margin: 10, color: 'white' }}>{selected_facturas[selected_facturas.length - 1].ref_factura}</h4>
+                          <h4 style={{ margin: 10, color: 'white' }}>{selected_facturas[selected_facturas.length - 1].factura}</h4>
                         </div>
 
-                        <div style={{display : 'flex', flexDirection : 'row'}}>
+                        <div style={{ display: 'flex', flexDirection: 'row' }}>
                           <h4 style={{ margin: 10, color: 'white' }}>cant_facts:</h4>
-                          <h4 style={{ margin: 10, color: 'red', fontWeight : 'bold'}}>{selected_facturas.length}</h4>
+                          <h4 style={{ margin: 10, color: 'red', fontWeight: 'bold' }}>{selected_facturas.length}</h4>
                         </div>
 
                       </div>
@@ -154,66 +152,40 @@ function AdminDespachoView() {
           <div className="table-responsive">
             <table className="table card-table table-vcenter text-nowrap datatable">
               <thead>
-                <tr>
-                  <th className="w-1"><input className="form-check-input m-0 align-middle" type="checkbox" id='001' /></th>
-                  <th className="w-auto">
-                    <div className="input-group mb-auto">
-                      <input type="text" className="form-control" placeholder="FACTURA" style={{ width: '20%' }} />
-                      <button className="btn" type="button">buscar</button>
-                    </div>
-                  </th>
-                  <th>LISTA DE ENTREGA</th>
-                  <th>PEDIDO</th>
-                  <th>ALBARAN</th>
-                  <th>
-                    <div className="mb-auto">
-                      <select name="countries" id="select-countries" className="form-select">
-                        <option value="pl" selected>CLIENTE</option>
-                        {data.map((item) => (
-                          <option key={item.id}>{item.cliente}</option>
-                        ))}
-                      </select>
-                    </div>
-                  </th>
-                  <th>CAJAS</th>
-                  <th>UNIDADES</th>
-                  <th>
-                    <div className="mb-auto">
-                      <select name="countries" id="select-countries" className="form-select" disabled>
-                        <option value="pl" data-data='{"flag": "pl"}'>CORTES</option>
-                      </select>
-                    </div>
-                  </th>
-                  <th>
-                    <div className="mb-auto">
-                      <select name="countries" id="select-countries" className="form-select" disabled>
-                        <option value="pl" data-data='{"flag": "pl"}'>SAN PEDRO SULA</option>
 
-                      </select>
-                    </div>
-                  </th>
-                  <th>
-                    <input className="form-control mb-2 flatpickr-input flatpickr-mobile mb-auto" tabindex="1" type="date" placeholder="Select a date" value={selectedDate} onChange={handleDateChange} />
-                  </th>
-                </tr>
+              <tr>
+                <th className="w-1"><input className="form-check-input m-0 align-middle" type="checkbox" id='001' /></th>
+                <th className="w-auto">
+                  <div className="input-group mb-auto">
+                    <input type="text" className="form-control" placeholder="FACTURA" style={{ width: '20%' }} />
+                    <button className="btn" type="button">buscar</button>
+                  </div>
+                </th>
+                <th>RUTA</th>
+                <th>PEDIDO</th>
+                <th>ALBARAN</th>
+                <th>CLIENTE</th>
+                <th>CAJAS</th>
+                <th>UNIDADES</th>
+                <th>UBICACION</th>
+              </tr>
               </thead>
+
               <tbody>
                 {data.map((item) => (
-                  <tr key={item.id}>
+                  <tr key={item.factura}>
                     <td>
                       <input className="form-check-input m-0 align-middle" type="checkbox"
-                        onClick={() => { get_selected_facturas(item); }} aria-label="Select invoice" />
+                        onChange={() => { get_selected_facturas(item); }} aria-label="Select invoice" />
                     </td>
-                    <td><span className="text-muted">{item.ref_factura}</span></td>
-                    <td>{item.lista_empaque}</td>
+                    <td><span className="text-muted">{item.factura}</span></td>
+                    <td>{item.list_empaque}</td>
                     <td>{item.pedidoventa}</td>
                     <td>{item.albaran}</td>
-                    <td>{item.cliente_nombre}</td>
+                    <td>{item.cliente}</td>
                     <td>{item.cant_cajas}</td>
-                    <td>{item.cant_unidades}</td>
-                    <td>CORTES</td>
-                    <td>{item.ubicaciones}</td>
-                    <td className="text-left">{set_fecha_format(item.created_at)}</td>
+                    <td>{item.cant_total}</td>
+                    <td>{item.ubicacion}</td>
                   </tr>
                 ))}
               </tbody>

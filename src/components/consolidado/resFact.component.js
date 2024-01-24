@@ -27,24 +27,24 @@ function ResumenFacturas() {
 
   return (
     <>
-      <div className="card" style={{ display : 'flex', flexDirection : 'row',margin: "0.5rem" }}>
+      <div className="card" style={{ display: 'flex', flexDirection: 'row', margin: "0.5rem" }}>
         <div className="col-6 col-sm-4 col-md-2 col-xl mb-3">
           <button className="btn btn-primary w-auto" style={{ marginTop: '0.5rem', marginBottom: '0rem' }} onClick={getFacs}>
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></svg>
             VER FACTURAS
           </button>
         </div>
 
         <div className="col-6 col-sm-4 col-md-2 col-xl mb-3">
           <button className="btn btn-primary w-auto" style={{ marginTop: '0.5rem', marginBottom: '0rem' }} onClick={getFacs}>
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></svg>
             VER DECLARACIONES DE ENVIO
           </button>
         </div>
       </div>
 
       <div className="card">
-      <div className="table-responsive">
+        <div className="table-responsive">
         <table className="table card-table table-vcenter text-nowrap datatable">
           <thead>
             <tr>
@@ -52,33 +52,11 @@ function ResumenFacturas() {
               <th>PEDIDO VENTA</th>
               <th>ALBARAN</th>
               <th>LISTA DE ENTREGA</th>
-              <th>
-                <div className="mb-auto">
-                  <select name="countries" id="select-countries" className="form-select">
-                    <option value="pl" data-data='{"flag": "pl"}' selected>CLIENTE</option>
-                    {data.map((item) => (
-                      <option key={item.id}>{item.cliente}</option>
-                    ))}
-                  </select>
-                </div>
-              </th>
+              <th>CLIENTE</th>
               <th>CAJAS</th>
               <th>UNIDADES</th>
-              <th>
-                <div className="mb-auto">
-                  <select name="countries" id="select-countries" className="form-select" disabled>
-                    <option value="pl" data-data='{"flag": "pl"}' selected>DEPARTAMENTO</option>
-                  </select>
-                </div>
-              </th>
-              <th>
-                <div className="mb-auto">
-                  <select name="countries" id="select-countries" className="form-select" disabled>
-                    <option value="pl" data-data='{"flag": "pl"}' selected>CIUDAD</option>
-
-                  </select>
-                </div>
-              </th>
+              <th>DEPARTAMENTO</th>
+              <th>CIUDAD</th>
               <th>UBICACION</th>
               <th>FECHA</th>
               <th>ESTADO</th>
@@ -109,7 +87,13 @@ function ResumenFacturas() {
             })}
           </tbody>
         </table>
+        
+
+
       </div>
+        
+
+
       </div>
     </>
   )

@@ -23,7 +23,7 @@ export const CreateUser = () => {
             alert('ERROR Favor llenar todos los campos')
         }else{
             e.preventDefault();
-            await axios.post(bk_dir + '/user/createuser', user);
+            await axios.post(bk_dir + '/usuarios/createuser', user);
             console.log('New user:', user);
         }
        

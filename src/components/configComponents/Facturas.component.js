@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { bk_dir } from "../../conf/configuration.file";
 import axios from "axios";
-import { FotosView } from "./modals/FotosFact.modal";
-import { AlterFact } from "./modals/AlterFact.modal";
+import { FotosView } from "./modals/FotosFact.modal"; // this is to see the pics of the fact
+import { AlterFact } from "./modals/AlterFact.modal"; // this is to do a changes in a specific factura
 
 
 function ListFact() {

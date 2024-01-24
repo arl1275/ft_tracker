@@ -9,8 +9,8 @@ export const AlterFact = ({ props }) => {
     return (
         <div>
             <ul className="nav nav-tabs" style={{ display: 'flex', flexDirection: 'row', width: 'auto', color: 'black', padding: '2%', color: 'black' }}>
-                <li className="nav-item" style={{ marginRight: '5%', cursor: 'pointer' }} onClick={() => {}}>
-                    <div className="nav-lib">CAMBIO ENTREGADOR</div>
+                <li className="nav-item" style={{ marginRight: '5%', cursor: 'pointer' }} onClick={() => {setVal(3)}}>
+                    <div className="nav-lib">AGREGAR DETALLE</div>
                 </li>
                 <li className="nav-item" style={{ marginRight: '5%', cursor: 'pointer' }} onClick={() => { setVal(1) }}>
                     <div className="nav-lib">CAMBIO MANUAL</div>
@@ -40,6 +40,10 @@ export const AlterFact = ({ props }) => {
                 {
                     val === 2 &&
                     <EntregaManual />
+                }
+                {
+                    val === 3 &&
+                    <div>NO HABILITADO</div>
                 }
             </div>
         </div>
