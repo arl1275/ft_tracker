@@ -12,7 +12,7 @@ function ResumenFacturas() {
 
   const getFacs = async () => {
     try {
-      var data = await axios.get(bk_dir + '/fact/getFacturasWithEntrega').then(e => e.data);
+      var data = await axios.get(bk_dir + '/facturas/getFactActives').then(e => e.data);
       setData(data.data);
     } catch (error) {
       console.log("err")

@@ -15,7 +15,7 @@ export const CreateUser = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setNewUser({ ...user, [name]: value });
-    };
+      };
 
     const handleSubmit = async (e) => {
         if(user.codEmpleado === '' || user.nombre === '' || 
@@ -91,10 +91,11 @@ export const CreateUser = () => {
                                 <tr>
                                     <td className="text-muted">Role:</td>
                                     <td>
-                                        <select className="btn btn-info active w-100" name="rol" value={user.id_rol} onChange={(e) => { handleChange(e) }}>
-                                            <option value="1">ENTREGADOR</option>
+                                        <select className="btn btn-info active w-100" name="rol" value={user.rol} onChange={(e) => { handleChange(e) }} style={{color : 'white'}}>
+                                            <option value="4">SUPERVISOR</option>
+                                            <option value="3">ENTREGADOR</option>
                                             <option value="2">GUARDIA</option>
-                                            <option value="3">ADMINISTRADOR</option>
+                                            <option value="1">ADMINISTRADOR</option>
                                             <option value="0" selected>ROL</option>
                                         </select>
                                     </td>

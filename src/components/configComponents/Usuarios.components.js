@@ -29,11 +29,13 @@ function ListUsuarios() {
     }
 
     const setRole = (value) => {
-        if (value === 1) {
-            return 'TRANSPORTISTA';
-        } else if (value === 2) {
+        if (value === 3) {
+            return 'ENTREGADOR';
+        } else if (value === 1) {
             return 'ADMIN';
-        } else {
+        }else if(value === 4){
+            return 'SUPERVISOR';
+        } else if(value === 2){
             return 'GUARDIA';
         }
     }
@@ -82,7 +84,7 @@ function ListUsuarios() {
                                                                 <path d="M10 10l4 4m0 -4l-4 4" />
                                                             </svg>
                                                         </div>}</td>
-                                                    <td>{setRole(item.id_rol)}</td>
+                                                    <td>{setRole(item.id_role)}</td>
                                                     <td onClick={() => {setSelectedUser(item); showUse()}}>
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                                                             stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
