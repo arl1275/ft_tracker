@@ -148,7 +148,7 @@ function AdminDespachoView() {
               </div>
             </div>
           </div>
-
+           
           <div className="table-responsive">
             <table className="table card-table table-vcenter text-nowrap datatable">
               <thead>

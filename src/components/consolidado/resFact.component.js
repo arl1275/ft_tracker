@@ -1,10 +1,27 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { bk_dir } from "../../conf/configuration.file";
+//import TableForm from "../table.component";
+import TableForm, { TextColumnFilter, NumberColumnFilter } from "../table.component";
 
 function ResumenFacturas() {
   const [data, setData] = useState([]);
   const [ver_facts_or_envios, setFactsOrEnvios] = useState(null);
+
+  //-----------------COLUMNS---------------------
+  const columns = [
+    { Header: 'PEDIDO', accessor: 'pedidoventa', Filter: TextColumnFilter },
+    { Header: 'FACTURA', accessor: 'factura', Filter: TextColumnFilter },
+    { Header: 'ALBARAN', accessor: 'albaran', Filter: TextColumnFilter },
+    { Header: 'CLIENTE', accessor: 'clientenombre', Filter: TextColumnFilter },
+    { Header: 'DEPARTAMENTO', accessor: 'departamento', Filter: TextColumnFilter },
+    { Header: 'CIUDAD', accessor: 'ciudad', Filter: TextColumnFilter },
+    { Header: 'ESTADO', accessor: 'state_name', Filter: TextColumnFilter },
+    { Header: 'DECLARACION', accessor: 'declaracionenvio', Filter: NumberColumnFilter },
+    { Header: 'ENTREGADOR', accessor: 'nombre', Filter: TextColumnFilter },
+    { Header: 'PLACA', accessor: 'placa', Filter: TextColumnFilter },
+  ];
+  //---------------------------------------------
 
   useEffect(() => {
     getFacs();
@@ -27,7 +44,9 @@ function ResumenFacturas() {
 
   return (
     <>
-      <div className="card" style={{ display: 'flex', flexDirection: 'row', margin: "0.5rem" }}>
+      <TableForm data={data} columns={columns}/>
+
+      {/* <div className="card" style={{ display: 'flex', flexDirection: 'row', margin: "0.5rem" }}>
         <div className="col-6 col-sm-4 col-md-2 col-xl mb-3">
           <button className="btn btn-primary w-auto" style={{ marginTop: '0.5rem', marginBottom: '0rem' }} onClick={getFacs}>
             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></svg>
@@ -41,8 +60,7 @@ function ResumenFacturas() {
             VER DECLARACIONES DE ENVIO
           </button>
         </div>
-      </div>
-
+      </div> 
       <div className="card">
         <div className="table-responsive">
         <table className="table card-table table-vcenter text-nowrap datatable">
@@ -87,14 +105,8 @@ function ResumenFacturas() {
             })}
           </tbody>
         </table>
-        
-
-
       </div>
-        
-
-
-      </div>
+      </div> */}
     </>
   )
 }
