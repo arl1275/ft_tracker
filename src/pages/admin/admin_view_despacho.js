@@ -38,7 +38,6 @@ function AdminDespachoView() {
   }, [])
 
   //---------------------------------------------------------------------------
-
   //---------------------------------------------------------------------------
    useEffect(() => {
      getFacturas();
@@ -97,16 +96,17 @@ function AdminDespachoView() {
                 </div>
 
                 <div style={{ display: "flex" }}>
+                  
                   <div className="mb-auto" style={{ marginRight: "10px" }}>
                     <select name="countries" id="select-countries" className="form-select" disabled>
                       <option value="pl" id='1'>TRANSPORTISTA</option>
                     </select>
                   </div>
 
-
                   <div className="col-6 col-sm-4 col-md-2 col-xl mb-3">
                     <ResumenConsolidado props={selected_facturas} />
                   </div>
+
                 </div>
 
                 <input

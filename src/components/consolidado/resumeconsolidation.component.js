@@ -15,8 +15,6 @@ const ResumenConsolidado = ({ props }) => {
     setEntregador(entregador);
   };
 
-
-
   const send_toCreate_Consolidacion = () => {
     if (entregador === '' || entregador === 'ENTREGADORES' || camionSeleccionado === '' || camionSeleccionado === 'CAMIONES' || entregador === null || camionSeleccionado === null) {
       alert('FAVOR LLENAR TODOS LOS CAMPOS ANTES DE ENVIAR EL CONSOLIDADO');
@@ -47,12 +45,13 @@ const ResumenConsolidado = ({ props }) => {
 
   const get_sumas_unidades = () => {
     if (props.length > 0) {
-      let sumU = props.reduce((acumulator, item) => acumulator + item.cant_unidades, 0);
-      return sumU;
+      let sumC = props.reduce((acumulator, item) => acumulator + item.cant_total, 0);
+      return sumC;
     } else {
       return 'SIN DATA';
     }
   }
+  
 
     return (
       <>

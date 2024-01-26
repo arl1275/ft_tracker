@@ -50,7 +50,7 @@ const TableForm = ({ columns, data }) => {
         style={{width : '20%', margin : 10}}
       />
 
-      <table {...getTableProps()} className="table card-table table-vcenter text-nowrap datatable">
+      <table {...getTableProps()} className="table card-table table-vcenter text-nowrap datatable" style={{color : 'black'}}>
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
