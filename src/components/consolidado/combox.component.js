@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { bk_dir } from "../../conf/configuration.file";
 
+//-------------------------------------------------------------------------------------------------//
+//-------------------------------------------------------------------------------------------------//
 
 export function CamionesCombox({ props }) {
 
@@ -41,6 +43,10 @@ export function CamionesCombox({ props }) {
     </>
   )
 }
+
+//-------------------------------------------------------------------------------------------------//
+//-------------------------------------------------------------------------------------------------//
+
 
 export function EntregadorCombox({ EntregadorHand }) {
   const [data, setData] = useState([]);

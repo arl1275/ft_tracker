@@ -17,7 +17,7 @@ function ListUsuarios() {
         try {
             const values = await axios.get(bk_dir + '/usuarios/getallUsers').then(e => e.data);
             setData(values.data);
-            console.log('data de los usuarios : ', values)
+            //console.log('data de los usuarios : ', values)
         } catch (error) {
             console.log('err to get usuarios');
         }

@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import ListaCamiones from "../../components/configComponents/Camiones.component";
 import ListUsuarios from "../../components/configComponents/Usuarios.components";
 import ListTransportistas from "../../components/configComponents/Transportistas.components";
 import ListFact from "../../components/configComponents/Facturas.component";
+import { List_decEnvio } from "../../components/configComponents/dec_envios.component";
 
 export function ConfigPage() {
   const [valueP, setValueP] = useState('');
@@ -27,7 +28,7 @@ export function ConfigPage() {
         {valueP === '2' ? <ListaCamiones /> : null}
         {valueP === '3' ? <ListUsuarios /> : null}
         {valueP === '4' ? <ListFact /> : null}
-
+        {valueP === '0' ? <List_decEnvio /> : null}
       </div>
     </>
   )
