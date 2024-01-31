@@ -63,9 +63,9 @@ const TableForm = ({ columns, data }) => {
         <tbody {...getTableBodyProps()}>
           {rows.map((row) => {
             prepareRow(row);
-            let valor = row.state_name === 'PREPARADO' ? (row.state_name === 'TRANSITO' && '#7DCEA0') : '#85C1E9'; 
+            let valor = row.values.state_name == 'PREPARACION' ? '#AED6F1 ' : '#5DADE2';
             return (
-              <tr {...row.getRowProps()} style={{backgroundColor : valor}}>
+              <tr {...row.getRowProps()} style={{ backgroundColor : valor }}>
                 {row.cells.map((cell) => (
                   <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                 ))}

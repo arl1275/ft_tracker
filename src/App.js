@@ -9,7 +9,7 @@ import LoginForm from './pages/log_index';
 function App() {
   return (
     <div className="App">
-      <MyTabs/>
+      <LoginForm />
     </div>
   );
 }

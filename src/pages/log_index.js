@@ -12,16 +12,16 @@ function LoginForm() {
     try {
       const data = {
         user: user,
-        _Password: _Password,
+        _password: _Password,
       }
 
-      if (data.user === '' || data._Password == '') {
+      if (data.user === '' || data._password == '') {
         alert('FAVOR INGRESE UN USUARIO Y CONTRASEÑA')
       } else {
-        const response = await axios.get(bk_dir + '/user/auth/user', { params: data });
+        const response = await axios.get(bk_dir + '/usuarios/auth/user', { params: data });
         if (response.status === 200) {
           setPage('INDEX');
-        } else if (response.status === 401) {
+        } else{
           alert('DATOS INVALIDOS')
         }
       }
@@ -38,9 +38,8 @@ function LoginForm() {
         </div>
         <div className="card card-md" action="." method="get" autoComplete="off" >
           <div className="card-body">
-            <h2 className="card-title text-center mb-4">LOGIN AL SISTEMA</h2>
+            <h2 className="card-title text-center mb-4">AUSKELLER-CHECK</h2>
             <div className="mb-3">
-              <label className="form-label">USUARIO</label>
               <input type="text" className="form-control" placeholder="INGRESE USUARIO" onChange={(e) => { setUser(e.target.value) }} />
             </div>
             <div className="mb-2">
@@ -62,9 +61,6 @@ function LoginForm() {
           </div>
         </div>
       </div>
-      //     </div>
-      //   </body>
-      // </html>
     )
   } else if (page === 'INDEX') {
     return <MyTabs />;
