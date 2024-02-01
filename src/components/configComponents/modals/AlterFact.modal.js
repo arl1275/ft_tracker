@@ -5,60 +5,107 @@ import { CambioManual } from "../minComponents/cambioManual.component";
 
 export const AlterFact = ({ props }) => {
     const [val, setVal] = useState(null);
-    //console.log('configurate : ', props);
+
+    const head_cell = {
+        border: '1px solid #D5D8DC', // Note: Property values should be strings
+        textAlign: 'left',
+        color: 'white',
+        backgroundColor: '#21618C',
+        fontSize: 15
+    }
+
+    const cell = {
+        border: '1px solid #D5D8DC', // Note: Property values should be strings
+        textAlign: 'left',
+        color: 'black',
+        backgroundColor: '#F0F3F4',
+        fontSize: 15
+    };
+
+    const cell_detail = {
+        border: '1px solid #D5D8DC', // Note: Property values should be strings
+        textAlign: 'left',
+        color: 'black',
+        backgroundColor: '#7FB3D5 ',
+        fontSize: 15
+    }
+
+    const cell_data = {
+        border: '1px solid #D5D8DC', 
+        textAlign: 'left',
+        color: 'black',
+        backgroundColor: 'white',
+        fontSize: 15
+    }
 
     return (
         <div>
-            <div className="card" style={{display : 'flex'}}>
-                <tr>
-                    <td>CLIENTE</td>
-                    <td>{props.clientenombre}</td>
-                </tr>
-                <tr>
-                    <td>FACTURA</td>
-                    <td>{props.factura}</td>
-                </tr>
-                <tr>
-                    <td>ALBARAN</td>
-                    <td>{props.albaran}</td>
-                </tr>
-                <tr>
-                    <td>RUTA</td>
-                    <td>{props.lista_empaque}</td>
-                </tr>
-                <tr>
-                    <td>PEDIDO</td>
-                    <td>{props.pedidoventa}</td>
-                </tr>
-                <tr>
-                    <td>CAJAS</td>
-                    <td>{props.cant_cajas}</td>
-                </tr>
-                <tr>
-                    <td>UNIDADES</td>
-                    <td>{props.cant_unidades}</td>
-                    <td>{props.toma_preparacion}</td>
-                </tr>
+            <div className="card" style={{ display: 'flex' }}>
+                <table>
+                    <tr>
+                        <td style={head_cell}>FACTURA</td>
+                        <td style={head_cell}>{props.factura}</td>
+                    </tr>
+                    <tr>
+                        <td style={cell}>CLIENTE</td>
+                        <td style={cell_data}>{props.clientenombre}</td>
+                    </tr>
+                    <tr>
+                        <td style={cell}>ALBARAN</td>
+                        <td style={cell_data}>{props.albaran}</td>
+                    </tr>
+                </table>
+
+                <table style={{ marginTop : 5}}>
+                    <tr>
+                        <td style={cell_detail}>RUTA</td>
+                        <td style={cell_detail}>PEDIDO</td>
+                        <td style={cell_detail}>CAJA</td>
+                        <td style={cell_detail}>UNIDADES</td>
+                    </tr>
+                    <tr>
+                        <td style={cell_data}>{props.lista_empaque}</td>
+                        <td style={cell_data}>{props.pedidoventa}</td>
+                        <td style={cell_data}>{props.cant_cajas}</td>
+                        <td style={cell_data}>{props.cant_unidades}</td>
+                    </tr>
+                </table>
+
             </div>
 
-            <div className="card" style={{marginTop : 5}}>
-                <tr>
-                    <th>PREPARACION</th>
-                    <th>TRANSITO</th>
-                    <th>ENTREGA</th>
-                    <th>SINCRONIZADO</th>
-                </tr>
-                <tr>
-                    <td>{props.toma_preparacion}</td>
-                    <td>{props.toma_transito}</td>
-                    <td>{props.toma_hora_fecha_entrega}</td>
-                    <td>{props.toma_sincronizado}</td>
-                </tr>
+            <table style={{ width : '100%'}}>
+                    <tr>
+                        <td style={cell_detail}>CAMION ASIGNADO</td>
+                        <td style={cell_data}>{props.placa}</td>
+                    </tr>
+                    <tr>
+                        <td style={cell_detail}>ENTREGADOR ASIGNADO</td>
+                        <td style={cell_data}>{props.nombre}</td>
+                    </tr>
+            </table>
+
+            <div className="card" style={{ marginTop: 5 }}>
+                <table>
+                    <tr>
+                        <td style={cell_detail}>DEC_ENVIO</td>
+                        <td style={cell_detail}>PREPARACION</td>
+                        <td style={cell_detail}>TRANSITO</td>
+                        <td style={cell_detail}>ENTREGA</td>
+                        <td style={cell_detail}>SINCRONIZADO</td>
+                    </tr>
+                    <tr>
+                        <td style={cell_data}>{props.declaracionenvio}</td>
+                        <td style={cell_data}>{props.toma_preparacion}</td>
+                        <td style={cell_data}>{props.toma_transito}</td>
+                        <td style={cell_data}>{props.toma_hora_fecha_entrega}</td>
+                        <td style={cell_data}>{props.toma_sincronizado}</td>
+                    </tr>
+                </table>
             </div>
 
             <ul className="nav nav-tabs" style={{ display: 'flex', flexDirection: 'row', width: 'auto', color: 'black', padding: '2%', color: 'black' }}>
-                <li className="nav-item" style={{ marginRight: '5%', cursor: 'pointer' }} onClick={() => {setVal(3)}}>
-                    <div className="nav-lib">AGREGAR DETALLE</div>
+                <li className="nav-item" style={{ marginRight: '5%', cursor: 'pointer' }} onClick={() => { setVal(3) }}>
+                    <div className="nav-lib">FIRMA</div>
                 </li>
                 <li className="nav-item" style={{ marginRight: '5%', cursor: 'pointer' }} onClick={() => { setVal(1) }}>
                     <div className="nav-lib">CAMBIO MANUAL</div>

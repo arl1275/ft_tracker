@@ -37,17 +37,63 @@ const TableAdminFact = ({ columns, data }) => {
         setIsOpen(!isOpen);
     }
 
-    const handleFact = ( value_ ) =>{
-        const{pedidoventa, clientenombre, factura, albaran, lista_empaque, cant_cajas, cant_unidades, declaracionenvio, 
-        id_estados, toma_preparacion, toma_transito, toma_hora_fecha_entrega, toma_sincronizado, link_firma,
-        link_foto, nombre, placa } = value_.values;
+    const handleFact = (value_) => {
+        const { factura, albaran } = value_.values;
+      
+        // Find the row in data that matches factura and albaran
+        const matchingRow = data.find((row) => row.factura === factura && row.albaran === albaran);
+      
+        if (matchingRow) {
+          const {
+            pedidoventa,
+            clientenombre,
+            factura,
+            albaran,
+            lista_empaque,
+            cant_cajas,
+            cant_unidades,
+            declaracionenvio,
+            id_estados,
+            toma_preparacion,
+            toma_transito,
+            toma_hora_fecha_entrega,
+            toma_sincronizado,
+            link_firma,
+            link_foto,
+            nombre,
+            placa,
+          } = matchingRow;
+      
+          // Save the extracted properties into the fact state
+          setFact({
+            pedidoventa,
+            clientenombre,
+            factura,
+            albaran,
+            lista_empaque,
+            cant_cajas,
+            cant_unidades,
+            declaracionenvio,
+            id_estados,
+            toma_preparacion,
+            toma_transito,
+            toma_hora_fecha_entrega,
+            toma_sincronizado,
+            link_firma,
+            link_foto,
+            nombre,
+            placa,
+          });
+      
+          // Open the modal or perform other actions
+          handleModal();
+        } else {
+          console.log('No matching row found');
+        }
+      };
+      
 
-        const da_ta = {pedidoventa, clientenombre, factura, albaran, lista_empaque, cant_cajas, cant_unidades, declaracionenvio, 
-            id_estados, toma_preparacion, toma_transito, toma_hora_fecha_entrega, toma_sincronizado, link_firma,
-            link_foto, nombre, placa }
 
-        setFact(da_ta);
-    }
     const {
         getTableProps,
         getTableBodyProps,
