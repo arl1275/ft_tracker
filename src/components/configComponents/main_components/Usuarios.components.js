@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { bk_dir } from "../../conf/configuration.file";
-import { ConfigUser } from "./minComponents/configUsers.components";
-import { CreateUser } from "./modals/createUser.modal";
+import { bk_dir } from "../../../conf/configuration.file";
+import { ConfigUser } from "../minComponents/configUsers.components";
+import { CreateUser } from "../modals/createUser.modal";
 
 function ListUsuarios() {
     const [data, setData] = useState([]);

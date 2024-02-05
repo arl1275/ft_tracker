@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { bk_dir } from "../../conf/configuration.file";
-import TableForm_dec_envio, { TextColumnFilter, NumberColumnFilter} from "../dynamic_table/table_dec_envio";
+import { bk_dir } from "../../../conf/configuration.file";
+import TableForm_dec_envio, { TextColumnFilter, NumberColumnFilter} from "../../dynamic_table/table_dec_envio";
 
 export const List_decEnvio = () => {
     const [decEnv, setDecEnv] = useState([]);
@@ -11,6 +11,7 @@ export const List_decEnvio = () => {
     }, 5000)
 
     const columns = [
+        { Header: 'CREADO', accessor: 'created_at', Filter: TextColumnFilter, width : 10},
         { Header: 'DECLARACION ENVIO', accessor: 'declaracionenvio', Filter: TextColumnFilter, width : 10},
         { Header: 'CAMION', accessor: 'placa', Filter: TextColumnFilter, width : 10},
         { Header: 'ENTREGADOR', accessor: 'nombre', Filter: TextColumnFilter, width : 10},

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { bk_dir } from "../../conf/configuration.file";
-import { CrearCamion } from "./modals/crearCamion.modal";
+import { bk_dir } from "../../../conf/configuration.file";
+import { CrearCamion } from "../modals/crearCamion.modal";
 
 function ListaCamiones() {
   const [data, setData] = useState([]);

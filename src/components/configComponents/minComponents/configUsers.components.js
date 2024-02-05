@@ -9,9 +9,16 @@ export const ConfigUser = ({dat}) => {
     const updateUser = async () =>{
         try {
             console.log('usuario actu: ', data);
-            await axios.put(bk_dir + '/user/update_user', data);
+            const result = await axios.put(bk_dir + '/usuarios/update_user', data);
+
+            if(result.status === 200){
+                alert('SE MODIFICO CORRECTAMENTE')
+            }else{
+                alert('NO SE HA REALIZADO EL CAMBIO')
+            }
+
         } catch (err) {
-            console.log('ERROR AL ACTUALIZAR USUARIO : ', err);
+            alert('ERROR AL ACTUALIZAR USUARIO : ', err);
         }
     }
 

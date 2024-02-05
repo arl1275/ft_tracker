@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { bk_dir } from "../../conf/configuration.file";
+import { bk_dir } from "../../../conf/configuration.file";
 import axios from "axios";
-import TableAdminFact, {TextColumnFilter, NumberColumnFilter} from "../dynamic_table/table_admin_facts";
-import { FotosView } from "./modals/FotosFact.modal"; // this is to see the pics of the fact
-import { AlterFact } from "./modals/AlterFact.modal"; // this is to do a changes in a specific factura
+import TableAdminFact, {TextColumnFilter, NumberColumnFilter} from "../../dynamic_table/table_admin_facts";
+import { FotosView } from "../modals/FotosFact.modal"; // this is to see the pics of the fact
+import { AlterFact } from "../modals/AlterFact.modal"; // this is to do a changes in a specific factura
 
 
 function ListFact() {

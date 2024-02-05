@@ -31,11 +31,16 @@ export const AlterFact = ({ props }) => {
     }
 
     const cell_data = {
-        border: '1px solid #D5D8DC', 
+        border: '1px solid #D5D8DC',
         textAlign: 'left',
         color: 'black',
         backgroundColor: 'white',
         fontSize: 15
+    }
+
+    const pic_format = {
+        width: '50%',
+        height: '40%'
     }
 
     return (
@@ -56,7 +61,7 @@ export const AlterFact = ({ props }) => {
                     </tr>
                 </table>
 
-                <table style={{ marginTop : 5}}>
+                <table style={{ marginTop: 5 }}>
                     <tr>
                         <td style={cell_detail}>RUTA</td>
                         <td style={cell_detail}>PEDIDO</td>
@@ -73,15 +78,15 @@ export const AlterFact = ({ props }) => {
 
             </div>
 
-            <table style={{ width : '100%'}}>
-                    <tr>
-                        <td style={cell_detail}>CAMION ASIGNADO</td>
-                        <td style={cell_data}>{props.placa}</td>
-                    </tr>
-                    <tr>
-                        <td style={cell_detail}>ENTREGADOR ASIGNADO</td>
-                        <td style={cell_data}>{props.nombre}</td>
-                    </tr>
+            <table style={{ width: '100%' }}>
+                <tr>
+                    <td style={cell_detail}>CAMION ASIGNADO</td>
+                    <td style={cell_data}>{props.placa}</td>
+                </tr>
+                <tr>
+                    <td style={cell_detail}>ENTREGADOR ASIGNADO</td>
+                    <td style={cell_data}>{props.nombre}</td>
+                </tr>
             </table>
 
             <div className="card" style={{ marginTop: 5 }}>
@@ -129,8 +134,8 @@ export const AlterFact = ({ props }) => {
                     // <CambioEntregador prop={props} />
                 }
                 {
-                    val === 1 &&
-                    <CambioManual prop={props} />
+                    val === 1 ?
+                    (<CambioManual prop={props.factura} />) : null
                 }
                 {
                     val === 2 &&
@@ -138,8 +143,37 @@ export const AlterFact = ({ props }) => {
                 }
                 {
                     val === 3 &&
-                    <div>NO HABILITADO</div>
+                    <div className="card" style={{ margin: 10 }}>
+                        {
+                            typeof props.link_firma === 'string' || typeof props.link_foto === 'string' ?
+                                <table>
+                                    
+                                        <tr>
+                                            <th style={{ margin: 20 }}> FIRMA</th>
+                                            <th style={{ margin: 20 }}>FOTO</th>
+                                        </tr>
+                                        <tr>
+                                            <td  style={pic_format}>
+                                                <img src={props.link_firma} />
+                                            </td>
+                                            <td style={pic_format}>
+                                                <img src={props.link_foto} />
+                                            </td>
+                                        </tr>
+
+                                  
+                                </table>
+                                : (<div className="card">AUN NO SE HAN TOMADO FOTOS</div>)
+
+
+
+                        }
+
+                    </div>
+
                 }
+
+
             </div>
         </div>
     )

@@ -4,6 +4,7 @@ import axios from "axios";
 
 export const CambioManual = ({ prop }) => {
     const [selected, setSelected] = useState('');
+    const queryToBodega = '/facturas/toNullState';
 
     const select_ = {
         padding: '10px',
@@ -22,6 +23,21 @@ export const CambioManual = ({ prop }) => {
         margin: 10
     }
 
+    const to_change_state = async () =>{
+        if(select_ == '1'){
+            console.log('factura a enviar =======================>', prop);
+            const result = await axios.get(bk_dir + queryToBodega, {params : { factura : prop }});
+            if(result.status === 200){
+                alert('SE ENVIO A BODEGA');
+            }else{
+                alert('NO SE PUDO REALIZAR EL CAMBIO')
+            }
+
+        }else{
+            alert('NO FAVOR SELECCIONE EL CAMPO')
+        }
+    }
+
     return (
         <div>
             <div className="card" style={{ marginTop: 5, marginBottom: 5, backgroundColor: '#922B21', color: 'white' }}>
@@ -36,16 +52,18 @@ export const CambioManual = ({ prop }) => {
                     <textarea style={input_text} />
                 </div>
 
-                <select name="cars" id="cars" style={select_}>
+                <select id="values" 
+                style={select_} 
+                value={selected}
+                onChange={(event) => setSelected(event.target.value)}>
+                    <option value="0">-- SELECCIONE --</option>
                     <option value="1">ENVIAR A BODEGA</option>
-                    <option value="2">A PREPARACION</option>
-                    <option value="3">A TRANSITO</option>
                 </select>
 
 
             </div>
 
-            <div style={{ width : '60%', alignSelf : 'flex-end'}}>
+            <div style={{ width : '60%', alignSelf : 'flex-end'}} onClick={to_change_state}>
                 <p className="btn btn-dark w-100"> VALIDAR CAMBIO </p>
             </div>
 

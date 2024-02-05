@@ -31,6 +31,10 @@ export const NumberColumnFilter = ({ column }) => {
     );
 };
 
+function removeTZ(dateString) {
+    return dateString.replace('T', ' ').replace('Z', '');
+  }
+
 const TableForm_dec_envio = ({ columns, data }) => {
     const [newCamion, setNewCamion] = useState([]);
     const [newEntregador, setNewEntregador] = useState([]);
@@ -116,8 +120,10 @@ const TableForm_dec_envio = ({ columns, data }) => {
                         prepareRow(row);
                         return (
                             <tr {...row.getRowProps()}>
-                                {row.cells.map((cell) => (
-                                    <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                {row.cells.map((cell, index) => (
+                                     <td {...cell.getCellProps()} key={index}>
+                                        {cell.render('Cell')}
+                                        </td>
                                 ))}
                                 <td style={{ padding: '8px', border: '1px solid #ddd' }} data-toggle="modal" data-target="#modal-large" onClick={() => { handleRow(row); }}>
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"

@@ -1,9 +1,9 @@
 import React, { useState} from "react";
-import ListaCamiones from "../../components/configComponents/Camiones.component";
-import ListUsuarios from "../../components/configComponents/Usuarios.components";
-import ListTransportistas from "../../components/configComponents/Transportistas.components";
-import ListFact from "../../components/configComponents/Facturas.component";
-import { List_decEnvio } from "../../components/configComponents/dec_envios.component";
+import ListaCamiones from "../../components/configComponents/main_components/Camiones.component";
+import ListUsuarios from "../../components/configComponents/main_components/Usuarios.components";
+import ListTransportistas from "../../components/configComponents/main_components/Transportistas.components";
+import ListFact from "../../components/configComponents/main_components/Facturas.component";
+import { List_decEnvio } from "../../components/configComponents/main_components/dec_envios.component";
 
 export function ConfigPage() {
   const [valueP, setValueP] = useState('');
