@@ -94,14 +94,14 @@ const TableForm_dec_envio = ({ columns, data }) => {
 
     return (
         <div>
-            <div style={{backgroundColor : 'black'}}>
+            <div>
             <input
                 type="text"
                 value={state.globalFilter || ''}
                 onChange={(e) => setGlobalFilter(e.target.value)}
                 placeholder="BUSCAR"
                 className='form-control'
-                style={{ width: '20%', margin: 10 }}
+                style={{ width: '30%', margin: 10 }}
             />
             </div>
 

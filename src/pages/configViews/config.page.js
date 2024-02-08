@@ -6,7 +6,7 @@ import ListFact from "../../components/configComponents/main_components/Facturas
 import { List_decEnvio } from "../../components/configComponents/main_components/dec_envios.component";
 
 export function ConfigPage() {
-  const [valueP, setValueP] = useState('');
+  const [valueP, setValueP] = useState('0');
 
   const selected = (event, value) => {
     setValueP(value);

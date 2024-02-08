@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import './assets/dist/css/tabler.min.css';//../assets/dist/css/tabler.min.css
+//import './assets/dist/css/tabler.min.css';//../assets/dist/css/tabler.min.css
 import './assets/dist/css/tabler-flags.min.css';
 import './assets/dist/css/tabler-payments.min.css';
 import './assets/dist/css/tabler-vendors.min.css';

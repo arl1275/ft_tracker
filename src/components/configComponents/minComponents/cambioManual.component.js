@@ -4,8 +4,7 @@ import axios from "axios";
 
 export const CambioManual = ({ prop }) => {
     const [selected, setSelected] = useState('');
-    const queryToBodega = '/facturas/toNullState';
-
+    
     const select_ = {
         padding: '10px',
         fontsize: '16px',
@@ -24,9 +23,9 @@ export const CambioManual = ({ prop }) => {
     }
 
     const to_change_state = async () =>{
-        if(select_ == '1'){
+        if(selected == '1'){
             console.log('factura a enviar =======================>', prop);
-            const result = await axios.get(bk_dir + queryToBodega, {params : { factura : prop }});
+            const result = await axios.get(bk_dir + '/facturas/toNullState', {params : { factura : prop }});
             if(result.status === 200){
                 alert('SE ENVIO A BODEGA');
             }else{

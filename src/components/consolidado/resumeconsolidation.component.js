@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { bk_dir } from "../../conf/configuration.file";
 
-const ResumenConsolidado = ({ props }) => {
+const ResumenConsolidado = ({ props, clearArray }) => {
   const lista_headers = ["DEPARTAMENTO", "CIUDAD", "NOMBRE DE CLIENTE", "ALBARAN", "FACTURA", "LISTA EMPAQUE", "CAJAS", "UNIDADES"];
   const [camionSeleccionado, setCamionSeleccionado] = useState(null);
   const [entregador, setEntregador] = useState(null);
@@ -29,6 +29,7 @@ const ResumenConsolidado = ({ props }) => {
           console.log('Se enviaron los datos al BK', data);
         } else {
           console.log('err al enviar:', data);
+          clearArray();
         }
       })
     }

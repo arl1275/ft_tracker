@@ -75,6 +75,10 @@ function AdminDespachoView() {
     setSelectedDate(event.target.value);
   };
 
+  const clearSelectedArray = () =>{
+    setSelectedFacturas([]);
+  }
+
   return (
     <>
       <div className="card" style={{ margin: "0.5rem" }}>
@@ -104,7 +108,7 @@ function AdminDespachoView() {
                   </div>
 
                   <div className="col-6 col-sm-4 col-md-2 col-xl mb-3">
-                    <ResumenConsolidado props={selected_facturas} />
+                    <ResumenConsolidado props={selected_facturas} clearArray={clearSelectedArray} />
                   </div>
 
                 </div>
