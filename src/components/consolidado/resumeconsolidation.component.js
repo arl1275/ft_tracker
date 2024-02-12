@@ -74,10 +74,10 @@ const ResumenConsolidado = ({ props, clearArray }) => {
               </div>
 
               <div className="modal-body">
-                <div>
+                {/* <div>
                   <div>PAIS : Honduras</div>
                   <div>UBICACION : TEST</div>
-                </div>
+                </div> */}
 
                 <table className="table card-table table-vcenter text-nowrap datatable">
 
