@@ -18,9 +18,12 @@ export const CrearCamion = () => {
         if(camion.placa === '' || camion.QR === ''){
             alert('ERROR Favor llenar todos los campos')
         }else{
-            console.log('valor a enviar : ' ,camion);
-            await axios.post(bk_dir + '/camiones/postNewCamion', camion);
-            console.log('New user:', camion);
+            let response = await axios.post(bk_dir + '/camiones/postNewCamion', camion);
+            if( response.status === 200){
+                alert('SE CREO EL CAMION NUEVO');
+            }else{
+                alert('NO SE CREO EL CAMION NUEVO');
+            }
         }
        
     };
