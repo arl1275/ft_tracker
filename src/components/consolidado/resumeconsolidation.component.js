@@ -15,25 +15,34 @@ const ResumenConsolidado = ({ props, clearArray }) => {
     setEntregador(entregador);
   };
 
-  const send_toCreate_Consolidacion = () => {
+  const send_toCreate_Consolidacion = async () => {
     if (entregador === '' || entregador === 'ENTREGADORES' || camionSeleccionado === '' || camionSeleccionado === 'CAMIONES' || entregador === null || camionSeleccionado === null) {
       alert('FAVOR LLENAR TODOS LOS CAMPOS ANTES DE ENVIAR EL CONSOLIDADO');
     } else {
-        const data = {
-          id_user : entregador[1],
-          id_cam : camionSeleccionado[1],
-          declaracion_env : props
-        }
-        axios.post(bk_dir + '/decEnv/NewDecEnv', data).then((err) => {
-        if (!err) {
-          console.log('Se enviaron los datos al BK', data);
-        } else {
-          console.log('err al enviar:', data);
+      const data = {
+        id_user: entregador[1],
+        id_cam: camionSeleccionado[1],
+        declaracion_env: props
+      };
+
+      try {
+        const response = await axios.post(bk_dir + '/decEnv/NewDecEnv', data);
+        console.log('Se enviaron los datos al BK', data);
+
+        if (response && response.data && response.data.data) {
+          alert('SE CREO LA DECLARACION DE ENVIO: ' + response.data.data);
           clearArray();
+        } else {
+          console.log('La respuesta no contiene los datos esperados:', response);
+          alert('Ocurrió un problema al crear la declaración de envío');
         }
-      })
+      } catch (error) {
+        console.log('Error al enviar:', error);
+        clearArray();
+      }
     }
-  }
+};
+
 
   const get_sumas_cajas = () => {
     if (props.length > 0) {
@@ -52,80 +61,90 @@ const ResumenConsolidado = ({ props, clearArray }) => {
       return 'SIN DATA';
     }
   }
-  
 
-    return (
-      <>
-        <button class="btn btn-success" data-toggle="modal" data-target="#modal-full-width1" >GENERAR DECLARACION DE ENVIO</button>
-         <div class="modal modal-blur fade" id="modal-full-width1" tabindex="-1" role="dialog" aria-hidden="true">
-          <div className="modal-dialog modal-full-width modal-dialog-centered" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">DECLARACION DE ENVIO</h5>
-                <small style={{ display: "flex", margin: "1rem" }}>
-                  <div className="mb-auto" style={{ marginRight: "10px" }}>
-                    <CamionesCombox props={selCamion} />
+
+  return (
+    <>
+      <button class="btn btn-success" data-toggle="modal" data-target="#modal-full-width1" >GENERAR DECLARACION DE ENVIO</button>
+      <div class="modal modal-blur fade" id="modal-full-width1" tabindex="-1" role="dialog" aria-hidden="true">
+        <div className="modal-dialog modal-full-width modal-dialog-centered" role="document">
+
+          <div className="modal-content">
+            {
+              props.length > 0 ?
+                (<div>
+                  <div className="modal-header">
+                    <h5 className="modal-title">DECLARACION DE ENVIO</h5>
+                    <small style={{ display: "flex", margin: "1rem" }}>
+                      <div className="mb-auto" style={{ marginRight: "10px" }}>
+                        <CamionesCombox props={selCamion} />
+                      </div>
+                      <div className="mb-auto" style={{ marginRight: "10px" }}>
+                        <EntregadorCombox EntregadorHand={SelEntregador} />
+                      </div>
+                    </small>
+                    <button type="button" className="btn-close" data-dismiss="modal" aria-label="Close"></button>
                   </div>
-                  <div className="mb-auto" style={{ marginRight: "10px" }}>
-                    <EntregadorCombox EntregadorHand={SelEntregador} />
+
+                  <div className="modal-body">
+                    <table className="table card-table table-vcenter text-nowrap datatable">
+                      <thead style={{ backgroundColor: '#02395E' }}>
+                        <tr>{
+                          lista_headers.map((item) => (
+                            <th style={{ color: 'white' }}>{item}</th>
+                          ))
+                        }
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {props.map((item) => (
+                          <tr key={item.id}>
+                            <td>CORTES</td>
+                            <td>San Pedro Sula</td>
+                            <td>{item.cliente}</td>
+                            <td>{item.albaran}</td>
+                            <td><span className="text-muted">{item.factura}</span></td>
+                            <td>{item.list_empaque}</td>
+                            <td>{item.cant_cajas}</td>
+                            <td>{item.cant_total}</td>
+                          </tr>
+                        ))}
+                        <tr style={{ width: '100%', backgroundColor: '#02395E' }}>
+                          <td style={{ color: 'white' }}>Totales</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td><div style={{ color: 'white' }}>{get_sumas_cajas()}</div></td>
+                          <td><div style={{ color: 'white' }}>{get_sumas_unidades()}</div></td>
+                        </tr>
+                      </tbody>
+                    </table>
+
                   </div>
-                </small>
-                <button type="button" className="btn-close" data-dismiss="modal" aria-label="Close"></button>
-              </div>
 
-              <div className="modal-body">
-                {/* <div>
-                  <div>PAIS : Honduras</div>
-                  <div>UBICACION : TEST</div>
-                </div> */}
+                  <div className="modal-footer">
+                    <button type="button" className="btn mr-auto" data-dismiss="modal">CANCELAR</button>
+                    <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={send_toCreate_Consolidacion}>ENVIAR A PREPARACION</button>
+                  </div>
+                </div>)
+                :
+                (<div className="modal-body" style={{ marginv: 10 }}>
+                  <h1>SIN FACTURAS ESCANEADAS</h1>
+                </div>)
+            }
 
-                <table className="table card-table table-vcenter text-nowrap datatable">
 
-                  <thead style={{ backgroundColor: '#02395E' }}>
-                    <tr>{
-                      lista_headers.map((item) => (
-                        <th style={{ color: 'white' }}>{item}</th>
-                      ))
-                    }
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {props.map((item) => (
-                      <tr key={item.id}>
-                        <td>CORTES</td>
-                        <td>San Pedro Sula</td>
-                        <td>{item.cliente}</td>
-                        <td>{item.albaran}</td>
-                        <td><span className="text-muted">{item.factura}</span></td>
-                        <td>{item.list_empaque}</td>
-                        <td>{item.cant_cajas}</td>
-                        <td>{item.cant_total}</td>
-                      </tr>
-                    ))}
-                    <tr style={{ width: '100%', backgroundColor: '#02395E' }}>
-                      <td style={{ color: 'white' }}>Totales</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td><div style={{ color: 'white' }}>{get_sumas_cajas()}</div></td>
-                      <td><div style={{ color: 'white' }}>{get_sumas_unidades()}</div></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn mr-auto" data-dismiss="modal">CANCELAR</button>
-                <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={send_toCreate_Consolidacion}>ENVIAR A PREPARACION</button>
-              </div>
-            </div>
           </div>
 
-        </div> 
-      </>
 
-    )
+        </div>
+
+      </div>
+    </>
+
+  )
 };
 
 export default ResumenConsolidado;

@@ -18,20 +18,29 @@ function AdminDespachoView() {
   }, []);
 
   const handleKeydown = (e) => {
-    const new_val = e.replace(/'/g, '-');
-    const match = new_val.match(/(?:[^-]*-){3}(\d+)/);
-    if (match && match[1]) {
-      let valor = match[1];
-      //console.log('valor : ', valor)
-      if (data.some((item) => item.factura === valor) === false) {
-        console.log('Factura no existe: ', valor);
-      } else {
-        let data_fact = data.filter((item) => item.factura === valor);
-        //console.log('data in keydownFunc : ', data_fact);
-        get_selected_facturas(data_fact[0]);
-      }
+    const new_val = e;
+
+    if (new_val.startsWith('AL-')) {
+        const valor = e; 
+
+        if (data.some((item) => item.factura === valor)) { 
+            const data_fact = data.filter((item) => item.factura === valor);
+            get_selected_facturas(data_fact[0]); 
+        } else {
+            console.log('Factura no existe: ', valor);
+        }
+    } else { 
+        const replaced_val = new_val.replace(/["/\\.,'\-`|_]/g, '-'); 
+        const match = replaced_val.match(/(?:[^-]*-){3}(\d+)/);
+
+        if (match && match[1]) {
+            const valor = match[1];
+            const data_fact = data.filter((item) => item.factura === valor);
+            get_selected_facturas(data_fact[0]); 
+        }
     }
-  }
+}
+
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -39,9 +48,9 @@ function AdminDespachoView() {
 
   //---------------------------------------------------------------------------
   //---------------------------------------------------------------------------
-   useEffect(() => {
-     getFacturas();
-   }, []);
+  useEffect(() => {
+    getFacturas();
+  }, []);
 
   const getFacturas = async () => {
     try {
@@ -64,18 +73,8 @@ function AdminDespachoView() {
     });
   };
 
-  let set_fecha_format = (date) => {
-    const fecha = new Date(date);
-    const soloFecha = fecha.toISOString().split('T')[0];
-    return soloFecha;
-  }
 
-  const [selectedDate, setSelectedDate] = useState(''); // State to store the selected date
-  const handleDateChange = (event) => {
-    setSelectedDate(event.target.value);
-  };
-
-  const clearSelectedArray = () =>{
+  const clearSelectedArray = () => {
     setSelectedFacturas([]);
   }
 
@@ -85,7 +84,7 @@ function AdminDespachoView() {
         <div className="col-12">
           <div className="card">
             <div className="card-body border-bottom py-3">
-              <div className="d-flex">
+              <div className="d-flex" style={{flexDirection : 'row'}}>
                 <div style={{ display: "flex" }}>
                   <div className="col-6 col-sm-4 col-md-2 col-xl mb-3">
                     <button className="btn btn-primary w-auto" onClick={getFacturas}>
@@ -100,7 +99,7 @@ function AdminDespachoView() {
                 </div>
 
                 <div style={{ display: "flex" }}>
-                  
+
                   <div className="mb-auto" style={{ marginRight: "10px" }}>
                     <select name="countries" id="select-countries" className="form-select" disabled>
                       <option value="pl" id='1'>TRANSPORTISTA</option>
@@ -127,7 +126,7 @@ function AdminDespachoView() {
                   }}
                 />
 
-                <div>
+                <div style={{ alignSelf: 'flex-end' }}>
                   {
                     selected_facturas.length == 0 ?
                       <div className="card" style={{ backgroundColor: '#A93226', width: 'auto' }}>
@@ -152,27 +151,22 @@ function AdminDespachoView() {
               </div>
             </div>
           </div>
-           
+
           <div className="table-responsive">
             <table className="table card-table table-vcenter text-nowrap datatable">
               <thead>
 
-              <tr>
-                <th className="w-1"><input className="form-check-input m-0 align-middle" type="checkbox" id='001' /></th>
-                <th className="w-auto">
-                  <div className="input-group mb-auto">
-                    <input type="text" className="form-control" placeholder="FACTURA" style={{ width: '20%' }} />
-                    <button className="btn" type="button">buscar</button>
-                  </div>
-                </th>
-                <th>RUTA</th>
-                <th>PEDIDO</th>
-                <th>ALBARAN</th>
-                <th>CLIENTE</th>
-                <th>CAJAS</th>
-                <th>UNIDADES</th>
-                <th>UBICACION</th>
-              </tr>
+                <tr>
+                  <th className="w-1"><input className="form-check-input m-0 align-middle" type="checkbox" id='001' /></th>
+                  <th className="w-auto">FACTURA</th>
+                  <th>RUTA</th>
+                  <th>PEDIDO</th>
+                  <th>ALBARAN</th>
+                  <th>CLIENTE</th>
+                  <th>CAJAS</th>
+                  <th>UNIDADES</th>
+                  <th>UBICACION</th>
+                </tr>
               </thead>
 
               <tbody>

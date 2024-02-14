@@ -3,14 +3,14 @@ import MyTabs from './admin/admin_view_index';
 import { bk_dir } from '../conf/configuration.file';
 import axios from 'axios';
 
-function LoginForm() {
-  const [page, setPage] = useState(null);
+
+const LoginForm = () => {
   const [user, setUser] = useState('');
   const [_Password, setPass] = useState('');
+  const [page, setPage] = useState(null);
 
   const ValidateUser = async (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
-    
+    event.preventDefault();
     try {
       const data = {
         user: user,
@@ -20,11 +20,11 @@ function LoginForm() {
       if (data.user === '' || data._password === '') {
         alert('FAVOR INGRESE UN USUARIO Y CONTRASEÑA');
       } else {
-        const response = await axios.get(bk_dir + '/usuarios/auth/user', { params: data });
+        const response = await axios.get(`${bk_dir}/usuarios/auth/user`, { params: data });
         if (response.status === 200) {
           setPage('INDEX');
         } else {
-          alert('Usuario inválido o no existe');
+          alert('DATOS INVALIDOS');
         }
       }
     } catch (err) {
@@ -35,13 +35,13 @@ function LoginForm() {
   if (page === null) {
     return (
       <div className="container-tight py-6">
-        <form onSubmit={ValidateUser}> {/* Handle form submission */}
+        <form>
           <div className="text-center mb-4">
             <a href="."><img src="./static/logo.svg" height="36" alt="" /></a>
           </div>
           <div className="card card-md" autoComplete="off">
             <div className="card-body">
-              <h2 className="card-title text-center mb-4">AUSKELLER-CHECK</h2>
+              <h2 className="card-title text-center mb-4">KELLER-CHECK</h2>
               <div className="mb-3">
                 <input type="text" className="form-control" placeholder="INGRESE USUARIO" onChange={(e) => { setUser(e.target.value) }} />
               </div>
@@ -59,7 +59,7 @@ function LoginForm() {
                 </div>
               </div>
               <div className="form-footer">
-                <button type="submit" className="btn btn-primary w-100">INGRESAR</button> {/* Use type="submit" for submit button */}
+                <button type="submit" className="btn btn-primary w-100" onClick={ValidateUser}>INGRESAR</button>
               </div>
             </div>
           </div>
@@ -69,6 +69,7 @@ function LoginForm() {
   } else if (page === 'INDEX') {
     return <MyTabs />;
   }
-}
+};
+
 
 export default LoginForm;
