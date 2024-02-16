@@ -20,26 +20,29 @@ function AdminDespachoView() {
   const handleKeydown = (e) => {
     const new_val = e;
 
-    if (new_val.startsWith('AL-')) {
-        const valor = e; 
+    if (new_val.startsWith('AL')) {
 
-        if (data.some((item) => item.factura === valor)) { 
-            const data_fact = data.filter((item) => item.factura === valor);
-            get_selected_facturas(data_fact[0]); 
-        } else {
-            console.log('Factura no existe: ', valor);
-        }
-    } else { 
-        const replaced_val = new_val.replace(/["/\\.,'\-`|_]/g, '-'); 
-        const match = replaced_val.match(/(?:[^-]*-){3}(\d+)/);
-
-        if (match && match[1]) {
-            const valor = match[1];
-            const data_fact = data.filter((item) => item.factura === valor);
-            get_selected_facturas(data_fact[0]); 
-        }
+      if (new_val.startsWith('AL')) {
+        const valor = new_val.replace(/["/\\.,'\-`|_{}[\]]/g, '-');
+        
+      if (data.some((item) => item.factura === valor)) {
+        const data_fact = data.filter((item) => item.factura === valor);
+        get_selected_facturas(data_fact[0]);
+      }
     }
-}
+
+    }
+    else {
+      const replaced_val = new_val.replace(/["/\\.,'\-`|_{}[\]]/g, '-');
+      const match = replaced_val.match(/(?:[^-]*-){3}(\d+)/);
+
+      if (match && match[1]) {
+        const valor = match[1];
+        const data_fact = data.filter((item) => item.factura === valor);
+        get_selected_facturas(data_fact[0]);
+      }
+    }
+  }
 
 
   useEffect(() => {
@@ -84,7 +87,7 @@ function AdminDespachoView() {
         <div className="col-12">
           <div className="card">
             <div className="card-body border-bottom py-3">
-              <div className="d-flex" style={{flexDirection : 'row'}}>
+              <div className="d-flex" style={{ flexDirection: 'row' }}>
                 <div style={{ display: "flex" }}>
                   <div className="col-6 col-sm-4 col-md-2 col-xl mb-3">
                     <button className="btn btn-primary w-auto" onClick={getFacturas}>

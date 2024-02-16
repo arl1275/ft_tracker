@@ -115,9 +115,9 @@ export const AlterFact = ({ props }) => {
                 <li className="nav-item" style={{ marginRight: '5%', cursor: 'pointer' }} onClick={() => { setVal(1) }}>
                     <div className="nav-lib">CAMBIO MANUAL</div>
                 </li>
-                <li className="nav-item" style={{ marginRight: '5%', cursor: 'pointer' }} onClick={() => { setVal(2) }}>
+                {/* <li className="nav-item" style={{ marginRight: '5%', cursor: 'pointer' }} onClick={() => { setVal(2) }}>
                     <div className="nav-lib">ENTREGA MANUAL</div>
-                </li>
+                </li> */}
             </ul>
 
             <div className="tab-content">
@@ -137,10 +137,10 @@ export const AlterFact = ({ props }) => {
                     val === 1 ?
                     (<CambioManual prop={props.factura} />) : null
                 }
-                {
+                {/* {
                     val === 2 &&
                     <EntregaManual />
-                }
+                } */}
                 {
                     val === 3 &&
                     <div className="card" style={{ margin: 10 }}>

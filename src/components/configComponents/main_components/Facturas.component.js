@@ -31,7 +31,7 @@ function ListFact() {
         { Header: "RUTA", accessor: "lista_empaque", Filter: TextColumnFilter },
         { Header: "CAJAS", accessor: "cant_cajas", Filter: NumberColumnFilter },
         { Header: "UNIDADES", accessor: "cant_unidades", Filter: NumberColumnFilter },
-        //{ Header: "DEC_ENVIO", accessor: "declaracionenvio", Filter: TextColumnFilter },
+        { Header: "DEC_ENVIO", accessor: "declaracionenvio", Filter: TextColumnFilter },
         { Header: "ESTADO", accessor: "id_estados", Filter: TextColumnFilter },
         //{ Header: "Toma Preparación", accessor: "toma_preparacion", Filter: TextColumnFilter },
         //{ Header: "Toma Tránsito", accessor: "toma_transito", Filter: TextColumnFilter },
