@@ -1,14 +1,12 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import axios from "axios";
 import { bk_dir } from "../../conf/configuration.file.js";
 import ResumenConsolidado from "../../components/consolidado/resumeconsolidation.component.js";
+import { MaterialReactTable, useMaterialReactTable } from "material-react-table";
 
 function AdminDespachoView() {
   const [data, setData] = useState([]);
   const [selected_facturas, setSelectedFacturas] = useState([]);
-  //---------------------------------------------------------------------------
-  // para el escaneo invisible de facturas
-  //---------------------------------------------------------------------------
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -24,12 +22,12 @@ function AdminDespachoView() {
 
       if (new_val.startsWith('AL')) {
         const valor = new_val.replace(/["/\\.,'\-`|_{}[\]]/g, '-');
-        
-      if (data.some((item) => item.factura === valor)) {
-        const data_fact = data.filter((item) => item.factura === valor);
-        get_selected_facturas(data_fact[0]);
+
+        if (data.some((item) => item.factura === valor)) {
+          const data_fact = data.filter((item) => item.factura === valor);
+          get_selected_facturas(data_fact[0]);
+        }
       }
-    }
 
     }
     else {
@@ -49,7 +47,8 @@ function AdminDespachoView() {
     inputRef.current?.focus();
   }, [])
 
-  //---------------------------------------------------------------------------
+
+
   //---------------------------------------------------------------------------
   useEffect(() => {
     getFacturas();
@@ -94,22 +93,22 @@ function AdminDespachoView() {
                       ACTUALIZAR
                     </button>
                   </div>
-                  <div className="mb-auto" style={{ marginRight: "10px", marginLeft: "10px" }}>
+                  {/* <div className="mb-auto" style={{ marginRight: "10px", marginLeft: "10px" }}>
                     <select name="countries" id="select-countries" className="form-select" disabled>
                       <option value="1" selected>PAIS</option>
                     </select>
-                  </div>
+                  </div> */}
                 </div>
 
                 <div style={{ display: "flex" }}>
 
-                  <div className="mb-auto" style={{ marginRight: "10px" }}>
+                  {/* <div className="mb-auto" style={{ marginRight: "10px" }}>
                     <select name="countries" id="select-countries" className="form-select" disabled>
                       <option value="pl" id='1'>TRANSPORTISTA</option>
                     </select>
-                  </div>
+                  </div> */}
 
-                  <div className="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                  <div className="col-6 col-sm-4 col-md-2 col-xl mb-3" style={{marginLeft : 10}}>
                     <ResumenConsolidado props={selected_facturas} clearArray={clearSelectedArray} />
                   </div>
 
@@ -129,22 +128,22 @@ function AdminDespachoView() {
                   }}
                 />
 
-                <div style={{ alignSelf: 'flex-end' }}>
+                <div>
                   {
                     selected_facturas.length == 0 ?
                       <div className="card" style={{ backgroundColor: '#A93226', width: 'auto' }}>
                         <h3 style={{ margin: 10, color: 'white' }}>SIN FACTURAS PARA CONSOLIDAR</h3>
                       </div>
                       :
-                      <div className="card" style={{ backgroundColor: '#02395E', width: 'auto', display: 'flex', flexDirection: 'row' }}>
+                      <div className="card" style={{ backgroundColor: '#ECF0F1', width: 'auto', display: 'flex', flexDirection: 'row' }}>
                         <div style={{ display: 'flex', flexDirection: 'row' }}>
-                          <h4 style={{ margin: 10, color: 'white' }}>Fact Escaneada :</h4>
-                          <h4 style={{ margin: 10, color: 'white' }}>{selected_facturas[selected_facturas.length - 1].factura}</h4>
+                          <h4 style={{ margin: 10, color: 'black' }}>ULTIMA ESCANEADA :</h4>
+                          <h4 style={{ margin: 10, color: 'black' }}>{selected_facturas[selected_facturas.length - 1].factura}</h4>
                         </div>
 
                         <div style={{ display: 'flex', flexDirection: 'row' }}>
-                          <h4 style={{ margin: 10, color: 'white' }}>cant_facts:</h4>
-                          <h4 style={{ margin: 10, color: 'red', fontWeight: 'bold' }}>{selected_facturas.length}</h4>
+                          <h4 style={{ margin: 10, color: 'black'}}>FACTURAS:</h4>
+                          <h4 style={{ margin: 10, color: 'black', fontWeight: 'bold', fontSize : 15 }}>{selected_facturas.length}</h4>
                         </div>
 
                       </div>
@@ -158,10 +157,9 @@ function AdminDespachoView() {
           <div className="table-responsive">
             <table className="table card-table table-vcenter text-nowrap datatable">
               <thead>
-
                 <tr>
-                  <th className="w-1"><input className="form-check-input m-0 align-middle" type="checkbox" id='001' /></th>
-                  <th className="w-auto">FACTURA</th>
+                  <th></th>
+                  <th>FACTURA</th>
                   <th>RUTA</th>
                   <th>PEDIDO</th>
                   <th>ALBARAN</th>
@@ -177,21 +175,22 @@ function AdminDespachoView() {
                   <tr key={item.factura}>
                     <td>
                       <input className="form-check-input m-0 align-middle" type="checkbox"
-                        onChange={() => { get_selected_facturas(item); }} aria-label="Select invoice" />
+                        onChange={(e) => {  get_selected_facturas(item); }} aria-label="Select invoice" />
                     </td>
-                    <td><span className="text-muted">{item.factura}</span></td>
-                    <td>{item.list_empaque}</td>
-                    <td>{item.pedidoventa}</td>
-                    <td>{item.albaran}</td>
-                    <td>{item.cliente}</td>
-                    <td>{item.cant_cajas}</td>
-                    <td>{item.cant_total}</td>
-                    <td>{item.ubicacion}</td>
+                    <td style={{fontSize : 12, fontFamily : 'sans-serif'}}>{item.factura}</td>
+                    <td style={{fontSize : 12, fontFamily : 'sans-serif'}}>{item.list_empaque}</td>
+                    <td style={{fontSize : 12, fontFamily : 'sans-serif'}}>{item.pedidoventa}</td>
+                    <td style={{fontSize : 12, fontFamily : 'sans-serif'}}>{item.albaran}</td>
+                    <td style={{fontSize : 12, fontFamily : 'sans-serif'}}>{item.cliente}</td>
+                    <td style={{fontSize : 12, fontFamily : 'sans-serif'}}>{item.cant_cajas}</td>
+                    <td style={{fontSize : 12, fontFamily : 'sans-serif'}}>{item.cant_total}</td>
+                    <td style={{fontSize : 12, fontFamily : 'sans-serif'}}>{item.ubicacion}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
-          </div>
+          </div> 
+            
         </div>
       </div>
     </>

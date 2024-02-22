@@ -21,7 +21,7 @@ export function ConfigPage() {
           <button className="btn btn-ghost-primary w-25" onClick={(event) => selected(event, '4')}>FACTURAS</button>
           <button className="btn btn-ghost-primary w-25" onClick={(event) => selected(event, '3')}>USUARIOS</button>
           <button className="btn btn-ghost-primary w-25" onClick={(event) => selected(event, '2')}>CAMIONES</button>
-          <button className="btn btn-ghost-primary active w-25" onClick={(event) => selected(event, '1')}>TRANSPORTISTAS</button>
+          {/* <button className="btn btn-ghost-primary active w-25" onClick={(event) => selected(event, '1')}>TRANSPORTISTAS</button> */}
           </div>
         </div>
         {valueP === '1' ? <ListTransportistas /> : null}
