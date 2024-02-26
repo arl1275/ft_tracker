@@ -85,40 +85,33 @@ function AdminDespachoView() {
       <div className="card" style={{ margin: "0.5rem" }}>
         <div className="col-12">
           <div className="card">
-            <div className="card-body border-bottom py-3">
-              <div className="d-flex" style={{ flexDirection: 'row' }}>
-                <div style={{ display: "flex" }}>
+
+            <table className="card-body border-bottom py-3" style={{ width : '100%' }}>
+              
+              <tr className="d-flex" style={{ margin : 10 }}>
+
+                <td style={{ display: "flex" }}>
                   <div className="col-6 col-sm-4 col-md-2 col-xl mb-3">
                     <button className="btn btn-primary w-auto" onClick={getFacturas}>
                       ACTUALIZAR
                     </button>
                   </div>
-                  {/* <div className="mb-auto" style={{ marginRight: "10px", marginLeft: "10px" }}>
-                    <select name="countries" id="select-countries" className="form-select" disabled>
-                      <option value="1" selected>PAIS</option>
-                    </select>
-                  </div> */}
-                </div>
+                </td>
 
-                <div style={{ display: "flex" }}>
-
-                  {/* <div className="mb-auto" style={{ marginRight: "10px" }}>
-                    <select name="countries" id="select-countries" className="form-select" disabled>
-                      <option value="pl" id='1'>TRANSPORTISTA</option>
-                    </select>
-                  </div> */}
+                <td style={{ display: "flex" }}>
 
                   <div className="col-6 col-sm-4 col-md-2 col-xl mb-3" style={{marginLeft : 10}}>
                     <ResumenConsolidado props={selected_facturas} clearArray={clearSelectedArray} />
                   </div>
 
-                </div>
+                </td>
 
+                <td>
                 <input
                   type="text"
                   autoFocus
                   ref={inputRef}
-                  style={{ opacity: 0 }}
+                  style={{ margin: 8, opacity: 0 }}
                   onBlur={() => inputRef.current?.focus()}
                   onKeyDown={(Event) => {
                     if (Event.key === 'Enter') {
@@ -127,31 +120,35 @@ function AdminDespachoView() {
                     }
                   }}
                 />
+                </td>
+                
 
-                <div>
+                <td>
                   {
                     selected_facturas.length == 0 ?
                       <div className="card" style={{ backgroundColor: '#A93226', width: 'auto' }}>
-                        <h3 style={{ margin: 10, color: 'white' }}>SIN FACTURAS PARA CONSOLIDAR</h3>
+                        <h3 style={{ margin: 7, color: 'white' }}>SIN FACTURAS PARA CONSOLIDAR</h3>
                       </div>
                       :
                       <div className="card" style={{ backgroundColor: '#ECF0F1', width: 'auto', display: 'flex', flexDirection: 'row' }}>
                         <div style={{ display: 'flex', flexDirection: 'row' }}>
-                          <h4 style={{ margin: 10, color: 'black' }}>ULTIMA ESCANEADA :</h4>
-                          <h4 style={{ margin: 10, color: 'black' }}>{selected_facturas[selected_facturas.length - 1].factura}</h4>
+                          <h4 style={{ margin: 7, color: 'black' }}>ULTIMA ESCANEADA :</h4>
+                          <h4 style={{ margin: 7, color: 'black' }}>{selected_facturas[selected_facturas.length - 1].factura}</h4>
                         </div>
 
                         <div style={{ display: 'flex', flexDirection: 'row' }}>
-                          <h4 style={{ margin: 10, color: 'black'}}>FACTURAS:</h4>
-                          <h4 style={{ margin: 10, color: 'black', fontWeight: 'bold', fontSize : 15 }}>{selected_facturas.length}</h4>
+                          <h4 style={{ margin: 7, color: 'black'}}>FACTURAS:</h4>
+                          <h4 style={{ margin: 7, color: 'black', fontWeight: 'bold', fontSize : 15 }}>{selected_facturas.length}</h4>
                         </div>
 
                       </div>
                   }
-                </div>
+                </td>
 
-              </div>
-            </div>
+              </tr>
+
+            </table>
+
           </div>
 
           <div className="table-responsive">

@@ -1,100 +1,47 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import { useTable, useGlobalFilter } from 'react-table';
 
-export const TextColumnFilter = ({ column }) => {
-  const { filterValue, setFilter } = column;
-
-  return (
-    <input
-      value={filterValue || ''}
-      onChange={(e) => setFilter(e.target.value)}
-      placeholder={`Filter ${column.Header}`}
-    />
-  );
-};
-
-
-export const DateColumnFilter = ({ column }) => {
-    const { filterValue, setFilter } = column;
-  
-    return (
-      <input
-        type="date"
-        value={filterValue || ''}
-        onChange={(e) => setFilter(e.target.value)}
-        placeholder={`Filter ${column.Header}`}
-      />
-    );
-  };
-
-
-// Define custom number filter component
-export const NumberColumnFilter = ({ column }) => {
-  const { filterValue, setFilter } = column;
-
-  return (
-    <input
-      type="number"
-      value={filterValue || ''}
-      onChange={(e) => setFilter(parseInt(e.target.value, 10))}
-      placeholder={`Filter ${column.Header}`}
-    />
-  );
-};
+//----------------------------------------
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
+//----------------------------------------
 
 // ... (your existing imports)
 
-const TableForm = ({ columns, data }) => {
-    const {
-      getTableProps,
-      getTableBodyProps,
-      headerGroups,
-      rows,
-      prepareRow,
-      state,
-      setGlobalFilter,
-    } = useTable({ columns, data }, useGlobalFilter); // Use useGlobalFilter
+const TableForm = ({ data }) => {
+    
+  const columns = useMemo( () => [
+    { header: 'FACTURA', accessorKey: 'factura', Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong>, muiTableHeadCellProps: { sx: { fontsize : 80 } }},
+    { header: 'LISTA DE ENTREGA', accessorKey: 'lista_empaque', Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong>},
+    { header: 'CLIENTE', accessorKey: 'clientenombre', Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong>},
+    { header: 'CAJAS', accessorKey: 'cant_cajas',Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong> },
+    { header: 'UNIDADES', accessorKey: 'cant_unidades', Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong> },
+    { header: 'DEPARTAMENTO', accessorKey: 'departamento', Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong> },
+    { header: 'CIUDAD', accessorKey: 'ciudad', Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong> },
+    { header: 'UBICACION', accessorKey: 'calle', Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong> },
+    { header: 'FECHA CREADO', accessorKey: 'created_at', Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong> },
+    { header: 'PREPARADO', accessorKey: 'toma_preparacion', Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong> },
+    { header: 'TRANSITO', accessorKey: 'toma_transito', Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong> },
+    { header: 'ENTREGADO', accessorKey: 'toma_hora_fecha_entrega', Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong> },
+    { header: 'SINCRONIZADO', accessorKey: 'toma_sincronizado', Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong> },
+    { header: 'DEC_ENVIO', accessorKey: 'declaracionenvio', Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong> },
+    { header: 'NOMBRE', accessorKey: 'nombre', Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong> },
+    { header: 'PLACA', accessorKey: 'placa', Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong> },
+  ]
+  );
+
+  const table = useMaterialReactTable({
+    data,
+    columns
+  });
+
+  return(
+    <div className='card' style={{margin : 10, backgroundColor : 'grey'}}>
+      <MaterialReactTable table={table} />
+    </div>
+  ) 
   
-    return (
-      <div>
-        <input
-          type="text"
-          value={state.globalFilter || ''}
-          onChange={(e) => setGlobalFilter(e.target.value)}
-          placeholder="BUSCAR"
-          className='form-control'
-          style={{ width: '20%', margin: 10 }}
-        />
-  
-        <table {...getTableProps()} className="table card-table table-vcenter text-nowrap datatable" style={{ color: 'black' }}>
-          <thead>
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {rows.map((row) => {
-              prepareRow(row);
-              let valor = row.toma_preparado ? 'black' : 'white';
-              return (
-                <tr {...row.getRowProps()} 
-                style={{ backgroundColor: row.original.valor }}>
-                  {row.cells.map((cell) => (
-                    <td {...cell.getCellProps()} style={{backgroundColor : valor}}>
-                      {cell.value !== null ? cell.render('Cell') : '-'}
-                    </td>
-                  ))}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-    );
-  };
-  
+}
 export default TableForm;
