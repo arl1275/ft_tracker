@@ -16,6 +16,7 @@ function App() {
     if (isLoggedIn) {
       window.location.href = '/main'; // Redirecciona a /main cuando el usuario inicia sesión
     }
+    document.title = 'keller';
   }, [isLoggedIn]);
 
   return (

@@ -26,9 +26,11 @@ function AdminDespachoView() {
         if (data.some((item) => item.factura === valor)) {
           const data_fact = data.filter((item) => item.factura === valor);
           get_selected_facturas(data_fact[0]);
+        }else{
+          alert('ESTE ALBARAN NO ES VALIDO')
         }
       }
-
+      
     }
     else {
       const replaced_val = new_val.replace(/["/\\.,'\-`|_{}[\]]/g, '-');
@@ -37,9 +39,17 @@ function AdminDespachoView() {
       if (match && match[1]) {
         const valor = match[1];
         const data_fact = data.filter((item) => item.factura === valor);
-        get_selected_facturas(data_fact[0]);
+        
+        if (data_fact && data_fact.length > 0) {
+          get_selected_facturas(data_fact[0]);
+        } else {
+          alert('ESTA FACTURA NO ES VALIDA');
+        }
+      } else {
+        alert('ESTA FACTURA NO ES VALIDA');
       }
     }
+
   }
 
 
@@ -63,17 +73,19 @@ function AdminDespachoView() {
     }
   };
 
-  const get_selected_facturas = (fact) => {
-    console.log('FROM SCANER : ', fact);
-    setSelectedFacturas((prevSelectedFacturas) => {
-      const index = prevSelectedFacturas.findIndex((item) => item.factura === fact.factura);
-      if (index === -1) {
-        return [...prevSelectedFacturas, fact]; // Add the new item
-      } else {
-        return prevSelectedFacturas.filter((item) => item.factura !== fact.factura);
-      }
-    });
-  };
+  
+   const get_selected_facturas = (fact) => {
+     console.log('FROM SCANER : ', fact);
+     setSelectedFacturas((prevSelectedFacturas) => {
+       const index = prevSelectedFacturas.findIndex((item) => item.factura === fact.factura);
+       if (index === -1) {
+         return [...prevSelectedFacturas, fact]; // Add the new item
+       } else {
+         return prevSelectedFacturas.filter((item) => item.factura !== fact.factura);
+       }
+    
+     });
+   };
 
 
   const clearSelectedArray = () => {
@@ -111,7 +123,7 @@ function AdminDespachoView() {
                   type="text"
                   autoFocus
                   ref={inputRef}
-                  style={{ margin: 8, opacity: 0 }}
+                  style={{ margin: 8, opacity : 0}}
                   onBlur={() => inputRef.current?.focus()}
                   onKeyDown={(Event) => {
                     if (Event.key === 'Enter') {
