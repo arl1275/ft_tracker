@@ -71,14 +71,11 @@ const TableForm_dec_envio = ({ columns, data }) => {
     const do_change = async () =>{
         if(newCamion !== '' || newEntregador !== ''){
             try {
-                
-
                 const data = {
                     cam : newCamion[1],
                     use : newEntregador[1],
                     decenv : dec_
                 }
-
                 const result = await axios.put(bk_dir + '/decEnv/putDecEnv', data);
                 if(result.status === 500){
                     alert('NO SE PUDO REALIZAR EL CAMBIO');
