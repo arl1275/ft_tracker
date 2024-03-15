@@ -34,37 +34,32 @@ export const CrearCamion = () => {
                     <h2 style={{color : 'white'}}>CREAR CAMION</h2>
                 </div>
 
-                <div className="modal-body">
-                    <div className="table-responsive" style={{width: 'auto' }}>
-                        <table className="table table-vcenter card-table">
-                            <tbody>
+                <div className="modal-body" style={{ width : 200 }}>
                                 <tr>
-                                    <td className="text-muted">INGRESE PLACA:</td>
+                                    <td className="text-muted" style={{ textAlign : 'right' }}>PLACA:</td>
                                     <td>
                                         <input
                                             type="text"
                                             name="placa"
                                             value={camion.placa}
                                             onChange={handleChange}
-                                            style={{ border: 'none', outline: 'none' }}
+                                            style={{ border: 'none', outline: 'none', textAlign : 'right'}}
                                         />
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td className="text-muted">INGRESE QR:</td>
+                                <br/>
+                                <tr >
+                                    <td style={{ textAlign : 'right' }}>QR:</td>
                                     <td>
                                         <input
                                             type="text"
                                             name="QR"
                                             value={camion.QR}
                                             onChange={handleChange}
-                                            style={{ border: 'none', outline: 'none' }}
+                                            style={{ border: 'none', outline: 'none', textAlign : 'right' }}
                                         />
                                     </td>
                                 </tr>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
 
                 <div className="modal-footer">

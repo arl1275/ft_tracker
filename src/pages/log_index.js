@@ -27,7 +27,8 @@ const LoginForm = ({ set_is_log }) => {
         alert('FAVOR INGRESE UN USUARIO Y CONTRASEÑA');
       } else {
         const response = await axios.get(`${bk_dir}/usuarios/auth/user`, { params: data });
-        if (response.status === 200) {
+        console.log(response.data.token)
+        if (response.status === 200 && response.data.token ) {
           set_is_log();
         } 
       }

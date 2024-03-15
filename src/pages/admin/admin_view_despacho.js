@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef, useMemo } from "react";
 import axios from "axios";
 import { bk_dir } from "../../conf/configuration.file.js";
 import ResumenConsolidado from "../../components/consolidado/resumeconsolidation.component.js";
-import { MaterialReactTable, useMaterialReactTable } from "material-react-table";
 
 function AdminDespachoView() {
   const [data, setData] = useState([]);
@@ -94,16 +93,16 @@ function AdminDespachoView() {
 
   return (
     <>
-      <div className="card" style={{ margin: "0.5rem" }}>
-        <div className="col-12">
-          <div className="card">
+      <div className="card" style={{ margin: 4 }}>
+        <div className="card">
+          <div>
 
-            <table className="card-body border-bottom py-3" style={{ width : '100%' }}>
+            <table className="table-responsive" style={{ width : '100%' }}>
               
-              <tr className="d-flex" style={{ margin : 10 }}>
+              <tr className="d-flex" style={{ borderColor : '0, 19, 255, 0.26', margin : 8}}>
 
                 <td style={{ display: "flex" }}>
-                  <div className="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                  <div>
                     <button className="btn btn-primary w-auto" onClick={getFacturas}>
                       ACTUALIZAR
                     </button>
@@ -123,7 +122,7 @@ function AdminDespachoView() {
                   type="text"
                   autoFocus
                   ref={inputRef}
-                  style={{ margin: 8, opacity : 0}}
+                  style={{ margin: 0, opacity : 0}}
                   onBlur={() => inputRef.current?.focus()}
                   onKeyDown={(Event) => {
                     if (Event.key === 'Enter') {
@@ -163,37 +162,37 @@ function AdminDespachoView() {
 
           </div>
 
-          <div className="table-responsive">
+          <div className="table-responsive" >
             <table className="table card-table table-vcenter text-nowrap datatable">
-              <thead>
+              <thead style={{ backgroundColor : '#154360 '}}>
                 <tr>
                   <th></th>
-                  <th>FACTURA</th>
-                  <th>RUTA</th>
-                  <th>PEDIDO</th>
-                  <th>ALBARAN</th>
-                  <th>CLIENTE</th>
-                  <th>CAJAS</th>
-                  <th>UNIDADES</th>
-                  <th>UBICACION</th>
+                  <th style={{fontSize : 12, fontFamily : 'sans-serif', textAlign : 'left', color : 'white'}}>FACTURA</th>
+                  <th style={{fontSize : 12, fontFamily : 'sans-serif', textAlign : 'left', color : 'white'}}>RUTA</th>
+                  <th style={{fontSize : 12, fontFamily : 'sans-serif', textAlign : 'left', color : 'white'}}>PEDIDO</th>
+                  <th style={{fontSize : 12, fontFamily : 'sans-serif', textAlign : 'left', color : 'white'}}>ALBARAN</th>
+                  <th style={{fontSize : 12, fontFamily : 'sans-serif', textAlign : 'left', color : 'white'}}>CLIENTE</th>
+                  <th style={{fontSize : 12, fontFamily : 'sans-serif', textAlign : 'left', color : 'white'}}>CAJAS</th>
+                  <th style={{fontSize : 12, fontFamily : 'sans-serif', textAlign : 'left', color : 'white'}}>UNIDADES</th>
+                  <th style={{fontSize : 12, fontFamily : 'sans-serif', textAlign : 'left', color : 'white'}}>UBICACION</th>
                 </tr>
               </thead>
 
               <tbody>
                 {data.map((item) => (
-                  <tr key={item.factura}>
+                  <tr key={item.factura} style={{marginBottom : 20}}>
                     <td>
                       <input className="form-check-input m-0 align-middle" type="checkbox"
                         onChange={(e) => {  get_selected_facturas(item); }} aria-label="Select invoice" />
                     </td>
-                    <td style={{fontSize : 12, fontFamily : 'sans-serif'}}>{item.factura}</td>
-                    <td style={{fontSize : 12, fontFamily : 'sans-serif'}}>{item.list_empaque}</td>
-                    <td style={{fontSize : 12, fontFamily : 'sans-serif'}}>{item.pedidoventa}</td>
-                    <td style={{fontSize : 12, fontFamily : 'sans-serif'}}>{item.albaran}</td>
-                    <td style={{fontSize : 12, fontFamily : 'sans-serif'}}>{item.cliente}</td>
-                    <td style={{fontSize : 12, fontFamily : 'sans-serif'}}>{item.cant_cajas}</td>
-                    <td style={{fontSize : 12, fontFamily : 'sans-serif'}}>{item.cant_total}</td>
-                    <td style={{fontSize : 12, fontFamily : 'sans-serif'}}>{item.ubicacion}</td>
+                    <td style={{fontSize : 12, fontFamily : 'sans-serif', textAlign : 'left'}}>{item.factura}</td>
+                    <td style={{fontSize : 12, fontFamily : 'sans-serif', textAlign : 'left'}}>{item.list_empaque}</td>
+                    <td style={{fontSize : 12, fontFamily : 'sans-serif', textAlign : 'left'}}>{item.pedidoventa}</td>
+                    <td style={{fontSize : 12, fontFamily : 'sans-serif', textAlign : 'left'}}>{item.albaran}</td>
+                    <td style={{fontSize : 12, fontFamily : 'sans-serif', textAlign : 'left'}}>{item.cliente}</td>
+                    <td style={{fontSize : 12, fontFamily : 'sans-serif', textAlign : 'left'}}>{item.cant_cajas}</td>
+                    <td style={{fontSize : 12, fontFamily : 'sans-serif', textAlign : 'left'}}>{item.cant_total}</td>
+                    <td style={{fontSize : 12, fontFamily : 'sans-serif', textAlign : 'left'}}>{item.ubicacion}</td>
                   </tr>
                 ))}
               </tbody>

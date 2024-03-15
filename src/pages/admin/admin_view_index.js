@@ -6,7 +6,7 @@ import ResumenFacturas from '../../components/consolidado/resFact.component';
 import { ConfigPage } from '../configViews/config.page';
 import { ResumenHistorico } from '../../components/Historico/hisotico.view';
 
-//styles from plantilla
+//styles from plantilla #02395E
 
 function MyTabs() {
   const [page, setPage] = useState("DESPACHO");
@@ -15,36 +15,36 @@ function MyTabs() {
   return (
     <>
       <div class="navbar-expand-md" style={{ width: '100%' }}>
-          <div class="navbar" style={{ backgroundColor: '#02395E' }}>
+          <div class="navbar" style={{ backgroundColor: '#283747' }}>
                 <ul class="navbar-nav">
                   
                   <li class="nav-item" style={{ marginLeft: 0 }}>
-                    <button class="btn" onClick={() => { setPage("CONFIG") }} style={{ borderWidth: 0, backgroundColor: '#02395E' }}>
+                    <button class="btn" onClick={() => { setPage("CONFIG") }} style={{ borderWidth: 0, backgroundColor: '#283747' }}>
                       <h4 style={{ color: 'white' }}>ADMIN</h4>
                     </button>
                   </li>
 
                   <li class="nav-item">
 
-                    <button class="btn" onClick={() => { setPage("DESPACHO") }} style={{ borderWidth: 0, backgroundColor: '#02395E' }}>
+                    <button class="btn" onClick={() => { setPage("DESPACHO") }} style={{ borderWidth: 0, backgroundColor: '#283747' }}>
                       <h4 style={{ color: 'white' }}>DESPACHO</h4>
                     </button>
                   </li>
 
                   <li class="nav-item">
-                    <button class="btn" onClick={() => { setPage("RESUMEN") }} style={{ borderWidth: 0, backgroundColor: '#02395E' }}>
+                    <button class="btn" onClick={() => { setPage("RESUMEN") }} style={{ borderWidth: 0, backgroundColor: '#283747' }}>
                       <h4 style={{ color: 'white' }}>EN PROCESO</h4>
                     </button>
                   </li>
 
                   <li className="nav-item" style={{ alignContent: 'center' }} >
-                    <button class="btn" onClick={() => { setPage("HISTO") }} style={{ borderWidth: 0, backgroundColor: '#02395E' }}>
+                    <button class="btn" onClick={() => { setPage("HISTO") }} style={{ borderWidth: 0, backgroundColor: '#283747' }}>
                       <h4 style={{ color: 'white' }}>HISTORICO</h4>
                     </button>
                   </li>
 
                   <li className="nav-item" style={{ left: 0 }}>
-                    <button className="btn" onClick={() => navigate('/')} style={{ borderWidth: 0, backgroundColor: '#02395E' }}>
+                    <button className="btn" onClick={() => navigate('/')} style={{ borderWidth: 0, backgroundColor: '#283747' }}>
                       <h4 style={{ color: 'white' }}>SALIR</h4>
                     </button>
                   </li>

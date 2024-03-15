@@ -5,7 +5,7 @@ import { CrearCamion } from "../modals/crearCamion.modal";
 
 function ListaCamiones() {
   const [data, setData] = useState([]);
-  useEffect(()=>{
+  useEffect(() => {
     getCamiones();
   }, [])
 
@@ -19,28 +19,31 @@ function ListaCamiones() {
   }
 
   return (
-    <div className="card" style={{margin : 20, color : 'grey'}}>
-    <div class="card" style={{width : '50%', margin : 10}}>
-      <div class="table-responsive">
-        <table class="table table-vcenter card-table">
-          <thead>
-            <tr>
-              <th>
-                <button className="card" style={{backgroundColor : 'green', width : '100%'}} data-toggle="modal" data-target="#modal-simple">
-                  <h3 style={{color : 'white', alignSelf : 'center', verticalAlign : 'center'}}>CREAR</h3>
-                </button>
-              </th>
-              <th>Placa</th>
-              <th>QR</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-            </tr>
+    <div className="card" style={{ margin: 20, color: 'grey' }}>
+      <div class="card" style={{ width: '50%', margin: 10 }}>
+        <div class="table-responsive">
+          <table class="table table-vcenter card-table">
+            <thead>
+              <tr>
+                <th>
+
+                  <button data-toggle="modal" data-target="#modal-simple"
+                    style={{ backgroundColor: 'green', borderWidth: 0, width: '100%', height: 'auto' }}>
+                    <div style={{ color: 'white' }}>CREAR</div>
+                  </button>
+
+                </th>
+                <th>Placa</th>
+                <th>QR</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+              </tr>
               {
-                data.length ? 
+                data.length ?
                   (
-                    data.map((item) =>(
+                    data.map((item) => (
                       <tr>
                         <td>{item.id}</td>
                         <td>{item.placa}</td>
@@ -50,22 +53,22 @@ function ListaCamiones() {
                   )
                   : <div>SIN DATA</div>
               }
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-
-    <div class="modal modal-blur fade" id="modal-simple" tabindex="-1" role="dialog" aria-hidden="true">
-      <div className="modal-dialog modal-sm modal-dialog-centered" role="document">
-          <div className="modal-content">
-                      <CrearCamion />
-                  </div>
+            </tbody>
+          </table>
         </div>
+      </div>
+
+
+      <div class="modal modal-blur fade" id="modal-simple" tabindex="-1" role="dialog" aria-hidden="true">
+        <div className="modal-dialog modal-sm modal-dialog-centered" role="document">
+          <div className="modal-content">
+            <CrearCamion />
+          </div>
+        </div>
+      </div>
+
     </div>
 
-  </div>
-                    
   )
 }
 

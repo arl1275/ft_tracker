@@ -4,9 +4,11 @@ import axios from "axios";
 import { bk_dir } from "../../conf/configuration.file";
 
 const ResumenConsolidado = ({ props, clearArray }) => {
-  const lista_headers = ["DEPARTAMENTO", "CIUDAD", "NOMBRE DE CLIENTE", "ALBARAN", "FACTURA", "LISTA EMPAQUE", "CAJAS", "UNIDADES"];
+  const lista_headers = ["DEPARTAMENTO", "NOMBRE DE CLIENTE", "ALBARAN", "FACTURA", "LISTA EMPAQUE", "CAJAS", "UNIDADES"];
   const [camionSeleccionado, setCamionSeleccionado] = useState(null);
   const [entregador, setEntregador] = useState(null);
+  const [dec_env, setDecEnv] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   const selCamion = (camion) => {
     setCamionSeleccionado(camion);
@@ -30,7 +32,8 @@ const ResumenConsolidado = ({ props, clearArray }) => {
         console.log('Se enviaron los datos al BK', data);
 
         if (response && response.data && response.data.data) {
-          alert('SE CREO LA DECLARACION DE ENVIO: ' + response.data.data);
+          //alert('SE CREO LA DECLARACION DE ENVIO: ' + response.data.data);
+          setDecEnv(response.data.data);
           clearArray();
         } else {
           console.log('La respuesta no contiene los datos esperados:', response);
@@ -41,7 +44,7 @@ const ResumenConsolidado = ({ props, clearArray }) => {
         clearArray();
       }
     }
-};
+  };
 
 
   const get_sumas_cajas = () => {
@@ -86,12 +89,12 @@ const ResumenConsolidado = ({ props, clearArray }) => {
                     <button type="button" className="btn-close" data-dismiss="modal" aria-label="Close"></button>
                   </div>
 
-                  <div className="modal-body">
+                  <div className="modal-body" style={{ backgroundColor: '#EAECEE' }}>
                     <table className="table card-table table-vcenter text-nowrap datatable">
                       <thead style={{ backgroundColor: '#02395E' }}>
                         <tr>{
                           lista_headers.map((item) => (
-                            <th style={{ color: 'white' }}>{item}</th>
+                            <th style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'white' }}>{item}</th>
                           ))
                         }
                         </tr>
@@ -99,25 +102,23 @@ const ResumenConsolidado = ({ props, clearArray }) => {
                       <tbody>
                         {props.map((item) => (
                           <tr key={item.id}>
-                            <td>CORTES</td>
-                            <td>San Pedro Sula</td>
-                            <td>{item.cliente}</td>
-                            <td>{item.albaran}</td>
-                            <td><span className="text-muted">{item.factura}</span></td>
-                            <td>{item.list_empaque}</td>
-                            <td>{item.cant_cajas}</td>
-                            <td>{item.cant_total}</td>
+                            <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'black' }}>{item.departamento}</td>
+                            <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'black' }}>{item.cliente}</td>
+                            <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'black' }}>{item.albaran}</td>
+                            <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'black' }}>{item.factura}</td>
+                            <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'black' }}>{item.list_empaque}</td>
+                            <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'black' }}>{item.cant_cajas}</td>
+                            <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'black' }}>{item.cant_total}</td>
                           </tr>
                         ))}
                         <tr style={{ width: '100%', backgroundColor: '#02395E' }}>
-                          <td style={{ color: 'white' }}>Totales</td>
+                          <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'white' }}>Totales</td>
                           <td></td>
                           <td></td>
                           <td></td>
                           <td></td>
-                          <td></td>
-                          <td><div style={{ color: 'white' }}>{get_sumas_cajas()}</div></td>
-                          <td><div style={{ color: 'white' }}>{get_sumas_unidades()}</div></td>
+                          <td><div style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'white' }}>{get_sumas_cajas()}</div></td>
+                          <td><div style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'white' }}>{get_sumas_unidades()}</div></td>
                         </tr>
                       </tbody>
                     </table>
@@ -126,11 +127,15 @@ const ResumenConsolidado = ({ props, clearArray }) => {
 
                   <div className="modal-footer">
                     <button type="button" className="btn mr-auto" data-dismiss="modal">CANCELAR</button>
-                    <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={send_toCreate_Consolidacion}>ENVIAR A PREPARACION</button>
+
+                    <button type="button" className="btn btn-primary" onClick={() =>{ setShowModal(true); send_toCreate_Consolidacion();}}>
+                      CREAR CONSOLIDADO
+                    </button>
+
                   </div>
                 </div>)
                 :
-                (<div className="modal-body" style={{ marginv: 10 }}>
+                (<div className="modal-body" style={{ width: '50%' }}>
                   <h1>SIN FACTURAS ESCANEADAS</h1>
                 </div>)
             }
@@ -142,6 +147,33 @@ const ResumenConsolidado = ({ props, clearArray }) => {
         </div>
 
       </div>
+
+
+      <>{/*----------------- ESTA PARTE ES DEL MODAL QUE MUESTRA LA INFO DE LA DECLARACION DE ENVIO ----------------*/}</>
+
+      {showModal && (
+        <div className="modal modal-blur fade show" id="modal-info" tabIndex="-1" style={{ display: 'block', paddingRight: '17px', backgroundColor : 'rgba(0, 0, 0, 0.5)' }} aria-modal="true" role="dialog">
+          <div className="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div className="modal-content">
+              <button type="button" className="btn-close" onClick={() => setShowModal(false)} aria-label="Close"></button>
+              <div className="modal-body text-center py-5">
+                <svg xmlns="http://www.w3.org/2000/svg" className="icon mb-4 text-green" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z"></path>
+                  <circle cx="12" cy="12" r="9"></circle>
+                  <path d="M9 12l2 2l4 -4"></path>
+                </svg>
+                <h4 style={{ color : '#ABB2B9'}}>DECLARACIÓN DE ENVIO</h4>
+                <h1 style={{color : '#2C3E50', fontSize : 30}}>{dec_env}</h1>
+              </div>
+              <div className="modal-footer">
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+
     </>
 
   )

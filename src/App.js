@@ -16,7 +16,7 @@ function App() {
     if (isLoggedIn) {
       window.location.href = '/main'; // Redirecciona a /main cuando el usuario inicia sesión
     }
-    document.title = 'keller';
+    document.title = 'KELLER';
   }, [isLoggedIn]);
 
   return (
@@ -25,6 +25,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LoginForm set_is_log={openSession} />} />
           <Route index path='/main' element={<MyTabs/>} />
+          <Route path="*" element={<div>ERROR</div>} />
         </Routes>
       </Router>
     </div>
