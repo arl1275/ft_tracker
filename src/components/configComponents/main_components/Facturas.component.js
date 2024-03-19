@@ -34,7 +34,7 @@ function ListFact() {
         //{ Header: "Toma Tránsito", accessor: "toma_transito", Filter: TextColumnFilter },
         //{ Header: "Toma Hora Fecha Entrega", accessor: "toma_hora_fecha_entrega", Filter: TextColumnFilter },
         //{ Header: "Toma Sincronizado", accessor: "toma_sincronizado", Filter: TextColumnFilter },
-        // { Header: "Link Firma", accessor: "link_firma", Filter: TextColumnFilter },
+        //{ Header: "Link Firma", accessor: "link_firma", Filter: TextColumnFilter },
         //{ Header: "Link Foto", accessor: "link_foto", Filter: TextColumnFilter },
         //{ Header: "Nombre", accessor: "nombre", Filter: TextColumnFilter },
         //{ Header: "Placa", accessor: "placa", Filter: TextColumnFilter },

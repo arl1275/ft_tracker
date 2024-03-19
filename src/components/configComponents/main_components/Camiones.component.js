@@ -23,7 +23,7 @@ function ListaCamiones() {
       <div class="card" style={{ width: '50%', margin: 10 }}>
         <div class="table-responsive">
           <table class="table table-vcenter card-table">
-            <thead>
+            <thead style={{ backgroundColor : '#2E4053'}}>
               <tr>
                 <th>
 
@@ -33,8 +33,8 @@ function ListaCamiones() {
                   </button>
 
                 </th>
-                <th>Placa</th>
-                <th>QR</th>
+                <th style={{ color: 'white', textAlign: 'left' }}>Placa</th>
+                <th style={{ color: 'white', textAlign: 'left' }}>QR</th>
               </tr>
             </thead>
             <tbody>
@@ -46,8 +46,8 @@ function ListaCamiones() {
                     data.map((item) => (
                       <tr>
                         <td>{item.id}</td>
-                        <td>{item.placa}</td>
-                        <td>{item.qr}</td>
+                        <td style={{ textAlign : 'left'}}>{item.placa}</td>
+                        <td style={{ textAlign : 'left'}}>no visible</td>
                       </tr>
                     ))
                   )

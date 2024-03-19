@@ -59,6 +59,18 @@ export const AlterFact = ({ props }) => {
                         <td style={cell}>ALBARAN</td>
                         <td style={cell_data}>{props.albaran}</td>
                     </tr>
+                    <tr>
+                        <td style={cell}>CIUDAD</td>
+                        <td style={cell_data}>{props.ciudad}</td>
+                    </tr>
+                    <tr>
+                        <td style={cell}>DEPARTAMENTO</td>
+                        <td style={cell_data}>{props.departamento}</td>
+                    </tr>
+                    <tr>
+                        <td style={cell}>CALLE</td>
+                        <td style={cell_data}>{props.calle}</td>
+                    </tr>
                 </table>
 
                 <table style={{ marginTop: 5 }}>

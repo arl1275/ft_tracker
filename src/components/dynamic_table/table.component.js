@@ -40,7 +40,7 @@ const TableForm = ({ columns, data }) => {
   } = useTable({ columns, data }, useGlobalFilter); // Use useGlobalFilter
 
   return (
-    <div>
+    <div className='card' style={{ margin : 5}}>
       <input
         type="text"
         value={state.globalFilter || ''}
@@ -53,9 +53,9 @@ const TableForm = ({ columns, data }) => {
       <table {...getTableProps()} className="table card-table table-vcenter text-nowrap datatable" style={{color : 'black'}}>
         <thead>
           {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
+            <tr {...headerGroup.getHeaderGroupProps()} style={{backgroundColor : '#34495E', textAlign : 'left' }}>
               {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                <th style={{ color : 'white' }} {...column.getHeaderProps()}>{column.render('Header')}</th>
               ))}
             </tr>
           ))}
@@ -65,7 +65,7 @@ const TableForm = ({ columns, data }) => {
             prepareRow(row);
             let valor = row.values.state_name == 'PREPARACION' ? '#AED6F1 ' : '#5DADE2';
             return (
-              <tr {...row.getRowProps()} style={{ backgroundColor : valor }}>
+              <tr {...row.getRowProps()} style={{ backgroundColor : valor, textAlign : 'left' }}>
                 {row.cells.map((cell) => (
                   <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                 ))}

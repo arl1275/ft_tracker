@@ -53,6 +53,10 @@ const TableAdminFact = ({ columns, data }) => {
             cant_cajas,
             cant_unidades,
             declaracionenvio,
+            pais,
+            departamento,
+            ciudad,
+            calle,
             id_estados,
             toma_preparacion,
             toma_transito,
@@ -74,6 +78,10 @@ const TableAdminFact = ({ columns, data }) => {
             cant_cajas,
             cant_unidades,
             declaracionenvio,
+            pais,
+            departamento,
+            ciudad,
+            calle,
             id_estados,
             toma_preparacion,
             toma_transito,
@@ -118,10 +126,11 @@ const TableAdminFact = ({ columns, data }) => {
             <table {...getTableProps()} className="table card-table table-vcenter text-nowrap datatable" style={{ color: 'black'}}>
                 <thead>
                     {headerGroups.map((headerGroup) => (
-                        <tr {...headerGroup.getHeaderGroupProps()}>
+                        <tr {...headerGroup.getHeaderGroupProps()} style={{backgroundColor : '#34495E', textAlign : 'left'}}>
                             {headerGroup.headers.map((column) => (
-                                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                                <th style={{ color : 'white'}} {...column.getHeaderProps()}>{column.render('Header')}</th>
                             ))}
+                            <th style={{ backgroundColor : '#34495E' }}/>
                         </tr>
                     ))}
                 </thead>
@@ -131,7 +140,7 @@ const TableAdminFact = ({ columns, data }) => {
                         return (
                             <tr {...row.getRowProps()} onClick={handleModal}>
                                 {row.cells.map((cell) => (
-                                    <td {...cell.getCellProps()}>
+                                    <td {...cell.getCellProps()} style={{ textAlign : 'left' }}>
                                         {cell.column.id === 'id_estados' ? (
                                             <span>{cell.value == null ? 'N/A' : (cell.value == 1 ? 'PREPARACION' : (cell.value == 2 ? 'TRANSITO' : 'SINCRONIZADO'))}</span>
                                         ) : (
@@ -158,8 +167,8 @@ const TableAdminFact = ({ columns, data }) => {
             <div class="modal modal-blur fade show" id="modal-large" tabindex="-1" style={{ paddingRight: "17px" }} aria-modal="true" role="dialog">
                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                     <div className='modal-content'>
-                        <div className='modal-header' style={{backgroundColor : '#7B241C'}}>
-                            <h5 class="modal-title" style={{color : 'white'}}>MODIFICACION FACTURA</h5>
+                        <div className='modal-header' style={{backgroundColor : '#34495E'}}>
+                            <h5 class="modal-title" style={{color : 'white'}}>DETALLE DE FACTURA</h5>
                             <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className='modal-body'>

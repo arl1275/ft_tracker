@@ -2,6 +2,7 @@ import { EntregadorCombox, CamionesCombox } from "../../components/consolidado/c
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { bk_dir } from "../../conf/configuration.file";
+import { LoadingWait } from "../any_components/loading_component.js";
 
 const ResumenConsolidado = ({ props, clearArray }) => {
   const lista_headers = ["DEPARTAMENTO", "NOMBRE DE CLIENTE", "ALBARAN", "FACTURA", "LISTA EMPAQUE", "CAJAS", "UNIDADES"];
@@ -9,6 +10,7 @@ const ResumenConsolidado = ({ props, clearArray }) => {
   const [entregador, setEntregador] = useState(null);
   const [dec_env, setDecEnv] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [ ischargin, setIsChargin ] = useState(false);
 
   const selCamion = (camion) => {
     setCamionSeleccionado(camion);
@@ -32,7 +34,7 @@ const ResumenConsolidado = ({ props, clearArray }) => {
         console.log('Se enviaron los datos al BK', data);
 
         if (response && response.data && response.data.data) {
-          //alert('SE CREO LA DECLARACION DE ENVIO: ' + response.data.data);
+          setIsChargin(true)
           setDecEnv(response.data.data);
           clearArray();
         } else {
@@ -42,6 +44,8 @@ const ResumenConsolidado = ({ props, clearArray }) => {
       } catch (error) {
         console.log('Error al enviar:', error);
         clearArray();
+      }finally{
+        setIsChargin(false);
       }
     }
   };
@@ -91,7 +95,7 @@ const ResumenConsolidado = ({ props, clearArray }) => {
 
                   <div className="modal-body" style={{ backgroundColor: '#EAECEE' }}>
                     <table className="table card-table table-vcenter text-nowrap datatable">
-                      <thead style={{ backgroundColor: '#02395E' }}>
+                      <thead style={{ backgroundColor: '#138D75' }}>
                         <tr>{
                           lista_headers.map((item) => (
                             <th style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'white' }}>{item}</th>
@@ -163,7 +167,7 @@ const ResumenConsolidado = ({ props, clearArray }) => {
                   <path d="M9 12l2 2l4 -4"></path>
                 </svg>
                 <h4 style={{ color : '#ABB2B9'}}>DECLARACIÓN DE ENVIO</h4>
-                <h1 style={{color : '#2C3E50', fontSize : 30}}>{dec_env}</h1>
+                <h1 style={{color : '#2C3E50', fontSize : 30}}>{ ischargin ? <LoadingWait /> : dec_env}</h1>
               </div>
               <div className="modal-footer">
                 

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import MyTabs from './admin/admin_view_index';
 import { bk_dir } from '../conf/configuration.file';
 import axios from 'axios';
-import logo from '../assets/dist/img/images/Invoice-amico.png'
-
+import logo from '../assets/dist/img/images/Invoice-amico.png';
+import { getItem, setItem, updateItem, deleteItem } from '../utils/local';
 
 const LoginForm = ({ set_is_log }) => {
   const [user, setUser] = useState('');
   const [_Password, setPass] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [data_user, setDataUser] = useState(null)
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -27,19 +27,22 @@ const LoginForm = ({ set_is_log }) => {
         alert('FAVOR INGRESE UN USUARIO Y CONTRASEÑA');
       } else {
         const response = await axios.get(`${bk_dir}/usuarios/auth/user`, { params: data });
-        console.log(response.data.token)
+        //console.log(response.data)
+        setDataUser(response.data);
+
         if (response.status === 200 && response.data.token ) {
+          localStorage.setItem('dataUser', JSON.stringify(response.data));
           set_is_log();
         } 
       }
     } catch (err) {
       console.log('ERROR al enviar data : ', err);
-      alert('INGRESE SU USUARIO CORRECTAMENTE, SI LOS PROBLEMAS PERSISTEN, HABLAR CON EL ADMINISTRADOR')
+      alert('Usuario Invalido')
     }
   };
 
   return (
-    <div className="container-tight py-6">
+    <div className="container-tight py-6" >
       <form>
         <div className="text-center mb-4">
           <a href="."><img src="./static/logo.svg" height="36" alt="" /></a>
@@ -47,8 +50,8 @@ const LoginForm = ({ set_is_log }) => {
         <div className="card card-md" autoComplete="off">
           <div className="card-body">
             <a href="."><img src={logo} height="300" width="300" alt="Logo" /></a>
-            <h2 className="card-title text-center mb-4">KELLER</h2>
-            <div className="mb-3">
+            <h1 className="card-title text-center mb-4">KELLER CHECK</h1>
+            <div className="mb-2">
               <input type="text" className="form-control" placeholder="INGRESE USUARIO" onChange={(e) => { setUser(e.target.value) }} />
             </div>
             <div autoComplete="off">
@@ -74,6 +77,7 @@ const LoginForm = ({ set_is_log }) => {
                           <circle cx="12" cy="12" r="2" />
                           <path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7" />
                         </svg>
+                        
                       </button>
                     </span>
                   </div>

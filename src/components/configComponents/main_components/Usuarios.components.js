@@ -48,17 +48,17 @@ function ListUsuarios() {
                         <div class="table-responsive">
                             <table class="table table-vcenter card-table">
                                 <thead>
-                                    <tr>
+                                    <tr style={{ textAlign : 'left', backgroundColor : '#273746'}}>
                                         <th>
                                             <button data-toggle="modal" data-target="#modal-simple" 
                                             style={{backgroundColor : 'green', borderWidth : 0, width : '100%', height : 'auto'}}>
                                                 <div style={{color : 'white'}}>CREAR</div>
                                             </button>
                                         </th>
-                                        <th>NOMBRE</th>
-                                        <th>Cod. EMPLEADO</th>
-                                        <th>QR</th>
-                                        <th>ROL</th>
+                                        <th style={{ color : 'white' }}>NOMBRE</th>
+                                        <th style={{ color : 'white' }}>Cod. EMPLEADO</th>
+                                        <th style={{ color : 'white' }}>QR</th>
+                                        <th style={{ color : 'white' }}>ROL</th>
                                         <th className="w-auto"></th>
                                     </tr>
                                 </thead>
@@ -66,7 +66,7 @@ function ListUsuarios() {
                                     {data.length > 0 ?
                                         (
                                             data.map((item) => (
-                                                <tr>
+                                                <tr style={{ textAlign : 'left'}}>
                                                     <td>{item.id}</td>
                                                     <td>{item.nombre}</td>
                                                     <td>{item.cod_empleado}</td>
@@ -104,8 +104,8 @@ function ListUsuarios() {
                     <div className="card" style={{ width: '40%', margin: 5 }}>
                         {showUs ?  (<ConfigUser dat={selectedUser} />): (
                             <div>
-                                <div className="card-header">
-                                    <h3>INFORMACION DE USUARIO</h3>
+                                <div className="card-header" style={{ backgroundColor : '#154360'}}>
+                                    <h3 style={{ color : 'white' }}>INFORMACION DE USUARIO</h3>
                                 </div>
                                 <div className="card"
                                     style={{ width: 'auto', height: 'auto', alignSelf: 'center', margin: 20, flexDirection: 'row' }}>
