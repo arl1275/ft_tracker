@@ -57,13 +57,10 @@ function AdminDespachoView() {
     }
 
   }
-
-
+  
   useEffect(() => {
     inputRef.current?.focus();
   }, [])
-
-
 
   //---------------------------------------------------------------------------
   useEffect(() => {
@@ -225,9 +222,6 @@ function AdminDespachoView() {
           </div>
         </div>
       }
-
-
-
 
     </>
   );

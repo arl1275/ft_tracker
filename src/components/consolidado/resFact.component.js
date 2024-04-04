@@ -3,10 +3,12 @@ import axios from "axios";
 import { bk_dir } from "../../conf/configuration.file";
 //import TableForm from "../table.component";
 import TableForm, { TextColumnFilter, NumberColumnFilter } from "../dynamic_table/table.component";
+const loagind = require('../../assets/dist/img/images/Processing-cuate.png')
 
 function ResumenFacturas() {
   const [data, setData] = useState([]);
   const [ver_facts_or_envios, setFactsOrEnvios] = useState(null);
+
 
   //-----------------COLUMNS---------------------
   const columns = [
@@ -44,7 +46,19 @@ function ResumenFacturas() {
 
   return (
     <>
-      <TableForm data={data} columns={columns}/>
+      {
+        data.length > 0 ?
+          <TableForm data={data} columns={columns} />
+          :
+          <div style={{ display: 'flex', justifyContent: 'center', width: '100vw', height: '100vh' }}>
+            <div style={{ width: '30%', height: '30%' }}>
+              <img src={loagind} style={{ display: 'block', margin: 'auto' }} />
+              <h3>SIN FACTURAS EN PROCESO</h3>
+            </div>
+          </div>
+
+      }
+
     </>
   )
 }
