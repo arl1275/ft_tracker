@@ -4,25 +4,36 @@ import axios from "axios";
 
 export const ForceSynchro = () => {
     const [open, setOpen] = useState(false);
-    const [type, setType] = useState(0);
     const [data, setData] = useState({
-        pedidoventa: '',
-        factura: '',
-        albaran: ''
+        caja : '',
+        tipo : ''
     });
+
+    const changeTipo = ( tip ) => {
+        setData({ ...data, tipo: tip })
+    }
 
     const forzar = async () => {
         try {
 
-            if (data.pedidoventa === '') {
-                alert('El campo de Pedido Venta es OBLIGATORIO')
+            if (data.caja === '', data.tipo === '') {
+                alert('LA CAJA ES OBLIGATORIA')
                 return;
             }
-        
-            const resp = await axios.post(`${bk_dir}/facturas/admin/forceSyncroFact`, { pedidoventa: data.pedidoventa, factura: data.factura, albaran: data.albaran });
-            if(resp.status === 200 ){
+
+            const baseUrl = new URL(`${bk_dir}/facturas/admin/forceSyncroFact`);
+
+            // Agregar parámetros a la URL
+            baseUrl.searchParams.append('caja', data.caja);
+            baseUrl.searchParams.append('tipo', data.tipo);
+
+            // Realizar la solicitud HTTP utilizando Axios con la URL construida
+            const resp = await axios.post(baseUrl.toString());
+
+            if (resp.status === 200) {
                 setOpen(false);
-                alert('SE FORZO CORRECTAMENTE');
+                console.log('DATA DEL SERVIDOR  ::: ',resp);
+                alert(`${resp.data.message}`);
             }
 
         } catch (err) {
@@ -42,59 +53,51 @@ export const ForceSynchro = () => {
                 <div class="modal modal-blur fade show" id="modal-info" tabindex="-1" style={{ display: 'block', paddingRight: "17px;", backgroundColor: 'rgba(0, 0, 0, 0.7)' }} >
                     <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style={{ width: '40%' }}>
                         <div class="modal-content">
-                            <button type="button" class="btn-close" onClick={() => { setType(0); setOpen(false) }}></button>
+                            <button type="button" class="btn-close" onClick={() => { changeTipo(0); setOpen(false) }}></button>
                             <div class="modal-body text-center py-5">
                                 <h3>FORZAR SINCRONIZACION</h3>
-                                <div class="text-muted">La sincronizacion es final, favor verifique los datos antes de ingresar las facturas.</div>
+                                <div class="text-muted">Escanee una caja del pedido para sincronizar</div>
+                                <br />
+                                <h5><strong>TODO EL PEDIDO</strong>, sincroniza todas las facturas/albaranes del pedido de la caja</h5>
+                                <br />
+                                <h5><strong>FACTURA/ALBARAN</strong>, sincroniza la factura o el albaran al que pertenece esa caja</h5>
                             </div>
 
-                            <div className="card" style={{ width: '90%', margin: 10, display: 'flex', flexDirection: 'row', alignSelf: 'center' }}>
-                                <div class="form-selectgroup form-selectgroup-boxes d-flex" style={{ margin: 10 }}>
+                            <div className="card" style={{ width: '90%', display: 'flex', flexDirection: 'column', alignSelf: 'center' }}>
 
-                                    <label class="form-selectgroup-item flex-fill" onClick={() => setType(1)}>
+                                <div style={{ marginLeft : 10, marginRight : 10 }}>
+                                    <input type="text" class="form-control" name="example-text-input" placeholder="ESCANEE UNA CAJA" style={{ marginTop: 15 }} onChange={(event) => setData({ ...data, caja: event.target.value })} />
+                                </div>
+
+                                <div class="form-selectgroup form-selectgroup-boxes d-flex" style={{ margin: 10, display: 'flex', flexDirection: 'row', alignSelf: 'center' }}>
+
+                                    <label class="form-selectgroup-item flex-fill" onClick={() => changeTipo('0')}>
                                         <input type="radio" name="form-payment" value="visa" class="form-selectgroup-input" />
                                         <div class="form-selectgroup-label d-flex align-items-center p-3">
                                             <div class="mr-3">
                                                 <span class="form-selectgroup-check"></span>
                                             </div>
                                             <div>
-                                                <strong>PEDIDO DE VENTA</strong>
+                                                <strong>TODO EL PEDIDO</strong>
+
                                             </div>
                                         </div>
                                     </label>
 
-                                    <label class="form-selectgroup-item flex-fill" onClick={() => setType(2)}>
+                                    <label class="form-selectgroup-item flex-fill" onClick={() => changeTipo('1')}>
                                         <input type="radio" name="form-payment" value="visa" class="form-selectgroup-input" />
                                         <div class="form-selectgroup-label d-flex align-items-center p-3">
                                             <div class="mr-3">
                                                 <span class="form-selectgroup-check"></span>
                                             </div>
                                             <div>
-                                                <strong>FACTURA</strong>
-                                            </div>
-                                        </div>
-                                    </label>
-
-                                    <label class="form-selectgroup-item flex-fill" onClick={() => setType(3)}>
-                                        <input type="radio" name="form-payment" value="paypal" class="form-selectgroup-input" />
-                                        <div class="form-selectgroup-label d-flex align-items-center p-3">
-                                            <div class="mr-3">
-                                                <span class="form-selectgroup-check"></span>
-                                            </div>
-                                            <div>
-                                                <strong>ALBARAN</strong>
+                                                <strong>FACTURA/ALBARAN UNICO</strong>
                                             </div>
                                         </div>
                                     </label>
                                 </div>
 
-                                <div style={{ margin: 10, width: '90%' }}>
-                                    {type == 0 && <div className="card" style={{ alignSelf: 'center', margin: 10 }}>Favor, seleccionar un tipo de sincronización</div>}
-                                    {type != 0 && <input type="text" class="form-control" name="example-text-input" placeholder="Pedido de Ventas" onChange={(event) => setData({ ...data, pedidoventa: event.target.value })} />}
-                                    {type == 2 && <input type="text" class="form-control" name="example-text-input" placeholder="FACTURA" style={{ marginTop: 15 }} onChange={(event) => setData({ ...data, factura: event.target.value })} />}
-                                    {type == 3 && <input type="text" class="form-control" name="example-text-input" placeholder="ALBARAN" style={{ marginTop: 15 }} onChange={(event) => setData({ ...data, albaran: event.target.value })} />}
-
-                                </div>
+                                
                             </div>
 
                             <div class="modal-footer" onClick={forzar}>

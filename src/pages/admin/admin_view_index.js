@@ -4,9 +4,6 @@ import AdminDespachoView from './admin_view_despacho';
 import ResumenFacturas from '../../components/consolidado/resFact.component';
 import { ConfigPage } from '../configViews/config.page';
 import { ResumenHistorico } from '../../components/Historico/hisotico.view';
-import { getItem, setItem, updateItem, deleteItem } from '../../utils/local';
-import { initView } from './void_view';
-import logo from '../../assets/dist/img/images/logo_app.png';
 
 //styles from plantilla #02395E
 
@@ -24,6 +21,7 @@ function MyTabs() {
               <select id="salir" className="selectize-input items full has-options has-items" style={{ backgroundColor: '#283747', borderWidth : 0}}
                 onChange={(e) => {
                   if (e.target.value === 'SALIR') {
+                    localStorage.removeItem('dataUser');
                     navigate('/'); 
                   }
                 }}

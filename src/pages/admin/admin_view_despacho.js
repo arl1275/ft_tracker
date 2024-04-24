@@ -186,11 +186,11 @@ function AdminDespachoView() {
               </thead>
 
               <tbody>
-                {data.map((item) => (
+                {data.slice().reverse().map((item) => (
                   <tr key={item.factura} style={{ marginBottom: 20 }}>
                     <td>
-                      <input className="form-check-input m-0 align-middle" type="checkbox"
-                        onChange={(e) => { get_selected_facturas(item); }} aria-label="Select invoice" />
+                      <input type="checkbox"
+                        onChange={(e) => { get_selected_facturas(item); }} />
                     </td>
                     <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left' }}>{item.factura}</td>
                     <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left' }}>{item.list_empaque}</td>

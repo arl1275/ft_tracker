@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { bk_dir } from '../conf/configuration.file';
 import axios from 'axios';
 import logo from '../assets/dist/img/images/Invoice-amico.png';
-import { getItem, setItem, updateItem, deleteItem } from '../utils/local';
 
 const LoginForm = ({ set_is_log }) => {
   const [user, setUser] = useState('');
