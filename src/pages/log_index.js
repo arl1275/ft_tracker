@@ -32,7 +32,7 @@ const LoginForm = ({ set_is_log }) => {
         if (response.status === 200 && response.data.token ) {
           localStorage.setItem('dataUser', JSON.stringify(response.data));
           set_is_log();
-        } 
+        }
       }
     } catch (err) {
       console.log('ERROR al enviar data : ', err);

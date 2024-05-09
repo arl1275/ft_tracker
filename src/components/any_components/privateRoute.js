@@ -1,17 +1,27 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, {useEffect} from 'react';
+import { useState } from 'react';
+import { Route, Navigate } from 'react-router-dom';
 
-const PrivateRoute = ({ element: Component, isLoggedIn}) => {
+const PrivateRoute = ({ component: Component }) => {
+  const [log, setLog] = useState(false);
+
+  useEffect(()=>{
+    const bruto = localStorage.getItem('dataUser');
+    const user = JSON.parse(bruto);
+    if (user) {
+      setLog(true);
+      console.log('data dentro de la ruta :: ', log)
+    }
+  }, [])
+
+
+
   return (
-    <Route
-      element={
-        isLoggedIn ? (
-          <Component />
-        ) : (
-          <Navigate to="/" />
-        )
-      }
-    />
+    <>
+    { log == true ? <Component /> : <Navigate to="/"/> }
+    
+    </>
+      
   );
 };
 

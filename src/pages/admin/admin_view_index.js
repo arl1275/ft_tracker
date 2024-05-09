@@ -12,7 +12,7 @@ function MyTabs() {
   const navigate = useNavigate();
 
   return (
-    <>
+    <div style={{ backgroundColor : 'black'}}>
       <div class="navbar-expand-md" style={{ width: '100%' }}>
         <div class="navbar" style={{ backgroundColor: '#283747', color : 'white' }}>
           <ul class="navbar-nav">
@@ -56,9 +56,6 @@ function MyTabs() {
                 <h4 style={{ color: 'white' }}>HISTORICO</h4>
               </button>
             </li>
-
-
-
           </ul>
 
         </div>
@@ -71,7 +68,7 @@ function MyTabs() {
         {page == "CONFIG" && <ConfigPage />}
         {page == "HISTO" && <ResumenHistorico />}
       </body>
-    </>
+    </div>
   );
 }
 
