@@ -114,7 +114,7 @@ const TableAdminFact = ({ columns, data }) => {
     } = useTable({ columns, data }, useGlobalFilter); // Use useGlobalFilter
 
     return (
-        <div>
+        <div style={{ height : '100vh'}}> 
             <div style={{ display : 'flex'}}>
                 <input
                     type="text"
@@ -132,18 +132,18 @@ const TableAdminFact = ({ columns, data }) => {
             </div>
 
 
-            <table {...getTableProps()} className="table card-table table-vcenter text-nowrap datatable" style={{ color: 'black' }}>
+            <table {...getTableProps()} className="table card-table table-vcenter text-nowrap datatable" style={{ color: 'black', height : '100vh' }}>
                 <thead>
                     {headerGroups.map((headerGroup) => (
-                        <tr {...headerGroup.getHeaderGroupProps()} style={{ backgroundColor: '#34495E', textAlign: 'left' }}>
+                        <tr {...headerGroup.getHeaderGroupProps()} style={{ backgroundColor: 'black', textAlign: 'left' }}>
                             {headerGroup.headers.map((column) => (
                                 <th style={{ color: 'white' }} {...column.getHeaderProps()}>{column.render('Header')}</th>
                             ))}
-                            <th style={{ backgroundColor: '#34495E' }} />
+                            <th style={{ backgroundColor: 'black' }} />
                         </tr>
                     ))}
                 </thead>
-                <tbody {...getTableBodyProps()}>
+                <tbody {...getTableBodyProps()} >
                     {rows.map((row) => {
                         prepareRow(row);
                         return (

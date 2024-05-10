@@ -1,5 +1,5 @@
 import { EntregadorCombox, CamionesCombox } from "../../components/consolidado/combox.component.js";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { bk_dir } from "../../conf/configuration.file";
 import { LoadingWait } from "../any_components/loading_component.js";
@@ -72,16 +72,21 @@ const ResumenConsolidado = ({ props, clearArray }) => {
 
   return (
     <>
-      <button class="btn btn-success" data-toggle="modal" data-target="#modal-full-width1" >GENERAR DECLARACION DE ENVIO</button>
+      <button class="btn btn-success" 
+      data-toggle="modal" 
+      data-target="#modal-full-width1" 
+      style={{ backgroundColor : '#171717' , color : 'white' , fontWeight : 'bold' }}>GENERAR DECLARACION DE ENVIO</button>
+
       <div class="modal modal-blur fade" id="modal-full-width1" tabindex="-1" role="dialog" aria-hidden="true">
         <div className="modal-dialog modal-full-width modal-dialog-centered" role="document">
 
-          <div className="modal-content">
+          <div className="modal-content" style={{ backgroundColor : '#17202A', borderWidth : 0.5, borderColor : '#66FF99', borderRadius : 10}}>
             {
               props.length > 0 ?
-                (<div>
-                  <div className="modal-header">
-                    <h5 className="modal-title">DECLARACION DE ENVIO</h5>
+                (
+                <div>
+                  <div className="modal-header" style={{ backgroundColor : '#17202A', borderRadius : 10, borderWidth : 0}}>
+                    <h5 className="modal-title" style={{ color : 'white'}}>DECLARACION DE ENVIO</h5>
                     <small style={{ display: "flex", margin: "1rem" }}>
                       <div className="mb-auto" style={{ marginRight: "10px" }}>
                         <CamionesCombox props={selCamion} />
@@ -90,12 +95,13 @@ const ResumenConsolidado = ({ props, clearArray }) => {
                         <EntregadorCombox EntregadorHand={SelEntregador} />
                       </div>
                     </small>
-                    <button type="button" className="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" className="btn-close" data-dismiss="modal" aria-label="Close" 
+                    style={{backgroundColor : '#FF0000', width : 40, height : 40, margin : 10 }}></button>
                   </div>
 
-                  <div className="modal-body" style={{ backgroundColor: '#EAECEE' }}>
+                  <div className="modal-body" style={{ backgroundColor: '#1C2833' }}>
                     <table className="table card-table table-vcenter text-nowrap datatable">
-                      <thead style={{ backgroundColor: '#138D75' }}>
+                      <thead style={{ backgroundColor: '#17202A' }}>
                         <tr>{
                           lista_headers.map((item) => (
                             <th style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'white' }}>{item}</th>
@@ -106,16 +112,16 @@ const ResumenConsolidado = ({ props, clearArray }) => {
                       <tbody>
                         {props.map((item) => (
                           <tr key={item.id}>
-                            <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'black' }}>{item.departamento}</td>
-                            <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'black' }}>{item.cliente}</td>
-                            <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'black' }}>{item.albaran}</td>
-                            <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'black' }}>{item.factura}</td>
-                            <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'black' }}>{item.list_empaque}</td>
-                            <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'black' }}>{item.cant_cajas}</td>
-                            <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'black' }}>{item.cant_total}</td>
+                            <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'white' }}>{item.departamento}</td>
+                            <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'white' }}>{item.cliente}</td>
+                            <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'white' }}>{item.albaran}</td>
+                            <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'white' }}>{item.factura}</td>
+                            <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'white' }}>{item.list_empaque}</td>
+                            <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'white' }}>{item.cant_cajas}</td>
+                            <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'white' }}>{item.cant_total}</td>
                           </tr>
                         ))}
-                        <tr style={{ width: '100%', backgroundColor: '#02395E' }}>
+                        <tr style={{ width: '100%', backgroundColor: '#17202A' }}>
                           <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'white' }}>Totales</td>
                           <td></td>
                           <td></td>
@@ -130,17 +136,20 @@ const ResumenConsolidado = ({ props, clearArray }) => {
                   </div>
 
                   <div className="modal-footer">
-                    <button type="button" className="btn mr-auto" data-dismiss="modal">CANCELAR</button>
+                    <button type="button" className="btn mr-auto" data-dismiss="modal"
+                    style={{ backgroundColor : '#FF0000', color : 'black', fontWeight : 'bold' }}>CANCELAR</button>
 
-                    <button type="button" className="btn btn-primary" onClick={() =>{ setShowModal(true); send_toCreate_Consolidacion();}}>
+                    <button type="button" className="btn btn-primary" 
+                    style={{ backgroundColor : '#33FFCC', color : 'black', fontWeight : 'bold'}}
+                    onClick={() =>{ setShowModal(true); send_toCreate_Consolidacion();}}>
                       CREAR CONSOLIDADO
                     </button>
 
                   </div>
                 </div>)
                 :
-                (<div className="modal-body" style={{ width: '50%' }}>
-                  <h1>SIN FACTURAS ESCANEADAS</h1>
+                (<div className="modal-body" style={{ width: '50%', justifyContent : 'center' }}>
+                  <h1 style={{ color : 'white', alignSelf : 'center'}}>SIN FACTURAS ESCANEADAS</h1>
                 </div>)
             }
 

@@ -1,28 +1,19 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { Route, Navigate } from 'react-router-dom';
+import { Route, Navigate, useNavigate } from 'react-router-dom';
 
-const PrivateRoute = ({ component: Component }) => {
-  const [log, setLog] = useState(false);
+const PrivateRoute = ({ children }) => {
+  const navigate = useNavigate()
 
-  useEffect(()=>{
-    const bruto = localStorage.getItem('dataUser');
-    const user = JSON.parse(bruto);
-    if (user) {
-      setLog(true);
-      console.log('data dentro de la ruta :: ', log)
+  useEffect(() => {
+    const account = localStorage.getItem('dataUser');
+
+    if (account === null) {
+      navigate("/", { replace: true })
     }
   }, [])
 
-
-
-  return (
-    <>
-    { log == true ? <Component /> : <Navigate to="/"/> }
-    
-    </>
-      
-  );
+  return children;
 };
 
 export default PrivateRoute;

@@ -96,7 +96,7 @@ const TableForm_dec_envio = ({ columns, data }) => {
                     onChange={(e) => setGlobalFilter(e.target.value)}
                     placeholder="BUSCAR"
                     className='form-control'
-                    style={{ width: '30%', margin: 10 }}
+                    style={{ width: '30%', margin: 10 , backgroundColor : 'white', color : 'black'}}
                 />
             </div>
 
@@ -105,9 +105,9 @@ const TableForm_dec_envio = ({ columns, data }) => {
                     {headerGroups.map((headerGroup) => (
                         <tr {...headerGroup.getHeaderGroupProps()} style={{ backgroundColor: '#34495E' }}>
                             {headerGroup.headers.map((column) => (
-                                <th style={{ color: 'white', textAlign: 'left' }} {...column.getHeaderProps()}>{column.render('Header')}</th>
+                                <th style={{ color: 'white', textAlign: 'left' , backgroundColor : 'black'}} {...column.getHeaderProps()}>{column.render('Header')}</th>
                             ))}
-                            <th style={{ backgroundColor: '#34495E' }} />
+                            <th style={{ backgroundColor: 'black' }} />
                         </tr>
                     ))}
 

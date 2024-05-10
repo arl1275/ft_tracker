@@ -14,15 +14,14 @@ export function ConfigPage() {
 
   return (
     < >
-      <div className="card" style={{ margin: "1rem" }}>
-        <div style={{width : 'auto'}}>
-          <div className="navbar navbar-expand-md navbar-light d-print-none">
-          <button className="btn btn-ghost-primary w-25" onClick={(event) => selected(event, '0')} style={{ borderBottom: '4px solid #48C9B0' }} >DECLARACIONES DE ENVIO</button>
-          <button className="btn btn-ghost-primary w-25" onClick={(event) => selected(event, '4')} style={{ borderBottom: '4px solid #48C9B0' }}>FACTURAS</button>
-          <button className="btn btn-ghost-primary w-25" onClick={(event) => selected(event, '3')} style={{ borderBottom: '4px solid blue' }}>USUARIOS</button>
-          <button className="btn btn-ghost-primary w-25" onClick={(event) => selected(event, '2')} style={{ borderBottom: '4px solid blue' }}>CAMIONES</button>
-          {/* <button className="btn btn-ghost-primary active w-25" onClick={(event) => selected(event, '1')}>TRANSPORTISTAS</button> */}
-          </div>
+      <div className="card" style={{ margin: "1rem", backgroundColor : 'white', borderWidth : 1, borderColor : '#4d4d4d',  borderRadius : 10}}>
+        
+        <div className="navbar navbar-expand-md navbar-light d-print-none" style={{ backgroundColor : 'black', borderRadius : 10}}>
+          <button className="btn btn-ghost-primary w-25" onClick={(event) => selected(event, '0')} style={{ borderBottom: valueP === '0' ? '4px solid white' : 'none' , backgroundColor : 'black' , color : 'white' }}>DECLARACIONES DE ENVIO</button>
+          <button className="btn btn-ghost-primary w-25" onClick={(event) => selected(event, '4')} style={{ borderBottom: valueP === '4' ? '4px solid white' : 'none' , backgroundColor : 'black' , color : 'white' }}>FACTURAS</button>
+          <button className="btn btn-ghost-primary w-25" onClick={(event) => selected(event, '3')} style={{ borderBottom: valueP === '3' ? '4px solid white' : 'none' , backgroundColor : 'black' , color : 'white' }}>USUARIOS</button>
+          <button className="btn btn-ghost-primary w-25" onClick={(event) => selected(event, '2')} style={{ borderBottom: valueP === '2' ? '4px solid white' : 'none' , backgroundColor : 'black' , color : 'white' }}>CAMIONES</button>
+          
         </div>
         { valueP === '1' ? <ListTransportistas /> : null}
         { valueP === '2' ? <ListaCamiones /> : null}

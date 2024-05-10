@@ -99,18 +99,17 @@ function AdminDespachoView() {
   }
 
   return (
-    <>
-      <div className="card" style={{ margin: 4 }}>
-        <div className="card">
-          <div>
+      <div className="card" style={{ backgroundColor : 'white', alignSelf : 'center', justifySelf : 'center'}}>
+        <div className="card"> 
 
-            <table className="table-responsive" style={{ width: '100%' }}>
-
-              <tr className="d-flex" style={{ borderColor: '0, 19, 255, 0.26', margin: 8 }}>
+            <table className="table-responsive" style={{ width: '100%', backgroundColor : 'white'}}>
+              <tr className="d-flex" style={{ margin: 8 }}>
 
                 <td style={{ display: "flex" }}>
                   <div>
-                    <button className="btn btn-primary w-auto" onClick={() => { getFacturas(); openModalWait(true); }}>
+                    <button className="btn btn-primary w-auto" 
+                    style={{ backgroundColor : 'black' , color : 'white', fontWeight : 'bold' }} 
+                    onClick={() => { getFacturas(); openModalWait(true); }}>
                       ACTUALIZAR
                     </button>
                   </div>
@@ -144,14 +143,14 @@ function AdminDespachoView() {
                 <td>
                   {
                     selected_facturas.length == 0 ?
-                      <div className="card" style={{ backgroundColor: '#A93226', width: 'auto', position: 'absolute', right: 10 }}>
-                        <h3 style={{ margin: 7, color: 'white' }}>SIN FACTURAS PARA CONSOLIDAR</h3>
+                      <div className="card" style={{ backgroundColor: '#FF0000', width: 400 , position: 'absolute', right: 10 }}>
+                        <h3 style={{ margin: 7, color: 'white', alignSelf : 'center', fontWeight : 'bold' }}>SIN FACTURAS PARA CONSOLIDAR</h3>
                       </div>
                       :
-                      <div className="card" style={{ backgroundColor: '#F1C40F', width: 'auto', display: 'flex', flexDirection: 'row', position: 'absolute', right: 10 }}>
+                      <div className="card" style={{ backgroundColor: '#FFFF33', width: 400 , display: 'flex', flexDirection: 'row', position: 'absolute', right: 10 }}>
                         <div style={{ display: 'flex', flexDirection: 'row' }}>
                           <h4 style={{ margin: 7, color: 'black' }}>ULTIMA ESCANEADA :</h4>
-                          <h4 style={{ margin: 7, color: 'black' }}>{selected_facturas[selected_facturas.length - 1].factura}</h4>
+                          <h4 style={{ margin: 7, color: 'black', fontWeight : 'bold' }}>{selected_facturas[selected_facturas.length - 1].factura}</h4>
                         </div>
 
                         <div style={{ display: 'flex', flexDirection: 'row' }}>
@@ -164,14 +163,11 @@ function AdminDespachoView() {
                 </td>
 
               </tr>
-
             </table>
 
-          </div>
-
-          <div className="table-responsive" >
+          <div className="table-responsive" style={{ height : '100vh'}}>
             <table className="table card-table table-vcenter text-nowrap datatable">
-              <thead style={{ backgroundColor: '#154360 ' }}>
+              <thead style={{ width : '90%', backgroundColor : 'grey' }}>
                 <tr>
                   <th></th>
                   <th style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'white' }}>FACTURA</th>
@@ -185,21 +181,22 @@ function AdminDespachoView() {
                 </tr>
               </thead>
 
-              <tbody>
+              <tbody style={{ backgroundColor : 'white'}}>
                 {data.slice().reverse().map((item) => (
-                  <tr key={item.factura} style={{ marginBottom: 20 }}>
+                  <tr key={item.factura}>
                     <td>
                       <input type="checkbox"
+                        style={{ colorInterpolation : 'black' }}
                         onChange={(e) => { get_selected_facturas(item); }} />
                     </td>
-                    <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left' }}>{item.factura}</td>
-                    <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left' }}>{item.list_empaque}</td>
-                    <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left' }}>{item.pedidoventa}</td>
-                    <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left' }}>{item.albaran}</td>
-                    <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left' }}>{item.cliente}</td>
-                    <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left' }}>{item.cant_cajas}</td>
-                    <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left' }}>{item.cant_total}</td>
-                    <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left' }}>{item.ubicacion}</td>
+                    <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left' , color : 'black' }}>{item.factura}</td>
+                    <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left' , color : 'black' }}>{item.list_empaque}</td>
+                    <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left' , color : 'black' }}>{item.pedidoventa}</td>
+                    <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left' , color : 'black' }}>{item.albaran}</td>
+                    <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left' , color : 'black' }}>{item.cliente}</td>
+                    <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left' , color : 'black' }}>{item.cant_cajas}</td>
+                    <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left' , color : 'black' }}>{item.cant_total}</td>
+                    <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left' , color : 'black' }}>{item.ubicacion}</td>
                   </tr>
                 ))}
               </tbody>
@@ -207,23 +204,23 @@ function AdminDespachoView() {
           </div>
 
         </div>
+        {
+         openLoad &&
+         <div class="modal modal-blur fade show" id="modal-simple" tabindex="-1" style={{ display: 'block', paddingRight: '17px', backgroundColor: 'rgb(0, 0, 0, 0.7)' }} aria-modal="true" role="dialog">
+           <div class="modal-dialog modal-dialog-centered" role="document">
+             <div class="modal-content">
+               <div class="modal-header">
+                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <LoadingWait message={'Obteniendo las facturas'}/>
+             </div>
+           </div>
+         </div>
+       }
       </div>
 
-      {
-        openLoad &&
-        <div class="modal modal-blur fade show" id="modal-simple" tabindex="-1" style={{ display: 'block', paddingRight: '17px', backgroundColor: 'rgb(0, 0, 0, 0.7)' }} aria-modal="true" role="dialog">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <LoadingWait message={'Obteniendo las facturas'}/>
-            </div>
-          </div>
-        </div>
-      }
+       
 
-    </>
   );
 
 }

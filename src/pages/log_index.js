@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { bk_dir } from '../conf/configuration.file';
 import axios from 'axios';
 import logo from '../assets/dist/img/images/Invoice-amico.png';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = ({ set_is_log }) => {
   const [user, setUser] = useState('');
   const [_Password, setPass] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [data_user, setDataUser] = useState(null)
+  const navigate = useNavigate()
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -29,9 +31,9 @@ const LoginForm = ({ set_is_log }) => {
         //console.log(response.data)
         setDataUser(response.data);
 
-        if (response.status === 200 && response.data.token ) {
+        if (response.status === 200 && response.data.token) {
           localStorage.setItem('dataUser', JSON.stringify(response.data));
-          set_is_log();
+          navigate("/main", { replace: true })
         }
       }
     } catch (err) {
@@ -41,21 +43,30 @@ const LoginForm = ({ set_is_log }) => {
   };
 
   return (
-    <div className="container-tight py-6" >
-      <form>
-        <div className="text-center mb-4">
-          <a href="."><img src="./static/logo.svg" height="36" alt="" /></a>
-        </div>
-        <div className="card card-md" autoComplete="off">
-          <div className="card-body">
-            <a href="."><img src={logo} height="300" width="300" alt="Logo" /></a>
-            <h1 className="card-title text-center mb-4">KELLER CHECK</h1>
-            <div className="mb-2">
-              <input type="text" className="form-control" placeholder="INGRESE USUARIO" onChange={(e) => { setUser(e.target.value) }} />
-            </div>
-            <div autoComplete="off">
-              
-                <div className="mb-2">
+      <div className="container-tight py-6">
+        <form>
+          <div className="text-center mb-4">
+            <a href="."><img src="./static/logo.svg" height="36" alt="" /></a>
+          </div>
+          <div className="card card-md" autoComplete="off"  style={{ backgroundColor : '#F4F6F7', borderWidth : 0}}>
+            <div className="card-body">
+              <h1 className="card-title text-center mb-4" style={{ color : 'black', fontSize : 50, fontWeight : 'bold' }}>[ KELLER ]</h1>
+              <div className="mb-2">
+                <input type="text" className="form-control" 
+                style={{ 
+                  height : 52, 
+                  marginTop : 70,
+                  color : 'black', 
+                  borderWidth : 0,
+                  backgroundColor : '#F4F6F7',
+                  borderBottomWidth : 2,
+                  borderBottomColor : 'grey'
+                }}
+                placeholder="INGRESE USUARIO" onChange={(e) => { setUser(e.target.value) }} />
+              </div>
+              <div autoComplete="off">
+
+                <div className="mb-2" style={{ marginTop : 70}}>
                   <div className="input-group input-group-flat">
                     <input
                       type={showPassword ? "text" : "password"}
@@ -64,33 +75,58 @@ const LoginForm = ({ set_is_log }) => {
                       autoComplete="off"
                       value={_Password}
                       onChange={(e) => setPass(e.target.value)}
+                      style={{ 
+                        color : 'black', 
+                        borderWidth : 0,
+                        backgroundColor : '#F4F6F7',
+                        borderBottomWidth : 2,
+                        borderBottomColor : 'grey'
+                      }}
                     />
-                    <span className="input-group-text">
+
+                    <span className="input-group-text"
+                    style={{
+                      borderWidth : 0,
+                      borderBottomWidth : 2,
+                      borderBottomColor : 'grey'
+                    }}>
                       <button
                         type="button"
                         className="btn btn-link link-secondary"
                         title={showPassword ? "Hide password" : "Show password"}
                         onClick={togglePasswordVisibility}
+                        
                       >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" 
+                          className="icon" width="24" height="10" 
+                          viewBox="0 0 24 24" strokeWidth="2" 
+                          stroke="currentColor" fill="none" 
+                          strokeLinecap="round" strokeLinejoin="round">
                           <circle cx="12" cy="12" r="2" />
                           <path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7" />
                         </svg>
-                        
+
                       </button>
                     </span>
                   </div>
                 </div>
-              
-            </div>
-            <div className="form-footer">
-              <button type="submit" className="btn btn-primary w-100" onClick={ValidateUser}>INGRESAR</button>
+
+              </div>
+              <div className="form-footer">
+                <button type="submit" className="btn btn-primary w-100" onClick={ValidateUser}
+                style={{
+                  borderRadius : 30,
+                  marginTop : 70,
+                  backgroundColor : 'black',
+                  color : 'white'
+                }}
+                >INGRESAR</button>
+              </div>
             </div>
           </div>
-        </div>
-      </form>
-    </div>
-  );
+        </form>
+      </div>
+      );
 };
 
 

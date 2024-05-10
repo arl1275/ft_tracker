@@ -41,9 +41,9 @@ function ListFact() {
       ];
       
     return (
-       <>
+       <div style={{ height : '100vh'}}>
         <TableAdminFact columns={columns} data={data}/>
-       </>
+       </div>
         )
 
 }

@@ -31,11 +31,11 @@ export function CamionesCombox({ props }) {
 
   return (
     <>
-      <div className="mb-auto" style={{ marginRight: "10px" }}>
-        <select id="select-camion" className="form-select" onChange={SelectCamion}>
-          <option value="camion">CAMIONES</option>{
+      <div className="mb-auto" style={{ marginRight: "10px", backgroundColor : '#17202A'}}>
+        <select id="select-camion" className="form-select" onChange={SelectCamion} style={{ backgroundColor : '#17202A', color : 'white' }}>
+          <option value="camion" style={{ backgroundColor : '#17202A', color : 'white' }}>CAMIONES</option>{
             data.map((item) => (
-              <option value={item.id} id={item.placa} key={item.placa}>{item.placa}</option>
+              <option value={item.id} id={item.placa} key={item.placa} style={{ backgroundColor : '#17202A', color : 'white' }}>{item.placa}</option>
             ))
           }
         </select>
@@ -74,10 +74,11 @@ export function EntregadorCombox({ EntregadorHand }) {
   return (
     <>
       <div className="mb-auto" style={{ marginRight: "10px" }}>
-        <select name="countries" id="select-countries" className="form-select" onChange={SelectEntregador}>
-          <option value="pl" id='1'>ENTREGADORES</option>{
+        <select name="countries" id="select-countries" className="form-select" onChange={SelectEntregador}
+        style={{ backgroundColor : '#17202A', color : 'white' }}>
+          <option value="pl" id='1' style={{ backgroundColor : '#17202A', color : 'white' }}>ENTREGADORES</option>{
             data.map((item) => (
-              <option value={item.id} id={item.nombre} key={item.id}>{item.nombre}</option>
+              <option value={item.id} id={item.nombre} key={item.id} style={{ backgroundColor : '#17202A', color : 'white' }}>{item.nombre}</option>
             ))
           }
         </select>
