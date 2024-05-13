@@ -17,7 +17,6 @@ function ListUsuarios() {
         try {
             const values = await axios.get(bk_dir + '/usuarios/getallUsers').then(e => e.data);
             setData(values.data);
-            //console.log('data de los usuarios : ', values)
         } catch (error) {
             console.log('err to get usuarios');
         }
@@ -42,23 +41,23 @@ function ListUsuarios() {
 
     return (
         <>
-            <div className="card" style={{ margin: 20, backgroundColor: '#F8F9F9' }}>
+            <div className="card" style={{ margin: 20, backgroundColor: 'white' }}>
                 <div class="col-12" style={{ display: 'flex', flexDirection: 'row' }}>
                     <div class="card" style={{ width: '60%', margin: 5 }}>
                         <div class="table-responsive">
                             <table class="table table-vcenter card-table">
                                 <thead>
-                                    <tr style={{ textAlign : 'left', backgroundColor : '#273746'}}>
+                                    <tr style={{ textAlign : 'left', backgroundColor : 'white'}}>
                                         <th>
                                             <button data-toggle="modal" data-target="#modal-simple" 
-                                            style={{backgroundColor : 'green', borderWidth : 0, width : '100%', height : 'auto'}}>
+                                            style={{backgroundColor : 'green', borderWidth : 0, borderRadius : 10 , width : '100%', height : 'auto'}}>
                                                 <div style={{color : 'white'}}>CREAR</div>
                                             </button>
                                         </th>
-                                        <th style={{ color : 'white' }}>NOMBRE</th>
-                                        <th style={{ color : 'white' }}>Cod. EMPLEADO</th>
-                                        <th style={{ color : 'white' }}>QR</th>
-                                        <th style={{ color : 'white' }}>ROL</th>
+                                        <th style={{ color : 'black' }}>NOMBRE</th>
+                                        <th style={{ color : 'black' }}>Cod. EMPLEADO</th>
+                                        <th style={{ color : 'black' }}>QR</th>
+                                        <th style={{ color : 'black' }}>ROL</th>
                                         <th className="w-auto"></th>
                                     </tr>
                                 </thead>

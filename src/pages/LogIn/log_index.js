@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { bk_dir } from '../conf/configuration.file';
+import { bk_dir } from '../../conf/configuration.file';
 import axios from 'axios';
-import logo from '../assets/dist/img/images/Invoice-amico.png';
 import { useNavigate } from 'react-router-dom';
 
 const LoginForm = ({ set_is_log }) => {
@@ -15,7 +14,6 @@ const LoginForm = ({ set_is_log }) => {
     setShowPassword(!showPassword);
   };
 
-
   const ValidateUser = async (event) => {
     event.preventDefault();
     try {
@@ -28,9 +26,7 @@ const LoginForm = ({ set_is_log }) => {
         alert('FAVOR INGRESE UN USUARIO Y CONTRASEÑA');
       } else {
         const response = await axios.get(`${bk_dir}/usuarios/auth/user`, { params: data });
-        //console.log(response.data)
         setDataUser(response.data);
-
         if (response.status === 200 && response.data.token) {
           localStorage.setItem('dataUser', JSON.stringify(response.data));
           navigate("/main", { replace: true })
@@ -43,12 +39,12 @@ const LoginForm = ({ set_is_log }) => {
   };
 
   return (
-      <div className="container-tight py-6">
-        <form>
+      <div className="container-tight py-6" style={{ height : '100vh'}}>
+        <form style={{ borderWidth : 0}}>
           <div className="text-center mb-4">
             <a href="."><img src="./static/logo.svg" height="36" alt="" /></a>
           </div>
-          <div className="card card-md" autoComplete="off"  style={{ backgroundColor : '#F4F6F7', borderWidth : 0}}>
+          <div className="card card-md" autoComplete="off"  style={{ backgroundColor : '#F4F6F7', borderColor: '#F2F3F4'}}>
             <div className="card-body">
               <h1 className="card-title text-center mb-4" style={{ color : 'black', fontSize : 50, fontWeight : 'bold' }}>[ KELLER ]</h1>
               <div className="mb-2">

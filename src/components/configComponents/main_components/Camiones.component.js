@@ -23,18 +23,18 @@ function ListaCamiones() {
       <div class="card" style={{ width: '50%', margin: 10 }}>
         <div class="table-responsive">
           <table class="table table-vcenter card-table">
-            <thead style={{ backgroundColor : '#2E4053'}}>
+            <thead style={{ backgroundColor : 'white'}}>
               <tr>
                 <th>
 
                   <button data-toggle="modal" data-target="#modal-simple"
-                    style={{ backgroundColor: 'green', borderWidth: 0, width: '100%', height: 'auto' }}>
+                    style={{ backgroundColor: 'green', borderWidth: 0, borderRadius : 10 , width: '100%', height: 'auto' }}>
                     <div style={{ color: 'white' }}>CREAR</div>
                   </button>
 
                 </th>
-                <th style={{ color: 'white', textAlign: 'left' }}>Placa</th>
-                <th style={{ color: 'white', textAlign: 'left' }}>QR</th>
+                <th style={{ color: 'black', textAlign: 'left' }}>Placa</th>
+                <th style={{ color: 'black', textAlign: 'left' }}>QR</th>
               </tr>
             </thead>
             <tbody>

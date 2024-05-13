@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { bk_dir } from "../../conf/configuration.file";
-//import TableForm from "../table.component";
+import { Loadingbar } from "../any_components/loadingbar";
 import TableForm, { TextColumnFilter, NumberColumnFilter } from "../dynamic_table/table.component";
 const loagind = require('../../assets/dist/img/images/Processing-cuate.png')
 
-function ResumenFacturas() {
+function DashboardFacturas() {
   const [data, setData] = useState([]);
-  const [ver_facts_or_envios, setFactsOrEnvios] = useState(null);
-
-
+  
   //-----------------COLUMNS---------------------
   const columns = [
     { Header: 'PEDIDO', accessor: 'pedidoventa', Filter: TextColumnFilter },
@@ -38,29 +36,22 @@ function ResumenFacturas() {
     }
   }
 
-  let set_fecha_format = (date) => {
-    const fecha = new Date(date);
-    const soloFecha = fecha.toISOString().split('T')[0];
-    return soloFecha;
-  }
-
   return (
     <>
       {
         data.length > 0 ?
           <TableForm data={data} columns={columns} />
           :
-          <div style={{ display: 'flex', justifyContent: 'center', width: '100vw', height: '100vh' }}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <Loadingbar />
             <div style={{ width: '30%', height: '30%' }}>
               <img src={loagind} style={{ display: 'block', margin: 'auto' }} />
-              <h3>SIN FACTURAS EN PROCESO</h3>
             </div>
           </div>
-
       }
 
     </>
   )
 }
 
-export default ResumenFacturas;
+export default DashboardFacturas;

@@ -29,11 +29,12 @@ const TableForm = ({ data }) => {
 
   const table = useMaterialReactTable({
     data,
-    columns
+    columns,
+    initialState: { density: 'compact' }
   });
 
   return(
-    <div className='card' style={{margin : 10, backgroundColor : 'grey', height : '100vh'}}>
+    <div className='card' style={{margin : 10, height : 'autovh' , borderTopColor : 'black' , borderTopWidth : 4 }}>
       <MaterialReactTable table={table} />
     </div>
   ) 

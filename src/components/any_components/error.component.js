@@ -1,6 +1,6 @@
 import React from "react";
 
-export const ERRcomponent = ({ message }) => {
+export const ERRcomponent = ({ message  }) => {
 
     return (
         <div style={{

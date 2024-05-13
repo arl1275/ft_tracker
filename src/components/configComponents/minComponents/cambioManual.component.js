@@ -24,7 +24,6 @@ export const CambioManual = ({ prop }) => {
 
     const to_change_state = async () =>{
         if(selected == '1'){
-            console.log('factura a enviar =======================>', prop);
             const result = await axios.get(bk_dir + '/facturas/toNullState', {params : { factura : prop }});
             if(result.status === 200){
                 alert('SE ENVIO A BODEGA');
@@ -39,7 +38,7 @@ export const CambioManual = ({ prop }) => {
 
     return (
         <div>
-            <div className="card" style={{ marginTop: 5, marginBottom: 5, backgroundColor: '#922B21', color: 'white' }}>
+            <div className="card" style={{ marginTop: 5, marginBottom: 5, backgroundColor: 'black', color: 'white' }}>
                 <h4 style={{ margin: 15 }}>FAVOR VALIDAR LA INFORMACION ANTES DE HACER UN CAMBIO EN EL ESTADO DE LA FACTURA, LO CAMBIOS SON PERMANENTES</h4>
             </div>
 
@@ -62,8 +61,8 @@ export const CambioManual = ({ prop }) => {
 
             </div>
 
-            <div style={{ width : '60%', alignSelf : 'flex-end'}} onClick={to_change_state}>
-                <p className="btn btn-dark w-100"> VALIDAR CAMBIO </p>
+            <div style={{ width : '60%', alignSelf : 'center' }} onClick={to_change_state}>
+                <p className="btn btn-dark w-100" style={{ alignSelf : 'center'}}> VALIDAR CAMBIO </p>
             </div>
 
         </div>

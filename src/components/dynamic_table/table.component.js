@@ -14,7 +14,6 @@ export const TextColumnFilter = ({ column }) => {
   );
 };
 
-// Define custom number filter component
 export const NumberColumnFilter = ({ column }) => {
   const { filterValue, setFilter } = column;
 
@@ -40,32 +39,42 @@ const TableForm = ({ columns, data }) => {
   } = useTable({ columns, data }, useGlobalFilter); // Use useGlobalFilter
 
   return (
-    <div className='card' style={{ margin : 5}}>
+    <div className='card' style={{ margin: 10 }}>
       <input
         type="text"
         value={state.globalFilter || ''}
         onChange={(e) => setGlobalFilter(e.target.value)}
         placeholder="BUSCAR"
         className='form-control'
-        style={{width : '20%', margin : 10}}
+        style={{ width: '25%', margin: 10 }}
       />
 
-      <table {...getTableProps()} className="table card-table table-vcenter text-nowrap datatable" style={{color : 'black'}}>
-        <thead>
+      <table
+        {...getTableProps()}
+        className="table table-vcenter card-table"//"table card-table table-vcenter text-nowrap datatable"
+        style={
+          { 
+            color: 'black', height : 90
+          }
+        }>
+
+        <thead style={{ borderRadius : 50 }}>
           {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()} style={{backgroundColor : '#34495E', textAlign : 'left' }}>
+            <tr {...headerGroup.getHeaderGroupProps()} style={{ backgroundColor: 'black', textAlign: 'left' }}>
               {headerGroup.headers.map((column) => (
-                <th style={{ color : 'white' }} {...column.getHeaderProps()}>{column.render('Header')}</th>
+                <th style={{ color: 'white' }} {...column.getHeaderProps()}>{column.render('Header')}</th>
               ))}
             </tr>
           ))}
         </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
+
+        <tbody {...getTableBodyProps()} style={{ height : 90}}> 
+          {
+          rows.map((row) => {
             prepareRow(row);
-            let valor = row.values.state_name == 'PREPARACION' ? '#AED6F1 ' : '#5DADE2';
+            let valor = row.values.state_name == 'PREPARACION' ? '#00CCFF' : '#00FFCC';
             return (
-              <tr {...row.getRowProps()} style={{ backgroundColor : valor, textAlign : 'left' }}>
+              <tr {...row.getRowProps()} style={{ backgroundColor: valor, textAlign: 'left', fontFamily : 'revert'}}>
                 {row.cells.map((cell) => (
                   <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                 ))}
@@ -73,6 +82,7 @@ const TableForm = ({ columns, data }) => {
             );
           })}
         </tbody>
+
       </table>
     </div>
   );

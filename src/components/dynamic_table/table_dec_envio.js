@@ -58,8 +58,8 @@ const TableForm_dec_envio = ({ columns, data }) => {
         setNewEntregador(value);
     }
     const handleRow = (value) => {
-        const { declaracionenvio, placa, nombre, cant_facturas, cant_cajas, cant_unidades, created_at} = value.values;
-        let arr = [declaracionenvio, placa, cant_facturas, cant_cajas, cant_unidades, nombre, created_at ];
+        const { declaracionenvio, placa, nombre, cant_facturas, cant_cajas, cant_unidades, created_at } = value.values;
+        let arr = [declaracionenvio, placa, cant_facturas, cant_cajas, cant_unidades, nombre, created_at];
         setNewCamion([0, placa]);
         setNewEntregador([0, nombre])
         setDec(declaracionenvio);
@@ -88,7 +88,12 @@ const TableForm_dec_envio = ({ columns, data }) => {
     }
 
     return (
-        <div >
+        <div style={{
+            backgroundColor: 'white',
+            margin: 5,
+            borderRadius: 10,
+            width: '97%'
+        }}>
             <div>
                 <input
                     type="text"
@@ -96,16 +101,32 @@ const TableForm_dec_envio = ({ columns, data }) => {
                     onChange={(e) => setGlobalFilter(e.target.value)}
                     placeholder="BUSCAR"
                     className='form-control'
-                    style={{ width: '30%', margin: 10 , backgroundColor : 'white', color : 'black'}}
+                    style={
+                        {
+                            width: '30%',
+                            margin: 10,
+                            backgroundColor: 'white',
+                            color: 'black',
+                            borderRadius: 50
+                        }
+                    }
                 />
             </div>
-
-            <table {...getTableProps()} className="table card-table table-vcenter text-nowrap datatable" style={{ color: 'black' }}>
-                <thead>
+            
+            {/*     THIS PART IS ONLY OF THE TABLE OF DECLARACIONES DE ENVIO  */}
+            <table {...getTableProps()} className="table card-table table-vcenter text-nowrap datatable"
+                style={
+                    {
+                        color: 'black',
+                        backgroundColor: 'white',
+                        height : '60vh'
+                    }
+                }>
+                <thead style={{ backgroundColor: 'black', borderRadius: 50 }}>
                     {headerGroups.map((headerGroup) => (
-                        <tr {...headerGroup.getHeaderGroupProps()} style={{ backgroundColor: '#34495E' }}>
+                        <tr {...headerGroup.getHeaderGroupProps()}>
                             {headerGroup.headers.map((column) => (
-                                <th style={{ color: 'white', textAlign: 'left' , backgroundColor : 'black'}} {...column.getHeaderProps()}>{column.render('Header')}</th>
+                                <th style={{ color: 'white', textAlign: 'left', backgroundColor: 'black' }} {...column.getHeaderProps()}>{column.render('Header')}</th>
                             ))}
                             <th style={{ backgroundColor: 'black' }} />
                         </tr>
@@ -137,12 +158,13 @@ const TableForm_dec_envio = ({ columns, data }) => {
                 </tbody>
             </table>
 
+            {/*     THIS PART IS ONLY ABOUT THE MODAL OF DECLARACIONES DE ENVIO*/}
             <div class="modal modal-blur fade show" id="modal-large" tabindex="-1" style={{ paddingRight: "17px" }} aria-modal="true" role="dialog">
                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                     <div className='modal-content'>
 
-                        <div className='modal-header' style={{ backgroundColor: '#7B241C' }}>
-                            <h5 class="modal-title" style={{ color: 'white' }}>DECLARACION DE ENVIO : {row_ ? row_[0] : null}</h5>
+                        <div className='modal-header' style={{ backgroundColor: 'WHITE' }}>
+                            <h5 class="modal-title" style={{ color: 'black' }}>DECLARACION DE ENVIO : {row_ ? row_[0] : null}</h5>
                             <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                         </div>
 
@@ -164,29 +186,29 @@ const TableForm_dec_envio = ({ columns, data }) => {
                                         <div class="tab-pane fade active show" id="tabs-home-17">
                                             <div className='card'>
                                                 <table>
-                                                    <tr style={{ width : '100%'}}>
-                                                        <td style={{ textAlign : 'left', backgroundColor : '#45B39D', color : 'white', borderBottom : '2px solid black'}}>DECLARACIÓN DE ENVIO</td>
-                                                        <td style={{ textAlign : 'left', backgroundColor : '#8E44AD', color : 'white', borderBottom : '2px solid black'}}>{row_ ? row_[0] : null}</td>
+                                                    <tr style={{ width: '100%' }}>
+                                                        <td style={{ textAlign: 'left', backgroundColor: 'white', color: 'black', borderBottom: '2px solid black' }}>DECLARACIÓN DE ENVIO</td>
+                                                        <td style={{ textAlign: 'left', backgroundColor: 'white', color: 'black', borderBottom: '2px solid black' }}>{row_ ? row_[0] : null}</td>
                                                     </tr>
                                                 </table>
                                                 <table>
                                                     <tr>
-                                                        <td style={{ textAlign : 'left', backgroundColor : '#45B39D', color : 'white', borderBottom : '2px solid black'}}>CREADO</td>
-                                                        <td style={{ textAlign : 'left'}}>{ row_ ? row_[6] : null}</td>
+                                                        <td style={{ textAlign: 'left', backgroundColor: 'white', color: 'black'}}>CREADO</td>
+                                                        <td style={{ textAlign: 'left' }}>{row_ ? row_[6] : null}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td style={{ textAlign : 'left', backgroundColor : '#45B39D', color : 'white', borderBottom : '2px solid black'}}>CAMION</td>
-                                                        <td style={{ textAlign : 'left'}}>{row_ ? row_[1] : null}</td>
-                                                        <td style={{ textAlign : 'left', backgroundColor : '#45B39D', color : 'white', borderBottom : '2px solid black'}}>ENTREGADOR</td>
-                                                        <td style={{ textAlign : 'left'}}>{ row_ ? row_[5] : null}</td>
+                                                        <td style={{ textAlign: 'left', color: 'black' }}>CAMION</td>
+                                                        <td style={{ textAlign: 'left' }}>{row_ ? row_[1] : null}</td>
+                                                        <td style={{ textAlign: 'left', color: 'black' }}>ENTREGADOR</td>
+                                                        <td style={{ textAlign: 'left' }}>{row_ ? row_[5] : null}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td style={{ textAlign : 'left', backgroundColor : '#45B39D', color : 'white', borderBottom : '2px solid black'}}>FACTURAS</td>
-                                                        <td style={{ textAlign : 'left'}}>{ row_ ? row_[2] : null}</td>
-                                                        <td style={{ textAlign : 'left', backgroundColor : '#45B39D', color : 'white', borderBottom : '2px solid black'}}>UNIDADES</td>
-                                                        <td style={{ textAlign : 'left'}}>{ row_ ? row_[4] : null }</td>
-                                                        <td style={{ textAlign : 'left', backgroundColor : '#45B39D', color : 'white', borderBottom : '2px solid black'}}>CAJAS</td>
-                                                        <td style={{ textAlign : 'left'}}>{ row_ ? row_[3] : null}</td>
+                                                        <td style={{ textAlign: 'left', color: 'black' }}>FACTURAS</td>
+                                                        <td style={{ textAlign: 'left' }}>{row_ ? row_[2] : null}</td>
+                                                        <td style={{ textAlign: 'left', color: 'black' }}>UNIDADES</td>
+                                                        <td style={{ textAlign: 'left' }}>{row_ ? row_[4] : null}</td>
+                                                        <td style={{ textAlign: 'left', color: 'black' }}>CAJAS</td>
+                                                        <td style={{ textAlign: 'left' }}>{row_ ? row_[3] : null}</td>
                                                     </tr>
                                                 </table>
                                             </div>

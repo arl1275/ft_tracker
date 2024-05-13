@@ -5,7 +5,7 @@ import TableForm from "../dynamic_table/tableHisto.component";
 import { LoadingMessage } from "../any_components/loading_component";
 import { ERRcomponent } from "../any_components/error.component";
 
-export const ResumenHistorico = () => {
+const ResumenHistorico = () => {
     const [AllFacts, setAllFacts] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -14,7 +14,6 @@ export const ResumenHistorico = () => {
             setLoading(true);
             const data = await axios.get(bk_dir + '/facturas/getHistoFact');
             setAllFacts(data.data.data);
-            //console.log('fromBK', AllFacts);
         } catch (err) {
             alert('NO SE PUDO OBTENER LOS DATOS, FAVOR REVISAR SU CONEXION A INTERNET');
         } finally {
@@ -22,11 +21,9 @@ export const ResumenHistorico = () => {
         }
     }
 
-
     useEffect(() => {
         getFacts();
     }, []);
-
 
     return (
         <>
@@ -40,8 +37,8 @@ export const ResumenHistorico = () => {
                         <ERRcomponent message={'Hay un error para obtener esta informacion'} />
                 }
             </div>
-
-
         </>
     )
 }
+
+export default ResumenHistorico;

@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { CambioEntregador } from "../minComponents/cambioEntregador.component";
-import { EntregaManual } from "../minComponents/entregaManual.component";
+import React, { useState } from "react";
 import { CambioManual } from "../minComponents/cambioManual.component";
 
 export const AlterFact = ({ props }) => {
@@ -10,23 +8,23 @@ export const AlterFact = ({ props }) => {
         border: '1px solid #D5D8DC', // Note: Property values should be strings
         textAlign: 'left',
         color: 'white',
-        backgroundColor: '#21618C',
+        backgroundColor: 'black',
         fontSize: 15
     }
 
     const cell = {
         border: '1px solid #D5D8DC', // Note: Property values should be strings
         textAlign: 'left',
-        color: 'black',
-        backgroundColor: '#F0F3F4',
+        color: 'white',
+        backgroundColor: '#242424',
         fontSize: 15
     };
 
     const cell_detail = {
         border: '1px solid #D5D8DC', // Note: Property values should be strings
         textAlign: 'left',
-        color: 'black',
-        backgroundColor: '#7FB3D5 ',
+        color: 'white',
+        backgroundColor: 'black ',
         fontSize: 15
     }
 
@@ -49,27 +47,27 @@ export const AlterFact = ({ props }) => {
                 <table>
                     <tr>
                         <td style={head_cell}>FACTURA</td>
-                        <td style={head_cell}>{props.factura}</td>
+                        <td style={head_cell}>{props?.factura}</td>
                     </tr>
                     <tr>
                         <td style={cell}>CLIENTE</td>
-                        <td style={cell_data}>{props.clientenombre}</td>
+                        <td style={cell_data}>{props?.clientenombre}</td>
                     </tr>
                     <tr>
                         <td style={cell}>ALBARAN</td>
-                        <td style={cell_data}>{props.albaran}</td>
+                        <td style={cell_data}>{props?.albaran}</td>
                     </tr>
                     <tr>
                         <td style={cell}>CIUDAD</td>
-                        <td style={cell_data}>{props.ciudad}</td>
+                        <td style={cell_data}>{props?.ciudad}</td>
                     </tr>
                     <tr>
                         <td style={cell}>DEPARTAMENTO</td>
-                        <td style={cell_data}>{props.departamento}</td>
+                        <td style={cell_data}>{props?.departamento}</td>
                     </tr>
                     <tr>
                         <td style={cell}>CALLE</td>
-                        <td style={cell_data}>{props.calle}</td>
+                        <td style={cell_data}>{props?.calle}</td>
                     </tr>
                 </table>
 
@@ -81,10 +79,10 @@ export const AlterFact = ({ props }) => {
                         <td style={cell_detail}>UNIDADES</td>
                     </tr>
                     <tr>
-                        <td style={cell_data}>{props.lista_empaque}</td>
-                        <td style={cell_data}>{props.pedidoventa}</td>
-                        <td style={cell_data}>{props.cant_cajas}</td>
-                        <td style={cell_data}>{props.cant_unidades}</td>
+                        <td style={cell_data}>{props?.lista_empaque}</td>
+                        <td style={cell_data}>{props?.pedidoventa}</td>
+                        <td style={cell_data}>{props?.cant_cajas}</td>
+                        <td style={cell_data}>{props?.cant_unidades}</td>
                     </tr>
                 </table>
 
@@ -93,11 +91,11 @@ export const AlterFact = ({ props }) => {
             <table style={{ width: '100%' }}>
                 <tr>
                     <td style={cell_detail}>CAMION ASIGNADO</td>
-                    <td style={cell_data}>{props.placa}</td>
+                    <td style={cell_data}>{props?.placa}</td>
                 </tr>
                 <tr>
                     <td style={cell_detail}>ENTREGADOR ASIGNADO</td>
-                    <td style={cell_data}>{props.nombre}</td>
+                    <td style={cell_data}>{props?.nombre}</td>
                 </tr>
             </table>
 
@@ -111,11 +109,11 @@ export const AlterFact = ({ props }) => {
                         <td style={cell_detail}>SINCRONIZADO</td>
                     </tr>
                     <tr>
-                        <td style={cell_data}>{props.declaracionenvio}</td>
-                        <td style={cell_data}>{props.toma_preparacion}</td>
-                        <td style={cell_data}>{props.toma_transito}</td>
-                        <td style={cell_data}>{props.toma_hora_fecha_entrega}</td>
-                        <td style={cell_data}>{props.toma_sincronizado}</td>
+                        <td style={cell_data}>{props?.declaracionenvio}</td>
+                        <td style={cell_data}>{props?.toma_preparacion}</td>
+                        <td style={cell_data}>{props?.toma_transito}</td>
+                        <td style={cell_data}>{props?.toma_hora_fecha_entrega}</td>
+                        <td style={cell_data}>{props?.toma_sincronizado}</td>
                     </tr>
                 </table>
             </div>
@@ -135,9 +133,9 @@ export const AlterFact = ({ props }) => {
             <div className="tab-content">
                 {
                     val === null &&
-                    <div className="card" style={{ margin: 30 }}>
-                        <h4>AVISO IMPORTANTE</h4>
-                        <p>Avisar de antemano a la administración</p>
+                    <div className="card" style={{ margin: 30 , backgroundColor : 'black' }}>
+                        <h4 color="white">AVISO IMPORTANTE</h4>
+                        <p color="white">Avisar de antemano a la administración</p>
                     </div>
                 }
                 {
@@ -147,7 +145,7 @@ export const AlterFact = ({ props }) => {
                 }
                 {
                     val === 1 ?
-                    (<CambioManual prop={props.factura} />) : null
+                    (<CambioManual prop={props?.factura} />) : null
                 }
                 {/* {
                     val === 2 &&
@@ -157,7 +155,7 @@ export const AlterFact = ({ props }) => {
                     val === 3 &&
                     <div className="card" style={{ margin: 10 }}>
                         {
-                            typeof props.link_firma === 'string' || typeof props.link_foto === 'string' ?
+                            typeof props?.link_firma === 'string' || typeof props?.link_foto === 'string' ?
                                 <table>
                                     
                                         <tr>
@@ -166,10 +164,10 @@ export const AlterFact = ({ props }) => {
                                         </tr>
                                         <tr>
                                             <td  style={pic_format}>
-                                                <img src={props.link_firma} />
+                                                <img src={props?.link_firma} />
                                             </td>
                                             <td style={pic_format}>
-                                                <img src={props.link_foto} />
+                                                <img src={props?.link_foto} />
                                             </td>
                                         </tr>
 
