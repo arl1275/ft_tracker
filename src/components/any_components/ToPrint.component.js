@@ -29,13 +29,13 @@ const sumarNumeros = (facts) => {
   };
 
 const PrintableComponent = React.forwardRef(({ facts, dec_ , truck , sCajas, sTotal}, ref) => (
-    <div ref={ref} style={{ padding: '20px', border: '1px solid #ddd', width: '100%' }}>
+    <div ref={ref} style={{ padding: '20px', border: '1px solid #ddd', width: '100%' , margin : 10 , alignSelf : 'center'}}>
         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
             <div>
                 <div style={{ fontSize : 15 , color : 'black' , fontWeight : 'bold'}}>DECLARACION DE ENVIO</div>
                 <div style={{ fontSize : 10 , color : 'black' , fontWeight : 'bold'}}>D-ENV-000{dec_ != '' ? dec_ : '- N/A'}</div>
-                <div style={{ fontSize : 10 , color : 'black' , fontWeight : 'bold'}}>Camion : {truck != '' ? truck : 'N/A'}</div>
-                <h3 style={{ fontSize : 10 , color : 'black' , fontWeight : 'bold'}}>{new Date().toLocaleString()}</h3>
+                <div style={{ fontSize : 10 , color : 'black' }}>Camion : {truck != '' ? truck : 'N/A'}</div>
+                <h3  style={{ fontSize : 10 , color : 'black' }}>{new Date().toLocaleString()}</h3>
             </div>
             <img src={foto} alt="Foto" style={{ width: '20%', height: '10%' }} />
         </div>
@@ -87,9 +87,9 @@ export const PrintButton = ({ facts, dec , camion}) => {
 
     const handlePrint = useReactToPrint({
         content: () => printRef.current,
-        documentTitle: 'Mi Documento de Prueba',
+        documentTitle: 'DeclaracionEnvio',
         pageStyle: `
-      @page { size: 8.5in 11in; margin: 0; }
+      @page { size: 11in 8.5in; margin: 1in; } 
       @media print {
         body { -webkit-print-color-adjust: exact; }
       }
@@ -101,8 +101,9 @@ export const PrintButton = ({ facts, dec , camion}) => {
 
     return (
         <div>
-            <IconButton onClick={handleOpen}>
-                <LocalPrintshopIcon style={{ fontSize: 'large', color: 'black' }} />
+            <IconButton onClick={handleOpen} style={{ backgroundColor : 'black', borderRadius : 50, marginTop : 20, padding : 15}}>
+                <LocalPrintshopIcon style={{ fontSize: 'large', color: 'white' }} />
+                <div style={{ fontSize : 15, marginLeft : 10 , color : 'white'}}>PRECIONE AQUI PARA IMPRIMIR</div>
             </IconButton>
 
             <Modal open={openPrint} onClose={handleClose}>
