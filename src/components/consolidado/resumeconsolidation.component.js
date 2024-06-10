@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { bk_dir } from "../../conf/configuration.file";
 import { LoadingWait } from "../any_components/loading_component.js";
+import { PrintButton } from "../any_components/ToPrint.component.js";
 
 const ResumenConsolidado = ({ props, clearArray }) => {
   const lista_headers = ["DEPARTAMENTO", "NOMBRE DE CLIENTE", "ALBARAN", "FACTURA", "LISTA EMPAQUE", "CAJAS", "UNIDADES"];
@@ -11,6 +12,7 @@ const ResumenConsolidado = ({ props, clearArray }) => {
   const [dec_env, setDecEnv] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [ischargin, setIsChargin] = useState(false);
+  const [valores, setValores ] = useState();
 
   const selCamion = (camion) => {
     setCamionSeleccionado(camion);
@@ -20,9 +22,11 @@ const ResumenConsolidado = ({ props, clearArray }) => {
   };
 
   const send_toCreate_Consolidacion = async () => {
-    if (entregador === '' || entregador === 'ENTREGADORES' || camionSeleccionado === '' || camionSeleccionado === 'CAMIONES' || entregador === null || camionSeleccionado === null) {
+    if (entregador === '' || entregador === 'ENTREGADORES' || camionSeleccionado === '' || 
+      camionSeleccionado === 'CAMIONES' || entregador === null || camionSeleccionado === null) {
       alert('FAVOR LLENAR TODOS LOS CAMPOS ANTES DE ENVIAR EL CONSOLIDADO');
     } else {
+      setValores(props);
       const data = {
         id_user: entregador[1],
         id_cam: camionSeleccionado[1],
@@ -86,17 +90,11 @@ const ResumenConsolidado = ({ props, clearArray }) => {
         GENERAR DECLARACION DE ENVIO
       </button>
 
-      <div class="modal modal-blur fade" id="modal-full-width1" tabindex="-1" role="dialog" aria-hidden="true">
+      <div className="modal modal-blur fade" id="modal-full-width1" tabindex="-1" role="dialog" aria-hidden="true">
         <div className="modal-dialog modal-full-width modal-dialog-centered" role="document">
 
           <div className="modal-content"
-            style={
-              {
-                backgroundColor: 'white',
-                borderWidth: '5px 0px 5px 0px',
-                borderColor: 'black',
-                borderRadius: 0
-              }}>
+            style={{ backgroundColor: 'white'}}>
             {
               props.length > 0 ?
                 (
@@ -168,9 +166,6 @@ const ResumenConsolidado = ({ props, clearArray }) => {
                     </div>
 
                     <div className="modal-footer">
-                      <button type="button" className="btn mr-auto" data-dismiss="modal"
-                        style={{ backgroundColor: '#FF0000', color: 'black', fontWeight: 'bold', borderRadius : 50 }}>CANCELAR</button>
-
                       <button type="button" className="btn btn-primary"
                         style={{ backgroundColor: 'black', color: 'white', fontWeight: 'bold', borderRadius : 50 }}
                         onClick={() => { setShowModal(true); send_toCreate_Consolidacion(); }}>
@@ -204,6 +199,7 @@ const ResumenConsolidado = ({ props, clearArray }) => {
                 </svg>
                 <h4 style={{ color: '#ABB2B9' }}>DECLARACIÓN DE ENVIO</h4>
                 <h1 style={{ color: '#2C3E50', fontSize: 30 }}>{ischargin ? <LoadingWait /> : dec_env}</h1>
+                <PrintButton facts={valores} dec={dec_env} camion={camionSeleccionado}/>
               </div>
               <div className="modal-footer">
 

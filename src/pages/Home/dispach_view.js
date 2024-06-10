@@ -1,18 +1,26 @@
-import React, { useEffect, useState, useRef, useMemo } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { bk_dir } from "../../conf/configuration.file.js";
 import ResumenConsolidado from "../../components/consolidado/resumeconsolidation.component.js";
 import { Loadingbar } from "../../components/any_components/loadingbar.js";
+import { ForceSynchro } from "../../components/configComponents/modals/forzarSynchro.js";
+import UpdateIcon from '@mui/icons-material/Update';
 
 function DispachView() {
   const [data, setData] = useState([]);
   const [selected_facturas, setSelectedFacturas] = useState([]);
   const inputRef = useRef(null);
   const [openLoad, setOpenLoad] = useState(false);
+  const [ isSynchroOpen, setIsSynchroOpen] = useState(false);
 
   const openModalWait = (vul) => {
     setOpenLoad(vul);
   };
+
+  const IsOpenModal = ( val ) =>{
+    setIsSynchroOpen(val);
+    console.log('el valor es :: ', isSynchroOpen)
+  }
 
   useEffect(() => {
     if (inputRef.current) {
@@ -48,18 +56,24 @@ function DispachView() {
         if (data_fact && data_fact.length > 0) {
           get_selected_facturas(data_fact[0]);
         } else {
-          alert('ESTA FACTURA NO ES VALIDA : ', new_val);
+          alert('ESTA FACTURA NO ES VALIDA : ', match);
         }
       } else {
-        alert('ESTA FACTURA NO ES VALIDA : ', new_val);
+        alert('ESTA FACTURA NO ES VALIDA : ', match);
       }
     }
 
   }
 
   useEffect(() => {
-    inputRef.current?.focus();
-  }, [])
+    if (!isSynchroOpen) {
+      inputRef.current?.focus();
+    }
+  }, [isSynchroOpen]);
+
+  // useEffect(() => {
+  //   isSynchroOpen === false && inputRef.current?.focus()  
+  // }, [])
 
   //---------------------------------------------------------------------------
   useEffect(() => {
@@ -104,12 +118,7 @@ function DispachView() {
       style={{ 
         backgroundColor: 'white', 
         margin: 10 ,
-        // borderColor : 'white' , 
-        height : '85vh', 
-        // borderTopWidth : 1 , 
-        // borderBottomWidth : 1,
-        // borderBottomColor : 'black',
-        // borderTopColor : 'black'
+        height : '90vh',
         }}>
 
         <table className="table-responsive" >
@@ -127,12 +136,13 @@ function DispachView() {
                       borderRadius : 70
                     }}
                   onClick={() => { getFacturas(); openModalWait(true); }}>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" 
-                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" 
-                  stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></svg>
+                    <UpdateIcon />
                 </button>
               </div>
+            </td>
+
+            <td>
+              <ForceSynchro func = { IsOpenModal }/>
             </td>
 
             <td style={{ display: "flex" }}>
@@ -148,8 +158,12 @@ function DispachView() {
                 type="text"
                 autoFocus
                 ref={inputRef}
-                style={{ margin: 0, opacity: 0 }}
-                onBlur={() => inputRef.current?.focus()}
+                style={{ margin: 0, opacity : 0 }}
+                onBlur={() => {
+                  if (!isSynchroOpen) {
+                    inputRef.current?.focus();
+                  }
+                }}
                 onKeyDown={(Event) => {
                   if (Event.key === 'Enter') {
                     handleKeydown(inputRef.current.value);
@@ -158,6 +172,7 @@ function DispachView() {
                 }}
               />
             </td>
+
             <td>
               {
                 selected_facturas.length == 0 ?
@@ -193,6 +208,7 @@ function DispachView() {
                   </div>
               }
             </td>
+
           </tr>
         </table>
 
@@ -201,20 +217,20 @@ function DispachView() {
             <thead style={{ width: '90%' }}>
               <tr style={{ borderBottomRightRadius : 90 , backgroundColor : 'black'}}>
                 <th></th>
-                <th style={{ fontSize: 12, fontFamily: 'revert' , textAlign: 'left', color: 'white' }}>FACTURA</th>
-                <th style={{ fontSize: 12, fontFamily: 'revert' , textAlign: 'left', color: 'white' }}>RUTA</th>
-                <th style={{ fontSize: 12, fontFamily: 'revert' , textAlign: 'left', color: 'white' }}>PEDIDO</th>
-                <th style={{ fontSize: 12, fontFamily: 'revert' , textAlign: 'left', color: 'white' }}>ALBARAN</th>
-                <th style={{ fontSize: 12, fontFamily: 'revert' , textAlign: 'left', color: 'white' }}>CLIENTE</th>
-                <th style={{ fontSize: 12, fontFamily: 'revert' , textAlign: 'left', color: 'white' }}>CAJAS</th>
-                <th style={{ fontSize: 12, fontFamily: 'revert' , textAlign: 'left', color: 'white' }}>UNIDADES</th>
+                <th style={{ fontSize: 12, fontFamily: 'revert' , textAlign: 'left', color: 'white' }} key = {0}>FACTURA</th>
+                <th style={{ fontSize: 12, fontFamily: 'revert' , textAlign: 'left', color: 'white' }} key = {1}>RUTA</th>
+                <th style={{ fontSize: 12, fontFamily: 'revert' , textAlign: 'left', color: 'white' }} key = {2}>PEDIDO</th>
+                <th style={{ fontSize: 12, fontFamily: 'revert' , textAlign: 'left', color: 'white' }} key = {3}>ALBARAN</th>
+                <th style={{ fontSize: 12, fontFamily: 'revert' , textAlign: 'left', color: 'white' }} key = {4}>CLIENTE</th>
+                <th style={{ fontSize: 12, fontFamily: 'revert' , textAlign: 'left', color: 'white' }} key = {5}>CAJAS</th>
+                <th style={{ fontSize: 12, fontFamily: 'revert' , textAlign: 'left', color: 'white' }} key = {6}>UNIDADES</th>
                 {/* <th style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'black' }}>UBICACION</th> */}
               </tr>
             </thead>
 
             <tbody>
               {data.slice().reverse().map((item) => (
-                <tr key={item.factura}>
+                <tr key={item.id_factura}>
                   <td>
                     <input type="checkbox"
                       style={{ colorInterpolation: 'black' }}
