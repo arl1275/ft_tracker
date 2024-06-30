@@ -5,42 +5,46 @@ import ResumenConsolidado from "../../components/consolidado/resumeconsolidation
 import { Loadingbar } from "../../components/any_components/loadingbar.js";
 import { ForceSynchro } from "../../components/configComponents/modals/forzarSynchro.js";
 import UpdateIcon from '@mui/icons-material/Update';
+import DescriptionSharpIcon from '@mui/icons-material/DescriptionSharp';
+import EditNoteSharpIcon from '@mui/icons-material/EditNoteSharp';
 
 function DispachView() {
-  const [data, setData] = useState([]);
-  const [selected_facturas, setSelectedFacturas] = useState([]);
-  const inputRef = useRef(null);
-  const [openLoad, setOpenLoad] = useState(false);
-  const [ isSynchroOpen, setIsSynchroOpen] = useState(false);
+  const [data, setData] = useState([]);                             // this save all the facturas that doesnt have any state
+  const [selected_facturas, setSelectedFacturas] = useState([]);    // this array save the selected facturas to be send to "PREPARACION" state
+  const inputRef = useRef(null);                                    // this is the input ref to the text input
+  const [openLoad, setOpenLoad] = useState(false);                  // this open the load component 
+  const [isSynchroOpen, setIsSynchroOpen] = useState(false);        // this is to open modal to force
+  const [force_fact, setForceFact] = useState('');                 // this is the value that is send to the force modal to be forced
+  const [seeInputText, setSeeInputText] = useState(false);       // this is to make visible the inputtext
+
+  useEffect(() => {
+    if (inputRef.current && !isSynchroOpen) {
+      inputRef.current.focus();
+    }
+  }, [isSynchroOpen]);
+
+  useEffect(() => {
+    getFacturas();
+    const intervalId = setInterval(() => {
+      getFacturas();
+    }, 60000);
+    return () => clearInterval(intervalId);
+  }, []);
 
   const openModalWait = (vul) => {
     setOpenLoad(vul);
   };
 
-  const IsOpenModal = ( val ) =>{
-    setIsSynchroOpen(val);
-    console.log('el valor es :: ', isSynchroOpen)
-  }
-
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, []);
-
   const handleKeydown = (e) => {
     const new_val = e;
-
     if (new_val.startsWith('AL')) {
-
       if (new_val.startsWith('AL')) {
         const valor = new_val.replace(/["/\\.,'\-`|_{}[\]]/g, '-');
-
         if (data.some((item) => item.factura === valor)) {
           const data_fact = data.filter((item) => item.factura === valor);
           get_selected_facturas(data_fact[0]);
         } else {
-          alert('ESTE ALBARAN NO ES VALIDO : ', new_val)
+          handleForceOpen(valor, true, false);
         }
       }
 
@@ -56,29 +60,15 @@ function DispachView() {
         if (data_fact && data_fact.length > 0) {
           get_selected_facturas(data_fact[0]);
         } else {
-          alert('ESTA FACTURA NO ES VALIDA : ', match);
+          handleForceOpen(valor, true, false);
         }
       } else {
-        alert('ESTA FACTURA NO ES VALIDA : ', match);
+        handleForceOpen(match[1], true, false);
       }
     }
 
+
   }
-
-  useEffect(() => {
-    if (!isSynchroOpen) {
-      inputRef.current?.focus();
-    }
-  }, [isSynchroOpen]);
-
-  // useEffect(() => {
-  //   isSynchroOpen === false && inputRef.current?.focus()  
-  // }, [])
-
-  //---------------------------------------------------------------------------
-  useEffect(() => {
-    getFacturas();
-  }, []);
 
   const getFacturas = async () => {
     try {
@@ -104,21 +94,37 @@ function DispachView() {
     });
   };
 
-
   const clearSelectedArray = () => {
     setSelectedFacturas([]);
+  }
+
+  const handleForceOpen = (factura, handlerOpen, handlerClear) => {
+    if (handlerOpen) {
+      setForceFact(factura);
+      setIsSynchroOpen(true);
+    } else if (handlerOpen === false) {
+      setIsSynchroOpen(false);
+    }
+
+    if (handlerClear) {
+      setForceFact('');
+      setIsSynchroOpen(false);
+    }
   }
 
   return (
     <div style={{ alignSelf: 'center', justifyContent: 'center', alignContent: 'center' }}>
 
-      { openLoad === true && <Loadingbar />}
+      {openLoad === true && <Loadingbar />}
 
-      <div className="card" 
-      style={{ 
-        backgroundColor: 'white', 
-        margin: 10 ,
-        height : '90vh',
+      <div className="card"
+        style={{
+          backgroundColor: 'white',
+          margin: 10,
+          padding: 1,
+          borderWidth: 1,
+          borderColor: '#979A9A',
+          height: '90vh',
         }}>
 
         <table className="table-responsive" >
@@ -133,32 +139,38 @@ function DispachView() {
                       fontWeight: 'bold',
                       alignSelf: 'center',
                       alignContent: 'center',
-                      borderRadius : 70
+                      borderRadius: 70,
+                      marginRight : 10
                     }}
                   onClick={() => { getFacturas(); openModalWait(true); }}>
-                    <UpdateIcon />
+                  <UpdateIcon />
                 </button>
               </div>
             </td>
 
-            <td>
-              <ForceSynchro func = { IsOpenModal }/>
-            </td>
-
-            <td style={{ display: "flex" }}>
-
-              <div className="col-6 col-sm-4 col-md-2 col-xl mb-3" style={{ marginLeft: 10 }}>
-                <ResumenConsolidado props={selected_facturas} clearArray={clearSelectedArray} />
+            <td style={{
+              display: 'flex', flexDirection: 'row', backgroundColor: 'black', borderRadius: 100, width: 'auto', height: 35, 
+              justifyContent: 'center',
+              alignItems: 'center', marginRight : 10
+            }}>
+              <div onClick={() => setSeeInputText(!seeInputText)}>
+                <EditNoteSharpIcon style={{ fontSize: 30, color: "white", margin : 10 }} />
               </div>
 
-            </td>
-
-            <td>
               <input
                 type="text"
                 autoFocus
                 ref={inputRef}
-                style={{ margin: 0, opacity : 0 }}
+                style={{
+                  marginRight: seeInputText ? 15 : 0,
+                  marginLeft: seeInputText ? 15 : 0,
+                  opacity: seeInputText ? 1 : 0,
+                  width: seeInputText ? 250 : 0,
+                  borderRadius : 50,
+                  textAlign : 'center',
+                  backgroundColor : '#212F3D',
+                  color : 'white'
+                }}
                 onBlur={() => {
                   if (!isSynchroOpen) {
                     inputRef.current?.focus();
@@ -174,35 +186,52 @@ function DispachView() {
             </td>
 
             <td>
+              <ForceSynchro func={isSynchroOpen} factura={force_fact} handler={handleForceOpen} />
+            </td>
+
+            <td style={{ display: "flex" }}>
+
+              <div className="col-6 col-sm-4 col-md-2 col-xl mb-3" style={{ marginLeft: 10, marginRight : 10 }}>
+                <ResumenConsolidado props={selected_facturas} clearArray={clearSelectedArray} />
+              </div>
+
+            </td>
+
+          
+            <td>
               {
                 selected_facturas.length == 0 ?
-                  <div className="card" 
-                  style={
-                    { 
-                      backgroundColor: '#FF0000', 
-                      width: 400, 
-                      position: 'absolute', 
-                      right: 10,
-                      borderRadius : 50 }}>
-                    <h3 style={{ margin: 7, color: 'white', alignSelf: 'center', fontWeight: 'bold' }}>SIN FACTURAS PARA CONSOLIDAR</h3>
+                  <div className="card"
+                    style={
+                      {
+                        backgroundColor: '#FF0000',
+                        width: 400,
+                        position: 'absolute',
+                        right: 10,
+                        borderRadius: 50
+                      }}>
+                    <h3 style={{ margin: 7, color: 'white', alignSelf: 'center', fontWeight: 'bold' }}>SIN FACTURAS</h3>
                   </div>
                   :
                   <div className="card" style={
-                    { backgroundColor: '#FFFF33', 
-                    width: 400, 
-                    display: 'flex', 
-                    flexDirection: 'row', 
-                    position: 'absolute', 
-                    right: 10,
-                    borderRadius : 50 }}>
+                    {
+                      backgroundColor: '#FFFF33',
+                      width: 250,
+                      display: 'flex',
+                      flexDirection: 'row',
+                      position: 'absolute',
+                      right: 10,
+                      borderRadius: 50,
+                      justifyContent: 'space-around'
+                    }}>
                     <div style={{ display: 'flex', flexDirection: 'row' }}>
-                      <h4 style={{ margin: 7, color: 'black' }}>ULTIMA ESCANEADA :</h4>
-                      <h4 style={{ margin: 7, color: 'black', fontWeight: 'bold' }}>{selected_facturas[selected_facturas.length - 1].factura}</h4>
+                      <DescriptionSharpIcon color="black" style={{ fontSize: 20, alignSelf: 'center', justifySelf: 'center' }} />
+                      <h4 style={{ margin: 7, color: 'black', fontWeight: 'bold', fontSize: 15 }}>{selected_facturas.length}</h4>
                     </div>
 
                     <div style={{ display: 'flex', flexDirection: 'row' }}>
-                      <h4 style={{ margin: 7, color: 'black' }}>FACTURAS:</h4>
-                      <h4 style={{ margin: 7, color: 'black', fontWeight: 'bold', fontSize: 15 }}>{selected_facturas.length}</h4>
+                      <h4 style={{ margin: 7, color: 'black' }}>|</h4>
+                      <h4 style={{ margin: 7, color: 'black', fontWeight: 'bold' }}>{selected_facturas[selected_facturas.length - 1].factura}</h4>
                     </div>
 
                   </div>
@@ -215,35 +244,34 @@ function DispachView() {
         <div className="table-responsive" style={{ backgroundColor: 'white' }}>
           <table className="table card-table table-vcenter text-nowrap datatable">
             <thead style={{ width: '90%' }}>
-              <tr style={{ borderBottomRightRadius : 90 , backgroundColor : 'black'}}>
+              <tr style={{ borderBottomRightRadius: 90, backgroundColor: 'black' }}>
                 <th></th>
-                <th style={{ fontSize: 12, fontFamily: 'revert' , textAlign: 'left', color: 'white' }} key = {0}>FACTURA</th>
-                <th style={{ fontSize: 12, fontFamily: 'revert' , textAlign: 'left', color: 'white' }} key = {1}>RUTA</th>
-                <th style={{ fontSize: 12, fontFamily: 'revert' , textAlign: 'left', color: 'white' }} key = {2}>PEDIDO</th>
-                <th style={{ fontSize: 12, fontFamily: 'revert' , textAlign: 'left', color: 'white' }} key = {3}>ALBARAN</th>
-                <th style={{ fontSize: 12, fontFamily: 'revert' , textAlign: 'left', color: 'white' }} key = {4}>CLIENTE</th>
-                <th style={{ fontSize: 12, fontFamily: 'revert' , textAlign: 'left', color: 'white' }} key = {5}>CAJAS</th>
-                <th style={{ fontSize: 12, fontFamily: 'revert' , textAlign: 'left', color: 'white' }} key = {6}>UNIDADES</th>
+                <th style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'white' }} key={0}>FACTURA</th>
+                <th style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'white' }} key={1}>RUTA</th>
+                <th style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'white' }} key={2}>PEDIDO</th>
+                <th style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'white' }} key={3}>ALBARAN</th>
+                <th style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'white' }} key={4}>CLIENTE</th>
+                <th style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'white' }} key={5}>CAJAS</th>
+                <th style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'white' }} key={6}>UNIDADES</th>
                 {/* <th style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'black' }}>UBICACION</th> */}
               </tr>
             </thead>
 
             <tbody>
               {data.slice().reverse().map((item) => (
-                <tr key={item.id_factura}>
+                <tr key={item.id_factura} style={{ height: 'auto' }}>
                   <td>
                     <input type="checkbox"
                       style={{ colorInterpolation: 'black' }}
                       onChange={(e) => { get_selected_facturas(item); }} />
                   </td>
-                  <td style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'black' , margin : 5 }}>{item.factura}</td>
-                  <td style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'black' , margin : 5 }}>{item.list_empaque}</td>
-                  <td style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'black' , margin : 5 }}>{item.pedidoventa}</td>
-                  <td style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'black' , margin : 5 }}>{item.albaran}</td>
-                  <td style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'black' , margin : 5 }}>{item.cliente}</td>
-                  <td style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'black' , margin : 5 }}>{item.cant_cajas}</td>
-                  <td style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'black' , margin : 5 }}>{item.cant_total}</td>
-                  {/* <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'black' , margin : 5}}>{item.ubicacion}</td> */}
+                  <td style={{ fontSize: 15, fontFamily: 'revert', textAlign: 'left', color: '#424949' }}>{item.factura}</td>
+                  <td style={{ fontSize: 15, fontFamily: 'revert', textAlign: 'left', color: '#424949' }}>{item.list_empaque}</td>
+                  <td style={{ fontSize: 15, fontFamily: 'revert', textAlign: 'left', color: '#424949' }}>{item.pedidoventa}</td>
+                  <td style={{ fontSize: 15, fontFamily: 'revert', textAlign: 'left', color: '#424949' }}>{item.albaran}</td>
+                  <td style={{ fontSize: 15, fontFamily: 'revert', textAlign: 'left', color: '#424949' }}>{item.cliente}</td>
+                  <td style={{ fontSize: 15, fontFamily: 'revert', textAlign: 'left', color: '#424949' }}>{item.cant_cajas}</td>
+                  <td style={{ fontSize: 15, fontFamily: 'revert', textAlign: 'left', color: '#424949' }}>{item.cant_total}</td>
                 </tr>
               ))}
             </tbody>

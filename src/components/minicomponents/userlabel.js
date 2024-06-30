@@ -1,6 +1,7 @@
 import React from "react";
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import { useNavigate } from 'react-router-dom';
+import RemoveCircleSharpIcon from '@mui/icons-material/RemoveCircleSharp';
 
 export const UserLabel = () => {
     const navigate = useNavigate();
@@ -12,33 +13,38 @@ export const UserLabel = () => {
     const role = account_userinfo.type_ === 1 ? 'Administrador' : 'Supervisor'
 
     return (
-        <div style={{ backgroundColor: 'white', display: 'flex', flexDirection: 'row' }}>
-            <div style={{ marginLeft : 10, marginRight : 15, marginTop : 5}}>
-                <AccountCircleRoundedIcon style={{ fontSize : 30 , color : 'black'}}/>        
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <h4 style={{ color: 'black', margin: 0 }}>{account_userinfo.nombre}</h4>
-                <h6 style={{ color: 'green', margin: 0 }}>{role}</h6>
+        <div style={styles.logo}>
+            <div style={{ display : 'flex' , flexDirection : 'row'}}>
+                <div style={{ marginLeft: 10, marginRight: 15, justifyContent: 'center', alignItems: 'center' }}>
+                    <AccountCircleRoundedIcon style={{ fontSize: 20, color: 'grey', marginTop: 3 }} />
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <h4 style={{ color: 'white', margin: 0, fontSize: 10, fontWeight: 'bold' }}>{account_userinfo.nombre}</h4>
+                    <h6 style={{ color: 'green', margin: 0, fontSize: 10 }}>{role}</h6>
+                </div>
+
             </div>
 
-            <div style={{ margin: 3, width: 150, color: 'black', fontWeight: 'bold' }}>
-                <select 
-                    id="salir" 
-                    className="selectize-input items full has-options has-items"
-                    style={{ backgroundColor: 'white', borderWidth: 0 }}
-                    onChange={(e) => {
-                        if (e.target.value === 'SALIR') {
-                            localStorage.removeItem('dataUser');
-                            navigate('/');
-                        }
-                    }}>
-
-                    <option value="main" className='selectize-dropdown single from'
-                        style={{ backgroundColor: 'white', color: 'black', fontWeight: 'bold' }}>KELLER</option>
-
-                    <option value="SALIR" style={{ backgroundColor: 'white' }}>SALIR</option>
-                </select>
+            <div 
+            style={{ justifySelf: 'center', alignSelf: 'center', marginRight: 5 }}
+            onClick={()=>{navigate('/');}}
+            >
+                <RemoveCircleSharpIcon style={{ fontSize: 20, color: 'red' }} />
             </div>
+
         </div>
     )
+}
+
+const styles = {
+    logo: {
+        backgroundColor: 'black',
+        display: 'flex',
+        flexDirection: 'row',
+        borderRadius: 100,
+        margin: 3,
+        height: 30,
+        width: 250,
+        justifyContent : 'space-between'
+    }
 }

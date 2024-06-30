@@ -3,6 +3,7 @@ import { useTable, useGlobalFilter } from 'react-table';
 import { CamionesCombox, EntregadorCombox } from '../consolidado/combox.component';
 import axios from 'axios';
 import { bk_dir } from '../../conf/configuration.file';
+import { ReporteFacturasDeEnvio } from '../configComponents/minComponents/reportDECENV.component';
 
 // Define custom text filter component
 export const TextColumnFilter = ({ column }) => {
@@ -159,13 +160,13 @@ const TableForm_dec_envio = ({ columns, data }) => {
             </table>
 
             {/*     THIS PART IS ONLY ABOUT THE MODAL OF DECLARACIONES DE ENVIO*/}
-            <div class="modal modal-blur fade show" id="modal-large" tabindex="-1" style={{ paddingRight: "17px" }} aria-modal="true" role="dialog">
-                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal modal-blur fade show" id="modal-large" tabindex="-1" style={{ paddingRight: "17px"}} aria-modal="true" role="dialog">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style={{ width : 2000}} >
                     <div className='modal-content'>
 
-                        <div className='modal-header' style={{ backgroundColor: 'WHITE' }}>
-                            <h5 class="modal-title" style={{ color: 'black' }}>DECLARACION DE ENVIO : {row_ ? row_[0] : null}</h5>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        <div className='modal-header' style={{ backgroundColor: 'black' }}>
+                            <h5 class="modal-title" style={{ color: 'white', backgroundColor : 'black' }}>DECLARACION DE ENVIO : {row_ ? row_[0] : null}</h5>
+                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"/>
                         </div>
 
 
@@ -177,7 +178,10 @@ const TableForm_dec_envio = ({ columns, data }) => {
                                         <a href="#tabs-home-17" class="nav-link active" data-toggle="tab">DETALLE DECLARACION DE ENVIO</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#tabs-profile-17" class="nav-link" data-toggle="tab">ACCIONES</a>
+                                        <a href="#tabs-profile-18" class="nav-link" data-toggle="tab">REPORT</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#tabs-profile-17" class="nav-link" data-toggle="tab">CAMBIO DETALLES</a>
                                     </li>
                                 </ul>
                                 <div class="card-body">
@@ -186,9 +190,9 @@ const TableForm_dec_envio = ({ columns, data }) => {
                                         <div class="tab-pane fade active show" id="tabs-home-17">
                                             <div className='card'>
                                                 <table>
-                                                    <tr style={{ width: '100%' }}>
-                                                        <td style={{ textAlign: 'left', backgroundColor: 'white', color: 'black', borderBottom: '2px solid black' }}>DECLARACIÓN DE ENVIO</td>
-                                                        <td style={{ textAlign: 'left', backgroundColor: 'white', color: 'black', borderBottom: '2px solid black' }}>{row_ ? row_[0] : null}</td>
+                                                    <tr style={{ width: '100%' , backgroundColor : 'black'}}>
+                                                        <td style={{ textAlign: 'left', color: 'white', borderBottom: '2px solid black' }}>DECLARACIÓN DE ENVIO</td>
+                                                        <td style={{ textAlign: 'left', color: 'white', borderBottom: '2px solid black' }}>{row_ ? row_[0] : null}</td>
                                                     </tr>
                                                 </table>
                                                 <table>
@@ -247,6 +251,10 @@ const TableForm_dec_envio = ({ columns, data }) => {
                                                 >VALIDAR CAMBIO</button>
                                             </div>
 
+                                        </div>
+
+                                        <div class="tab-pane fade" id="tabs-profile-18" >
+                                                <div><ReporteFacturasDeEnvio  declaracion_ = {row_ ? row_[0] : null} camion={row_ ? row_[1] : null}/></div>
                                         </div>
                                     </div>
                                 </div>

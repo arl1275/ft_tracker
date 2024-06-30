@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { CambioManual } from "../minComponents/cambioManual.component";
-
+import { VerCajas } from "../minComponents/vercajas.components";
 export const AlterFact = ({ props }) => {
     const [val, setVal] = useState(null);
 
@@ -125,39 +125,26 @@ export const AlterFact = ({ props }) => {
                 <li className="nav-item" style={{ marginRight: '5%', cursor: 'pointer' }} onClick={() => { setVal(1) }}>
                     <div className="nav-lib">CAMBIO MANUAL</div>
                 </li>
-                {/* <li className="nav-item" style={{ marginRight: '5%', cursor: 'pointer' }} onClick={() => { setVal(2) }}>
-                    <div className="nav-lib">ENTREGA MANUAL</div>
-                </li> */}
+                <li className="nav-item" style={{ marginRight: '5%', cursor: 'pointer' }} onClick={() => { setVal(2) }}>
+                    <div className="nav-lib">CAJAS</div>
+                </li>
             </ul>
 
             <div className="tab-content">
-                {
-                    val === null &&
+                { val === null &&
                     <div className="card" style={{ margin: 30 , backgroundColor : 'black' }}>
-                        <h4 color="white">AVISO IMPORTANTE</h4>
-                        <p color="white">Avisar de antemano a la administración</p>
+                        <h4 style={{color : 'white'}}>AVISO IMPORTANTE</h4>
+                        <p style={{color : 'white'}}>Avisar de antemano a la administración</p>
                     </div>
                 }
-                {
-                    val === 0 &&
-                    <p>SE HA INHABILITADO</p>
-                    // <CambioEntregador prop={props} />
-                }
-                {
-                    val === 1 ?
-                    (<CambioManual prop={props?.factura} />) : null
-                }
-                {/* {
-                    val === 2 &&
-                    <EntregaManual />
-                } */}
-                {
-                    val === 3 &&
+                { val === 0 && <p>SE HA INHABILITADO</p> }
+                { val === 1 && (<CambioManual prop={props?.factura} />)}
+                { val === 2 && (<VerCajas albaran_={props?.albaran}/>)}
+                { val === 3 &&
                     <div className="card" style={{ margin: 10 }}>
                         {
                             typeof props?.link_firma === 'string' || typeof props?.link_foto === 'string' ?
                                 <table>
-                                    
                                         <tr>
                                             <th style={{ margin: 20 }}> FIRMA</th>
                                             <th style={{ margin: 20 }}>FOTO</th>
@@ -169,21 +156,12 @@ export const AlterFact = ({ props }) => {
                                             <td style={pic_format}>
                                                 <img src={props?.link_foto} />
                                             </td>
-                                        </tr>
-
-                                  
+                                        </tr>                 
                                 </table>
-                                : (<div className="card">AUN NO SE HAN TOMADO FOTOS</div>)
-
-
-
+                                : (<div style={{ margin : 10 }}>Aun no se han tomado fotos de esta factura.</div>)
                         }
-
                     </div>
-
                 }
-
-
             </div>
         </div>
     )

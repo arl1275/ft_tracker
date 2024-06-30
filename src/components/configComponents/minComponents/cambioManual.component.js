@@ -45,10 +45,10 @@ export const CambioManual = ({ prop }) => {
 
             <div className="card" style={{ display: 'flex', flexDirection: 'row', marginTop: 5, marginBottom: 5 }}>
 
-                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                {/* <div style={{ display: 'flex', flexDirection: 'row' }}>
                     <p style={input_text}>DETALLE CAMBIO</p>
                     <textarea style={input_text} />
-                </div>
+                </div> */}
 
                 <select id="values" 
                 style={select_} 

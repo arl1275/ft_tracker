@@ -5,7 +5,7 @@ import { useReactToPrint } from 'react-to-print';
 import PropTypes from 'prop-types'; // Agrega esto si quieres utilizar PropTypes
 const foto = require('../../assets/dist/img/images/image.png');
 
-const sumarNumeros = (facts) => {
+export const sumarNumeros = (facts) => {
     let sumaCajas = 0;
     let sumaTotal = 0;
   
@@ -28,7 +28,7 @@ const sumarNumeros = (facts) => {
     return { sumaCajas, sumaTotal };
   };
 
-const PrintableComponent = React.forwardRef(({ facts, dec_ , truck , sCajas, sTotal}, ref) => (
+export const PrintableComponent = React.forwardRef(({ facts, dec_ , truck , sCajas, sTotal}, ref) => (
     <div ref={ref} style={{ padding: '20px', border: '1px solid #ddd', width: '100%' , margin : 10 , alignSelf : 'center'}}>
         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
             <div>
@@ -37,8 +37,15 @@ const PrintableComponent = React.forwardRef(({ facts, dec_ , truck , sCajas, sTo
                 <div style={{ fontSize : 10 , color : 'black' }}>Camion : {truck != '' ? truck : 'N/A'}</div>
                 <h3  style={{ fontSize : 10 , color : 'black' }}>{new Date().toLocaleString()}</h3>
             </div>
+            <div style={{ display : 'flex', flexDirection : 'row', justifyContent : 'space-between',width : '20%', alignItems : 'self-end'}}>
+                <div style={{ borderWidth : 1, borderTopColor : 'black', borderTopStyle : 'solid', fontSize : 10, width : '40%', textAlign : 'center'}}>guardia</div>
+                <div style={{ borderWidth : 1, borderTopColor : 'black', borderTopStyle : 'solid', fontSize : 10, width : '40%', textAlign : 'center'}}>entregador</div>
+            </div>
             <img src={foto} alt="Foto" style={{ width: '20%', height: '10%' }} />
         </div>
+
+
+
         <table style={{ width: '100%', marginTop: '20px', borderCollapse: 'collapse' }}>
             <thead>
                 <tr style={{ backgroundColor: 'black' }}>

@@ -92,7 +92,7 @@ function ListFact() {
 
     const columns = useMemo(() => [
         {
-            header: "Acciones",
+            header: "VER",
             Cell: ({ row }) => (
                 <div data-toggle="modal" data-target="#modal-large"
                     onClick={() => { handleFact(row.original); handleModal(); }}>
@@ -103,7 +103,7 @@ function ListFact() {
                         <circle cx="12" cy="12" r="3" />
                     </svg>
                 </div >
-            )
+            ), size : 50
         },
         { header: "PEDIDO", accessorKey: "pedidoventa", Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong> },
         { header: "CLIENTE", accessorKey: "clientenombre", Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong> },
@@ -131,7 +131,7 @@ function ListFact() {
     const table = useMaterialReactTable({
         data,
         columns,
-        initialState: { density: 'compact' }
+        initialState: { density: 'compact', pagination : { pageSize : 15} }
     });
 
     return (
@@ -153,9 +153,9 @@ function ListFact() {
             <div class="modal modal-blur fade show" id="modal-large" tabindex="-1" style={{ paddingRight: "17px" }} aria-modal="true" role="dialog">
                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                     <div className='modal-content'>
-                        <div className='modal-header' style={{ backgroundColor: 'white' }}>
-                            <h5 class="modal-title" style={{ color: 'black' }}>DETALLE DE FACTURA</h5>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        <div className='modal-header' style={{ backgroundColor: 'black' }}>
+                            <h5 class="modal-title" style={{ color: 'white' }}>DETALLE DE FACTURA</h5>
+                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" style={{ color : 'white'}}/>
                         </div>
                         <div className='modal-body'>
                             <AlterFact props={fact} />

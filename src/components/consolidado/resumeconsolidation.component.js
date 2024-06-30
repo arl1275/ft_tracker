@@ -87,7 +87,7 @@ const ResumenConsolidado = ({ props, clearArray }) => {
             borderRadius: 50
           }
         }>
-        GENERAR DECLARACION DE ENVIO
+        GENERAR ENVIO
       </button>
 
       <div className="modal modal-blur fade" id="modal-full-width1" tabindex="-1" role="dialog" aria-hidden="true">

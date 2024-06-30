@@ -8,7 +8,7 @@ import {
 const TableForm = ({ data }) => {
     
   const columns = useMemo( () => [
-    { header: 'FACTURA', accessorKey: 'factura', Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong>, muiTableHeadCellProps: { sx: { fontsize : 80 } }},
+    { header: 'FACTURA', accessorKey: 'factura', Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong>},
     { header: 'LISTA DE ENTREGA', accessorKey: 'lista_empaque', Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong>},
     { header: 'CLIENTE', accessorKey: 'clientenombre', Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong>},
     { header: 'CAJAS', accessorKey: 'cant_cajas',Cell: ({ renderedCellValue }) => <strong color='red'>{renderedCellValue}</strong> },
@@ -30,7 +30,7 @@ const TableForm = ({ data }) => {
   const table = useMaterialReactTable({
     data,
     columns,
-    initialState: { density: 'compact' }
+    initialState: { density: 'compact' , pagination : { pageSize : 15 }}
   });
 
   return(
