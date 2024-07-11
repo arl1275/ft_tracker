@@ -8,13 +8,13 @@ export const Botton_Navbar = ({ texto, proppage }) => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderWidth : 0,
-                borderRadius : 50,
-                backgroundColor : proppage === texto ?  'black' : 'white' ,
+                borderRadius : 5,
+                backgroundColor : proppage === texto ?  'black' : '#979A9A' ,
                 width: 150,
-                height: 25,
+                height: 30,
             }}
         >
-            <h5 style={{ color: proppage === texto ?  'white' : 'black' , margin: 0 }}>{texto}</h5>
+            <h5 style={{ color: proppage === texto ?  'white' : 'white' , margin: 0 }}>{texto}</h5>
         </button>
     )
 }

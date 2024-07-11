@@ -35,7 +35,7 @@ ${resp.data.message}`);
     return (
         <>
             <a href="#" class="btn btn-white"
-                style={{ backgroundColor: '#FF0000', color: 'white', borderRadius: 80, alignContent: 'center' }}
+                style={{ backgroundColor: '#FF0000', color: 'white', borderRadius: 7, alignContent: 'center' }}
                 onClick={() => { handler('' , true, false); setOpen(true) ;}}>
                 <CloudDownloadIcon style={{ fontSize: 80 }} />
             </a>

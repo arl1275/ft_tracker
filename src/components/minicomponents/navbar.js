@@ -16,26 +16,25 @@ function NavbarMenu() {
                     backgroundColor: 'white'
                 }}>
 
-                <div style={{borderBottomColor: 'black', borderWidth : 2}}>
-                    <ul className="navbar-nav" style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                <div style={{ borderBottomColor: 'black', borderWidth: 2 }}>
+                    <ul className="navbar-nav" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
 
-                        <li className="nav-item" style={{ alignContent: 'center', marginLeft: '3%' }}>
+                        <li className="nav-item" style={{ alignContent: 'center', marginLeft: 10 }}>
                             <UserLabel />
                         </li>
-
 
                         <div
                             style={{
                                 display: 'flex',
                                 flexDirection: 'row',
                                 justifyContent: 'space-around',
-                                alignItems : 'center',
+                                alignItems: 'center',
                                 backgroundColor: 'white',
                                 height: 35,
                                 padding: 5,
                                 borderRadius: 50,
                                 width: '40%',
-                                marginRight : 20
+                                marginRight: 10
                             }}
                         >
                             <li className="nav-item" style={{ marginRight: 5 }} onClick={() => { setPage("ADMIN"); navigate('/main/administration', { replace: true }) }} >
@@ -53,11 +52,10 @@ function NavbarMenu() {
                             <li className="nav-item" style={{ marginLeft: 5, marginRight: 5 }} onClick={() => { setPage("DESPACHO"); navigate('/main/dispach', { replace: true }) }}>
                                 <Botton_Navbar texto={'DESPACHO'} proppage={page} />
                             </li>
-
                         </div>
                     </ul>
-
                 </div>
+
             </div>
         </div>
     );

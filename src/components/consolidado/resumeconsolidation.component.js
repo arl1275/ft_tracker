@@ -6,13 +6,13 @@ import { LoadingWait } from "../any_components/loading_component.js";
 import { PrintButton } from "../any_components/ToPrint.component.js";
 
 const ResumenConsolidado = ({ props, clearArray }) => {
-  const lista_headers = ["DEPARTAMENTO", "NOMBRE DE CLIENTE", "ALBARAN", "FACTURA", "LISTA EMPAQUE", "CAJAS", "UNIDADES"];
+  const lista_headers = ["DEPARTAMENTO", "NOMBRE DE CLIENTE","PEDIDO", "FACTURA", "ALBARAN", "LISTA EMPAQUE", "CAJAS", "UNIDADES"];
   const [camionSeleccionado, setCamionSeleccionado] = useState(null);
   const [entregador, setEntregador] = useState(null);
   const [dec_env, setDecEnv] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [ischargin, setIsChargin] = useState(false);
-  const [valores, setValores ] = useState();
+  const [valores, setValores] = useState();
 
   const selCamion = (camion) => {
     setCamionSeleccionado(camion);
@@ -22,7 +22,7 @@ const ResumenConsolidado = ({ props, clearArray }) => {
   };
 
   const send_toCreate_Consolidacion = async () => {
-    if (entregador === '' || entregador === 'ENTREGADORES' || camionSeleccionado === '' || 
+    if (entregador === '' || entregador === 'ENTREGADORES' || camionSeleccionado === '' ||
       camionSeleccionado === 'CAMIONES' || entregador === null || camionSeleccionado === null) {
       alert('FAVOR LLENAR TODOS LOS CAMPOS ANTES DE ENVIAR EL CONSOLIDADO');
     } else {
@@ -84,7 +84,7 @@ const ResumenConsolidado = ({ props, clearArray }) => {
             backgroundColor: '#171717',
             color: 'white',
             fontWeight: 'bold',
-            borderRadius: 50
+            borderRadius: 7
           }
         }>
         GENERAR ENVIO
@@ -94,7 +94,7 @@ const ResumenConsolidado = ({ props, clearArray }) => {
         <div className="modal-dialog modal-full-width modal-dialog-centered" role="document">
 
           <div className="modal-content"
-            style={{ backgroundColor: 'white'}}>
+            style={{ backgroundColor: 'white' }}>
             {
               props.length > 0 ?
                 (
@@ -144,15 +144,23 @@ const ResumenConsolidado = ({ props, clearArray }) => {
                             <tr key={item.id}>
                               <td style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'black' }}>{item.departamento}</td>
                               <td style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'black' }}>{item.cliente}</td>
-                              <td style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'black' }}>{item.albaran}</td>
+                              <td style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'black' }}>{item.pedidoventa}</td>
                               <td style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'black' }}>{item.factura}</td>
-                              <td style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'black' }}>{item.list_empaque}</td>
+                              <td style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'black' }}>
+                                {item.albaran.split(',').map((albaran, index) => (
+                                  <div key={index}>{albaran.trim()}</div>
+                                ))}</td>
+                              <td style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'black' }}>
+                                {item.list_empaque.split(',').map((albaran, index) => (
+                                  <div key={index}>{albaran.trim()}</div>
+                                ))}</td>
                               <td style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'black' }}>{item.cant_cajas}</td>
                               <td style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'black' }}>{item.cant_total}</td>
                             </tr>
                           ))}
                           <tr style={{ width: '100%', backgroundColor: '#17202A' }}>
                             <td style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'white' }}>Totales</td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -167,7 +175,7 @@ const ResumenConsolidado = ({ props, clearArray }) => {
 
                     <div className="modal-footer">
                       <button type="button" className="btn btn-primary"
-                        style={{ backgroundColor: 'black', color: 'white', fontWeight: 'bold', borderRadius : 50 }}
+                        style={{ backgroundColor: 'black', color: 'white', fontWeight: 'bold', borderRadius: 50 }}
                         onClick={() => { setShowModal(true); send_toCreate_Consolidacion(); }}>
                         CREAR CONSOLIDADO
                       </button>
@@ -199,7 +207,7 @@ const ResumenConsolidado = ({ props, clearArray }) => {
                 </svg>
                 <h4 style={{ color: '#ABB2B9' }}>DECLARACIÓN DE ENVIO</h4>
                 <h1 style={{ color: '#2C3E50', fontSize: 30 }}>{ischargin ? <LoadingWait /> : dec_env}</h1>
-                <PrintButton facts={valores} dec={dec_env} camion={camionSeleccionado}/>
+                <PrintButton facts={valores} dec={dec_env} camion={camionSeleccionado} />
               </div>
               <div className="modal-footer">
 

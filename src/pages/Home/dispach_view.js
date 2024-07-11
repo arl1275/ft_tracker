@@ -127,8 +127,8 @@ function DispachView() {
           height: '90vh',
         }}>
 
-        <table className="table-responsive" >
-          <tr className="d-flex" style={{ margin: '10px 10px 0px 10px' }}>
+        <table className="table-responsive">
+          <tr className="d-flex" style={{ margin: '10px 10px 0px 10px', borderBottomWidth : 1, borderBottomColor : 'black' }}>
             <td style={{ display: "flex", alignContent: 'center' }}>
               <div>
                 <button className="btn btn-primary w-auto"
@@ -139,8 +139,8 @@ function DispachView() {
                       fontWeight: 'bold',
                       alignSelf: 'center',
                       alignContent: 'center',
-                      borderRadius: 70,
-                      marginRight : 10
+                      borderRadius: 7,
+                      marginRight: 5
                     }}
                   onClick={() => { getFacturas(); openModalWait(true); }}>
                   <UpdateIcon />
@@ -149,12 +149,12 @@ function DispachView() {
             </td>
 
             <td style={{
-              display: 'flex', flexDirection: 'row', backgroundColor: 'black', borderRadius: 100, width: 'auto', height: 35, 
+              display: 'flex', flexDirection: 'row', backgroundColor: 'black', borderRadius: 7, width: 'auto', height: 35,
               justifyContent: 'center',
-              alignItems: 'center', marginRight : 10
+              alignItems: 'center', marginRight: 5
             }}>
               <div onClick={() => setSeeInputText(!seeInputText)}>
-                <EditNoteSharpIcon style={{ fontSize: 30, color: "white", margin : 10 }} />
+                <EditNoteSharpIcon style={{ fontSize: 30, color: "white", margin: 10 }} />
               </div>
 
               <input
@@ -166,10 +166,10 @@ function DispachView() {
                   marginLeft: seeInputText ? 15 : 0,
                   opacity: seeInputText ? 1 : 0,
                   width: seeInputText ? 250 : 0,
-                  borderRadius : 50,
-                  textAlign : 'center',
-                  backgroundColor : '#212F3D',
-                  color : 'white'
+                  borderRadius: 7,
+                  textAlign: 'center',
+                  backgroundColor: '#212F3D',
+                  color: 'white'
                 }}
                 onBlur={() => {
                   if (!isSynchroOpen) {
@@ -191,13 +191,13 @@ function DispachView() {
 
             <td style={{ display: "flex" }}>
 
-              <div className="col-6 col-sm-4 col-md-2 col-xl mb-3" style={{ marginLeft: 10, marginRight : 10 }}>
+              <div className="col-6 col-sm-4 col-md-2 col-xl mb-3" style={{ marginLeft: 10, marginRight: 10 }}>
                 <ResumenConsolidado props={selected_facturas} clearArray={clearSelectedArray} />
               </div>
 
             </td>
 
-          
+
             <td>
               {
                 selected_facturas.length == 0 ?
@@ -205,33 +205,35 @@ function DispachView() {
                     style={
                       {
                         backgroundColor: '#FF0000',
-                        width: 400,
+                        width: 250,
+                        height : 40,
                         position: 'absolute',
                         right: 10,
-                        borderRadius: 50
+                        borderRadius: 7
                       }}>
                     <h3 style={{ margin: 7, color: 'white', alignSelf: 'center', fontWeight: 'bold' }}>SIN FACTURAS</h3>
                   </div>
                   :
                   <div className="card" style={
                     {
-                      backgroundColor: '#FFFF33',
+                      backgroundColor: 'black',//'#FFFF33',
                       width: 250,
+                      height : 40,
                       display: 'flex',
                       flexDirection: 'row',
                       position: 'absolute',
                       right: 10,
-                      borderRadius: 50,
+                      borderRadius: 7,
                       justifyContent: 'space-around'
                     }}>
                     <div style={{ display: 'flex', flexDirection: 'row' }}>
-                      <DescriptionSharpIcon color="black" style={{ fontSize: 20, alignSelf: 'center', justifySelf: 'center' }} />
-                      <h4 style={{ margin: 7, color: 'black', fontWeight: 'bold', fontSize: 15 }}>{selected_facturas.length}</h4>
+                      <DescriptionSharpIcon color="white" style={{ fontSize: 20, alignSelf: 'center', justifySelf: 'center' }} />
+                      <h4 style={{ margin: 7, color: 'white', fontWeight: 'bold', fontSize: 15 }}>{selected_facturas.length}</h4>
                     </div>
 
                     <div style={{ display: 'flex', flexDirection: 'row' }}>
-                      <h4 style={{ margin: 7, color: 'black' }}>|</h4>
-                      <h4 style={{ margin: 7, color: 'black', fontWeight: 'bold' }}>{selected_facturas[selected_facturas.length - 1].factura}</h4>
+                      <h4 style={{ margin: 7, color: 'grey' }}>|</h4>
+                      <h4 style={{ margin: 7, color: 'white', fontWeight: 'bold' }}>{selected_facturas[selected_facturas.length - 1].factura}</h4>
                     </div>
 
                   </div>
@@ -241,34 +243,40 @@ function DispachView() {
           </tr>
         </table>
 
-        <div className="table-responsive" style={{ backgroundColor: 'white' }}>
+        <div className="table-responsive" style={{ backgroundColor: '#F2F3F4'}}>
           <table className="table card-table table-vcenter text-nowrap datatable">
             <thead style={{ width: '90%' }}>
               <tr style={{ borderBottomRightRadius: 90, backgroundColor: 'black' }}>
                 <th></th>
-                <th style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'white' }} key={0}>FACTURA</th>
-                <th style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'white' }} key={1}>RUTA</th>
-                <th style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'white' }} key={2}>PEDIDO</th>
-                <th style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'white' }} key={3}>ALBARAN</th>
-                <th style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'white' }} key={4}>CLIENTE</th>
-                <th style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'white' }} key={5}>CAJAS</th>
-                <th style={{ fontSize: 12, fontFamily: 'revert', textAlign: 'left', color: 'white' }} key={6}>UNIDADES</th>
+                <th style={{ fontSize: 10, fontFamily: 'revert', textAlign: 'left', color: 'white' }} key={0}>FACTURA</th>
+                <th style={{ fontSize: 10, fontFamily: 'revert', textAlign: 'left', color: 'white' }} key={1}>RUTA</th>
+                <th style={{ fontSize: 10, fontFamily: 'revert', textAlign: 'left', color: 'white' }} key={2}>PEDIDO</th>
+                <th style={{ fontSize: 10, fontFamily: 'revert', textAlign: 'left', color: 'white' }} key={3}>ALBARAN</th>
+                <th style={{ fontSize: 10, fontFamily: 'revert', textAlign: 'left', color: 'white' }} key={4}>CLIENTE</th>
+                <th style={{ fontSize: 10, fontFamily: 'revert', textAlign: 'left', color: 'white' }} key={5}>CAJAS</th>
+                <th style={{ fontSize: 10, fontFamily: 'revert', textAlign: 'left', color: 'white' }} key={6}>UNIDADES</th>
                 {/* <th style={{ fontSize: 12, fontFamily: 'sans-serif', textAlign: 'left', color: 'black' }}>UBICACION</th> */}
               </tr>
             </thead>
 
             <tbody>
               {data.slice().reverse().map((item) => (
-                <tr key={item.id_factura} style={{ height: 'auto' }}>
+                <tr key={item.id_factura} style={{ height: 50 }}>
                   <td>
                     <input type="checkbox"
                       style={{ colorInterpolation: 'black' }}
                       onChange={(e) => { get_selected_facturas(item); }} />
                   </td>
                   <td style={{ fontSize: 15, fontFamily: 'revert', textAlign: 'left', color: '#424949' }}>{item.factura}</td>
-                  <td style={{ fontSize: 15, fontFamily: 'revert', textAlign: 'left', color: '#424949' }}>{item.list_empaque}</td>
                   <td style={{ fontSize: 15, fontFamily: 'revert', textAlign: 'left', color: '#424949' }}>{item.pedidoventa}</td>
-                  <td style={{ fontSize: 15, fontFamily: 'revert', textAlign: 'left', color: '#424949' }}>{item.albaran}</td>
+                  <td style={{ fontSize: 15, fontFamily: 'revert', textAlign: 'left', color: '#424949' }}>
+                    {item.list_empaque.split(',').map((list_empaque, index) => (
+                      <div key={index}>{list_empaque.trim()}</div>
+                    ))}</td>
+                  <td style={{ fontSize: 15, fontFamily: 'revert', textAlign: 'left', color: '#424949' }}>
+                    {item.albaran.split(',').map((albaran, index) => (
+                      <div key={index}>{albaran.trim()}</div>
+                    ))}</td>
                   <td style={{ fontSize: 15, fontFamily: 'revert', textAlign: 'left', color: '#424949' }}>{item.cliente}</td>
                   <td style={{ fontSize: 15, fontFamily: 'revert', textAlign: 'left', color: '#424949' }}>{item.cant_cajas}</td>
                   <td style={{ fontSize: 15, fontFamily: 'revert', textAlign: 'left', color: '#424949' }}>{item.cant_total}</td>

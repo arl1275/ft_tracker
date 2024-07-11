@@ -14,20 +14,20 @@ export const UserLabel = () => {
 
     return (
         <div style={styles.logo}>
-            <div style={{ display : 'flex' , flexDirection : 'row'}}>
-                <div style={{ marginLeft: 10, marginRight: 15, justifyContent: 'center', alignItems: 'center' }}>
-                    <AccountCircleRoundedIcon style={{ fontSize: 20, color: 'grey', marginTop: 3 }} />
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                <div style={{ marginLeft: 10, marginRight: 15, display: 'flex', alignItems: 'center' }}>
+                    <AccountCircleRoundedIcon style={{ fontSize: 20, color: 'grey' }} />
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <h4 style={{ color: 'white', margin: 0, fontSize: 10, fontWeight: 'bold' }}>{account_userinfo.nombre}</h4>
-                    <h6 style={{ color: 'green', margin: 0, fontSize: 10 }}>{role}</h6>
+                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                    <h4 style={{ color: 'white', margin: 0, fontSize: 10, fontWeight: 'bold', textAlign: 'left' }}>{account_userinfo.nombre}</h4>
+                    <h6 style={{ color: 'green', margin: 0, fontSize: 10, textAlign: 'center' }}>{role}</h6>
                 </div>
-
             </div>
 
-            <div 
-            style={{ justifySelf: 'center', alignSelf: 'center', marginRight: 5 }}
-            onClick={()=>{navigate('/');}}
+
+            <div
+                style={{ justifySelf: 'center', alignSelf: 'center', marginRight: 5 }}
+                onClick={() => { navigate('/'); }}
             >
                 <RemoveCircleSharpIcon style={{ fontSize: 20, color: 'red' }} />
             </div>
@@ -41,10 +41,10 @@ const styles = {
         backgroundColor: 'black',
         display: 'flex',
         flexDirection: 'row',
-        borderRadius: 100,
+        borderRadius: 7,
         margin: 3,
-        height: 30,
+        height: 35,
         width: 250,
-        justifyContent : 'space-between'
+        justifyContent: 'space-between'
     }
 }
