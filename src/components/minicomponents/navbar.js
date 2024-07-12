@@ -37,8 +37,8 @@ function NavbarMenu() {
                                 marginRight: 10
                             }}
                         >
-                            <li className="nav-item" style={{ marginRight: 5 }} onClick={() => { setPage("ADMIN"); navigate('/main/administration', { replace: true }) }} >
-                                <Botton_Navbar texto={'ADMIN'} proppage={page} />
+                            <li className="nav-item" style={{ marginRight: 5 }} onClick={() => { setPage("ADMINISTRACION"); navigate('/main/administration', { replace: true }) }} >
+                                <Botton_Navbar texto={'ADMINISTRACION'} proppage={page} />
                             </li>
 
                             <li className="nav-item" style={{ marginLeft: 5, marginRight: 5 }} onClick={() => { setPage("HISTORICO"); navigate('/main/historic', { replace: true }) }} >

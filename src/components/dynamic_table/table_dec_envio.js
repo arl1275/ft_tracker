@@ -91,9 +91,12 @@ const TableForm_dec_envio = ({ columns, data }) => {
     return (
         <div style={{
             backgroundColor: 'white',
-            margin: 5,
+            margin: '5px 15px 5px 15px',
             borderRadius: 10,
-            width: '97%'
+            padding: 5,
+            width: '100%',
+            height: '85vh',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'
         }}>
             <div>
                 <input
@@ -108,65 +111,68 @@ const TableForm_dec_envio = ({ columns, data }) => {
                             margin: 10,
                             backgroundColor: 'white',
                             color: 'black',
-                            borderRadius: 50
+                            borderRadius: 7
                         }
                     }
                 />
             </div>
-            
-            {/*     THIS PART IS ONLY OF THE TABLE OF DECLARACIONES DE ENVIO  */}
-            <table {...getTableProps()} className="table card-table table-vcenter text-nowrap datatable"
-                style={
-                    {
-                        color: 'black',
-                        backgroundColor: 'white',
-                        height : '60vh'
-                    }
-                }>
-                <thead style={{ backgroundColor: 'black', borderRadius: 50 }}>
-                    {headerGroups.map((headerGroup) => (
-                        <tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map((column) => (
-                                <th style={{ color: 'white', textAlign: 'left', backgroundColor: 'black' }} {...column.getHeaderProps()}>{column.render('Header')}</th>
-                            ))}
-                            <th style={{ backgroundColor: 'black' }} />
-                        </tr>
-                    ))}
 
-                </thead>
-                <tbody {...getTableBodyProps()}>
-                    {rows.map((row) => {
-                        prepareRow(row);
-                        return (
-                            <tr {...row.getRowProps()}>
-                                {row.cells.map((cell, index) => (
-                                    <td {...cell.getCellProps()} key={index} style={{ textAlign: 'left' }}>
-                                        {cell.render('Cell')}
-                                    </td>
+            <div style={{
+                height: '76vh',
+                overflowY: 'auto',
+                backgroundColor: 'white'
+            }}>
+                <table {...getTableProps()} className="table card-table table-vcenter text-nowrap datatable"
+                    style={{ color: 'black', backgroundColor: 'white', height: '60vh', tableLayout: 'fixed'}}>
+
+                    <thead style={{ backgroundColor: 'black' }}>
+                        {headerGroups.map((headerGroup) => (
+                            <tr {...headerGroup.getHeaderGroupProps()}>
+                                {headerGroup.headers.map((column) => (
+                                    <th style={{ color: 'white', textAlign: 'left', backgroundColor: 'black' }} {...column.getHeaderProps()}>{column.render('Header')}</th>
                                 ))}
-                                <td style={{ padding: '8px', border: '1px solid #ddd' }} data-toggle="modal" data-target="#modal-large" onClick={() => { handleRow(row); }}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
-                                        stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" />
-                                        <circle cx="12" cy="12" r="3" />
-                                    </svg>
-                                </td>
+                                <th style={{ backgroundColor: 'black' }}/>
                             </tr>
+                        ))}
+                    </thead>
 
-                        );
-                    })}
-                </tbody>
-            </table>
+                    <tbody {...getTableBodyProps()}>
+                        {rows.map((row) => {
+                            prepareRow(row);
+                            return (
+                                <tr {...row.getRowProps()} style={{ height : 'auto'}}>
+
+                                    {row.cells.map((cell, index) => (
+                                        <td {...cell.getCellProps()} key={index} style={{ textAlign : 'left' }}>{cell.render('Cell')}</td>
+                                    ))}
+
+                                    <td style={{  border: '1px solid #ddd' }} data-toggle="modal" data-target="#modal-large" onClick={() => { handleRow(row); }}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                                            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" />
+                                            <circle cx="12" cy="12" r="3" />
+                                        </svg>
+                                    </td>
+
+                                </tr>
+
+                            );
+                        })}
+                    </tbody>
+
+                </table>
+            </div>
+
 
             {/*     THIS PART IS ONLY ABOUT THE MODAL OF DECLARACIONES DE ENVIO*/}
-            <div class="modal modal-blur fade show" id="modal-large" tabindex="-1" style={{ paddingRight: "17px"}} aria-modal="true" role="dialog">
-                <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style={{ width : 2000}} >
+            <div class="modal modal-blur fade show" id="modal-large" tabindex="-1" style={{ paddingRight: "17px" }} aria-modal="true" role="dialog">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style={{ maxWidth : 1000}}>
                     <div className='modal-content'>
 
                         <div className='modal-header' style={{ backgroundColor: 'black' }}>
-                            <h5 class="modal-title" style={{ color: 'white', backgroundColor : 'black' }}>DECLARACION DE ENVIO : {row_ ? row_[0] : null}</h5>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"/>
+                            <h5 class="modal-title" style={{ color: 'white', backgroundColor: 'black' }}>DECLARACION DE ENVIO : {row_ ? row_[0] : null}</h5>
+                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" />
                         </div>
 
 
@@ -188,33 +194,38 @@ const TableForm_dec_envio = ({ columns, data }) => {
                                     <div class="tab-content">
 
                                         <div class="tab-pane fade active show" id="tabs-home-17">
-                                            <div className='card'>
-                                                <table>
-                                                    <tr style={{ width: '100%' , backgroundColor : 'black'}}>
-                                                        <td style={{ textAlign: 'left', color: 'white', borderBottom: '2px solid black' }}>DECLARACIÓN DE ENVIO</td>
-                                                        <td style={{ textAlign: 'left', color: 'white', borderBottom: '2px solid black' }}>{row_ ? row_[0] : null}</td>
-                                                    </tr>
-                                                </table>
-                                                <table>
-                                                    <tr>
-                                                        <td style={{ textAlign: 'left', backgroundColor: 'white', color: 'black'}}>CREADO</td>
-                                                        <td style={{ textAlign: 'left' }}>{row_ ? row_[6] : null}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style={{ textAlign: 'left', color: 'black' }}>CAMION</td>
-                                                        <td style={{ textAlign: 'left' }}>{row_ ? row_[1] : null}</td>
-                                                        <td style={{ textAlign: 'left', color: 'black' }}>ENTREGADOR</td>
-                                                        <td style={{ textAlign: 'left' }}>{row_ ? row_[5] : null}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style={{ textAlign: 'left', color: 'black' }}>FACTURAS</td>
-                                                        <td style={{ textAlign: 'left' }}>{row_ ? row_[2] : null}</td>
-                                                        <td style={{ textAlign: 'left', color: 'black' }}>UNIDADES</td>
-                                                        <td style={{ textAlign: 'left' }}>{row_ ? row_[4] : null}</td>
-                                                        <td style={{ textAlign: 'left', color: 'black' }}>CAJAS</td>
-                                                        <td style={{ textAlign: 'left' }}>{row_ ? row_[3] : null}</td>
-                                                    </tr>
-                                                </table>
+                                            <div className='card' style={{ display : 'flex' , flexDirection : 'column'}}>
+                                                <div style={{ width : '100%'}}>
+                                                    <div 
+                                                    style={{ 
+                                                        width: '100%', backgroundColor: 'black', display : 'flex', 
+                                                        flexDirection : 'row', justifyContent : 'space-between', padding : 10,
+                                                        }}>
+                                                        <div style={{ textAlign: 'left', color: 'white', borderBottom: '2px solid black', marginLeft : 20 }}>DECLARACIÓN DE ENVIO</div>
+                                                        <div style={{ textAlign: 'left', color: 'white', borderBottom: '2px solid black', marginRight : 20 }}>{row_ ? row_[0] : null}</div>
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <div style={{ display : 'flex', flexDirection : 'row', justifyContent : 'space-between', padding : 10, borderWidth : 3 , borderColor : 'black'}}>
+                                                        <div style={{ textAlign: 'left', backgroundColor: 'white', color: 'black' }}>CREADO</div>
+                                                        <div style={{ textAlign: 'left' }}>{row_ ? row_[6] : null}</div>
+                                                    </div>
+                                                    <div style={{ display : 'flex', flexDirection : 'row', justifyContent : 'space-between', padding : 10}}>
+                                                        <div style={{ textAlign: 'left', color: 'black' }}>CAMION</div>
+                                                        <div style={{ textAlign: 'left' }}>{row_ ? row_[1] : null}</div>
+                                                        <div style={{ textAlign: 'left', color: 'black' }}>ENTREGADOR</div>
+                                                        <div style={{ textAlign: 'left' }}>{row_ ? row_[5] : null}</div>
+                                                    </div>
+                                                    <div style={{ display : 'flex', flexDirection : 'row', justifyContent : 'space-between', padding : 10}}>
+                                                        <div style={{ textAlign: 'left', color: 'black' }}>FACTURAS</div>
+                                                        <div style={{ textAlign: 'left' }}>{row_ ? row_[2] : null}</div>
+                                                        <div style={{ textAlign: 'left', color: 'black' }}>UNIDADES</div>
+                                                        <div style={{ textAlign: 'left' }}>{row_ ? row_[4] : null}</div>
+                                                        <div style={{ textAlign: 'left', color: 'black' }}>CAJAS</div>
+                                                        <div style={{ textAlign: 'left' }}>{row_ ? row_[3] : null}</div>
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             {/* <div className='card' style={{ marginTop : 5}}>
@@ -254,7 +265,7 @@ const TableForm_dec_envio = ({ columns, data }) => {
                                         </div>
 
                                         <div class="tab-pane fade" id="tabs-profile-18" >
-                                                <div><ReporteFacturasDeEnvio  declaracion_ = {row_ ? row_[0] : null} camion={row_ ? row_[1] : null}/></div>
+                                            <div><ReporteFacturasDeEnvio declaracion_={row_ ? row_[0] : null} camion={row_ ? row_[1] : null} /></div>
                                         </div>
                                     </div>
                                 </div>

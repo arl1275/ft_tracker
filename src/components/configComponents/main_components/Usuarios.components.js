@@ -41,24 +41,24 @@ function ListUsuarios() {
 
     return (
         <>
-            <div className="card" style={{ margin: 20, backgroundColor: 'white' }}>
+            <div className="card" style={{ margin: 20, backgroundColor: '#ECF0F1' }}>
                 <div class="col-12" style={{ display: 'flex', flexDirection: 'row' }}>
                     <div class="card" style={{ width: '60%', margin: 5 }}>
                         <div class="table-responsive">
                             <table class="table table-vcenter card-table">
                                 <thead>
-                                    <tr style={{ textAlign : 'left', backgroundColor : 'white'}}>
+                                    <tr style={{ textAlign : 'left', backgroundColor : 'black'}}>
                                         <th>
                                             <button data-toggle="modal" data-target="#modal-simple" 
-                                            style={{backgroundColor : 'green', borderWidth : 0, borderRadius : 10 , width : '100%', height : 'auto'}}>
+                                            style={{backgroundColor : 'green', borderWidth : 0, borderRadius : 3 , width : '100%', height : 'auto'}}>
                                                 <div style={{color : 'white'}}>CREAR</div>
                                             </button>
                                         </th>
-                                        <th style={{ color : 'black' }}>NOMBRE</th>
-                                        <th style={{ color : 'black' }}>Cod. EMPLEADO</th>
-                                        <th style={{ color : 'black' }}>QR</th>
-                                        <th style={{ color : 'black' }}>ROL</th>
-                                        <th className="w-auto"></th>
+                                        <th style={{ color : 'white' }}>NOMBRE</th>
+                                        <th style={{ color : 'white' }}>CODIGO</th>
+                                        <th style={{ color : 'white' }}>QR</th>
+                                        <th style={{ color : 'white' }}>ROL</th>
+                                        <th className="w-auto"> VER</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -66,7 +66,7 @@ function ListUsuarios() {
                                         (
                                             data.map((item) => (
                                                 <tr style={{ textAlign : 'left'}}>
-                                                    <td>{item.id}</td>
+                                                    <td style={{ textAlign : 'center'}}>{item.id}</td>
                                                     <td>{item.nombre}</td>
                                                     <td>{item.cod_empleado}</td>
                                                     <td>{item._qr ?
@@ -103,7 +103,7 @@ function ListUsuarios() {
                     <div className="card" style={{ width: '40%', margin: 5 }}>
                         {showUs ?  (<ConfigUser dat={selectedUser} />): (
                             <div>
-                                <div className="card-header" style={{ backgroundColor : '#154360'}}>
+                                <div className="card-header" style={{ backgroundColor : 'black'}}>
                                     <h3 style={{ color : 'white' }}>INFORMACION DE USUARIO</h3>
                                 </div>
                                 <div className="card"

@@ -151,7 +151,7 @@ function ListFact() {
             </div>
 
             <div class="modal modal-blur fade show" id="modal-large" tabindex="-1" style={{ paddingRight: "17px" }} aria-modal="true" role="dialog">
-                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style={{ maxWidth : '60%'}}>
                     <div className='modal-content'>
                         <div className='modal-header' style={{ backgroundColor: 'black' }}>
                             <h5 class="modal-title" style={{ color: 'white' }}>DETALLE DE FACTURA</h5>

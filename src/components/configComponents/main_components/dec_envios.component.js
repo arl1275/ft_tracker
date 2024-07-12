@@ -15,7 +15,7 @@ export const List_decEnvio = () => {
         { Header: 'DECLARACION ENVIO', accessor: 'declaracionenvio', Filter: TextColumnFilter, width: 10 },
         { Header: 'CAMION', accessor: 'placa', Filter: TextColumnFilter, width: 10 },
         { Header: 'ENTREGADOR', accessor: 'nombre', Filter: TextColumnFilter, width: 10 },
-        { Header: 'FACTURAS', accessor: 'cant_facturas', Filter: NumberColumnFilter, width: 10 },
+        { Header: 'FACTURAS', accessor: 'cant_facturas', Filter: NumberColumnFilter, width: 90},
         { Header: 'CAJAS', accessor: 'cant_cajas', Filter: NumberColumnFilter, width: 10 },
         { Header: 'UNIDADES', accessor: 'cant_unidades', Filter: NumberColumnFilter, width: 10 },
     ]

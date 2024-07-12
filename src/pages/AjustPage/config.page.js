@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import AdminNavbar from "../../components/minicomponents/adminnavbar";
-import ListTransportistas from "../../components/configComponents/main_components/Transportistas.components";
 import ListFact from "../../components/configComponents/main_components/Facturas.component";
 import { List_decEnvio } from "../../components/configComponents/main_components/dec_envios.component";
 import AdvancedView from "../../components/advancedView/advanced";

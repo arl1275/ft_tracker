@@ -2,19 +2,13 @@ import { useState } from "react"
 import { Botton_small_Admin } from "../minicomponents/button";
 import ListUsuarios from "../configComponents/main_components/Usuarios.components";
 import ListaCamiones from "../configComponents/main_components/Camiones.component";
+import { AdvancedList } from "../configComponents/main_components/advanced.component";
 
 function AdvancedView() {
     const [page, setPage] = useState('GENERAL');
 
     return (
-        < div style={
-            {
-                backgroundColor: 'white',
-                padding: '10px 0px 10px 0px',
-                margin: '0px 20px 0px 20px',
-                borderRadius: 10,
-            }
-        }>
+        < div style={{ backgroundColor: 'white', padding: '10px 0px 10px 0px', margin: '0px 20px 0px 20px', borderRadius: 10 }}>
             <div>
                 <div style={{
                     display: 'flex',
@@ -31,25 +25,17 @@ function AdvancedView() {
                         <Botton_small_Admin texto={'CAMIONES'} proppage={page} />
                     </div>
 
-                    <div onClick={() => { setPage('CONFIG') }}>
-                        <Botton_small_Admin texto={'CONFIG'} proppage={page} />
+                    <div onClick={() => { setPage('AVANZADO') }}>
+                        <Botton_small_Admin texto={'AVANZADO'} proppage={page} />
                     </div>
 
                 </div>
 
             </div>
 
-            {
-                page === 'USUARIOS' && (<ListUsuarios />)
-            }
-            {
-                page === 'CAMIONES' && (<ListaCamiones />)
-            }
-            {
-                page === 'CONFIG' && (
-                    <div></div>
-                )
-            }
+            { page === 'USUARIOS' && (<ListUsuarios />) }
+            { page === 'CAMIONES' && (<ListaCamiones />) }
+            { page === 'AVANZADO' && (<AdvancedList/>) }
         </div>
     )
 }

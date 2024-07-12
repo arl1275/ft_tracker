@@ -11,16 +11,17 @@ function AdminNavbar() {
     return (
         <div style={
             {
-                backgroundColor: 'white',
+                backgroundColor: 'black',
                 display: 'flex',
                 flexDirection: 'row',
                 height: 50,
                 justifyContent: 'space-between',
                 alignItems: 'center',  // Centra verticalmente los elementos
                 alignSelf: 'center',
-                margin: '5px 20px 5px 20px',
-                borderRadius: 50,
-                padding: '0px 10px 0px 10px'
+                margin: '10px 15px 10px 15px',
+                borderRadius: 7,
+                padding: '0px 10px 0px 10px',
+                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'
             }
         }>
 

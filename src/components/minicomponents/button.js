@@ -9,12 +9,12 @@ export const Botton_Navbar = ({ texto, proppage }) => {
                 alignItems: 'center',
                 borderWidth : 0,
                 borderRadius : 5,
-                backgroundColor : proppage === texto ?  'black' : '#979A9A' ,
+                backgroundColor : proppage === texto ?  'black' : '#E5E7E9' ,
                 width: 150,
                 height: 30,
             }}
         >
-            <h5 style={{ color: proppage === texto ?  'white' : 'white' , margin: 0 }}>{texto}</h5>
+            <h5 style={{ color: proppage === texto ?  'white' : 'black' , margin: 0 }}>{texto}</h5>
         </button>
     )
 }
@@ -27,19 +27,20 @@ export const Botton_Navbar_Admin = ({ texto , prop  }) => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor : prop === texto ? 'black' : 'white',
+                backgroundColor : prop === texto ? 'white' : 'black',
                 width: 200,
                 height: 30, // Ajusta la altura del botón según sea necesario
-                borderRadius: 50, // Opcional: agrega borde redondeado al botón
+                borderRadius: 5, // Opcional: agrega borde redondeado al botón
+                borderWidth : 0
             }}
         >
-            <h5 style={{ color: prop === texto ? 'white' : 'black', margin: 0 }}>{texto}</h5>
+            <h5 style={{ color: prop === texto ?  'black' : 'white', margin: 0 }}>{texto}</h5>
         </button>
         </>
     )
 }
 
-export const Botton_small_Admin = ({ texto , prop  }) => {
+export const Botton_small_Admin = ({ texto , proppage  }) => {
     return(
         <>
          <button
@@ -47,23 +48,15 @@ export const Botton_small_Admin = ({ texto , prop  }) => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                borderWidth: prop === texto ? 2 : 0,
-                borderBlockColor: prop === texto ? 'black' : 'white',
-                backgroundColor : 'white',
-                width: 100,
-                height: 20, // Ajusta la altura del botón según sea necesario
-                borderRadius: 50, // Opcional: agrega borde redondeado al botón
+                borderWidth: proppage === texto ? 2 : 0,
+                backgroundColor: proppage === texto ? 'black' : '#D0D3D4',
+                width: 150,
+                height: 25,
+                borderRadius: 5,
                 margin : '0px 5px 0px 5px'
             }}
         >
-            <h6
-                style={{
-                    color: 'black',
-                    margin: 0, // Elimina el margen predeterminado del <h4>
-                }}
-            >
-                {texto}
-            </h6>
+            <h6 style={{ color: 'white', margin: 0, fontSize : 12}}>{texto}</h6>
         </button>
         </>
     )

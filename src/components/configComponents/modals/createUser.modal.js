@@ -31,14 +31,14 @@ export const CreateUser = () => {
 
     return (
         <>
-            <div className="card">
-                <div className="modal-header" style={{backgroundColor : '#02395E'}}>
+            <div className="card" style={{ width: 450, borderRadius : 10 }}>
+                <div className="modal-header" style={{backgroundColor : 'black'}}>
                     <h2 style={{color : 'white'}}>CREAR USUARIO</h2>
                 </div>
 
-                <div className="modal-body">
-                    <div className="table-responsive" style={{width: 'auto' }}>
-                        <table className="table table-vcenter card-table">
+                <div className="modal-body" style={{ alignSelf : 'center'}}>
+                    <div className="table-responsive" >
+                        <table className="table table-vcenter card-table" style={{ tableLayout : 'fixed', width : 'auto'}}>
                             <tbody>
                                 <tr>
                                     <td className="text-muted">Usuario:</td>
@@ -91,7 +91,8 @@ export const CreateUser = () => {
                                 <tr>
                                     <td className="text-muted">Role:</td>
                                     <td>
-                                        <select className="btn btn-info active w-100" name="rol" value={user.rol} onChange={(e) => { handleChange(e) }} style={{color : 'white'}}>
+                                        <select className="btn btn-info active w-100" name="rol" value={user.rol} onChange={(e) => { handleChange(e) }} 
+                                        style={{color : 'white', backgroundColor : 'black'}}>
                                             <option value="4">SUPERVISOR</option>
                                             <option value="3">ENTREGADOR</option>
                                             <option value="2">GUARDIA</option>
@@ -106,7 +107,7 @@ export const CreateUser = () => {
                 </div>
 
                 <div className="modal-footer">
-                    <button className="btn btn-primary active w-100" onClick={handleSubmit}>CREAR USUARIO</button>
+                    <button className="btn btn-primary active w-100" onClick={handleSubmit} style={{ backgroundColor : 'green'}}>CREAR USUARIO</button>
                 </div>
             </div>
         </>

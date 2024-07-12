@@ -11,13 +11,25 @@ export const VerCajas = ({ albaran_ }) => {
 
     const getCajas = async () => {
         try {
-            const result = await axios.get(`${bk_dir}/facturas/getCajas`, { params: { albaran: albaran_ } });
-            setData(result.data.data);  // Suponiendo que el objeto recibido tiene la estructura { data: [...] }
-            console.log(result.data);
+            let albaranes = albaran_.split(", ");
+            let allData = []; // Asegúrate de que allData esté correctamente inicializado o definido en un ámbito superior.
+    
+            for (const element of albaranes) {
+                const result = await axios.get(`${bk_dir}/facturas/getCajas`, { params: { albaran: element } });
+                const newData = result.data.data.filter(
+                    newElement => !allData.some(existingElement => existingElement.caja === newElement.caja && existingElement.lista_empaque === newElement.lista_empaque)
+                );
+                
+                allData = [...allData, ...newData];
+            }
+    
+            setData(allData); 
         } catch (error) {
             console.error("Error fetching data:", error);
         }
     };
+    
+    
 
     // Función para ordenar los datos por 'numerocaja'
     const sortDataByNumeroCaja = (data) => {
@@ -36,13 +48,15 @@ export const VerCajas = ({ albaran_ }) => {
             {sortedData.length > 0 ? (
                 <div>
                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', backgroundColor: 'black' }}>
-                        <div style={{ color: 'white' }}>Numero</div>
-                        <div style={{ color: 'white' }}>Caja</div>
-                        <div style={{ color: 'white' }}>Cantidad</div>
+                        <div style={{ color: 'white' }}>RUTA</div>
+                        <div style={{ color: 'white' }}>NUM_CAJA</div>
+                        <div style={{ color: 'white' }}>CAJA</div>
+                        <div style={{ color: 'white' }}>CANTIDAD</div>
                     </div>
                     <div style={{ height: 200, overflowY: 'scroll' }}>
                         {sortedData.map((item) => (
-                            <div key={item?.numerocaja} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
+                            <div key={item?.numerocaja} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                <div style={{ color: 'black' }}>{item?.lista_empaque}</div>
                                 <div style={{ color: 'black' }}>{item?.numerocaja}</div>
                                 <div style={{ color: 'black' }}>{item?.caja}</div>
                                 <div style={{ color: 'black' }}>{item?.cantidad}</div>
