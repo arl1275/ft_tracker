@@ -6,7 +6,7 @@ import { LoadingWait } from "../any_components/loading_component.js";
 import { PrintButton } from "../any_components/ToPrint.component.js";
 
 const ResumenConsolidado = ({ props, clearArray }) => {
-  const lista_headers = ["DEPARTAMENTO", "NOMBRE DE CLIENTE","PEDIDO", "FACTURA", "ALBARAN", "LISTA EMPAQUE", "CAJAS", "UNIDADES"];
+  const lista_headers = ["DEPARTAMENTO", "NOMBRE DE CLIENTE", "PEDIDO", "FACTURA", "ALBARAN", "LISTA EMPAQUE", "CAJAS", "UNIDADES"];
   const [camionSeleccionado, setCamionSeleccionado] = useState(null);
   const [entregador, setEntregador] = useState(null);
   const [dec_env, setDecEnv] = useState('');
@@ -27,10 +27,27 @@ const ResumenConsolidado = ({ props, clearArray }) => {
       alert('FAVOR LLENAR TODOS LOS CAMPOS ANTES DE ENVIAR EL CONSOLIDADO');
     } else {
       setValores(props);
+      let User = '';
+      const userString = localStorage.getItem('dataUser');
+
+      if (userString) {
+        try {
+          const user = JSON.parse(userString);
+          const userName = user.usurario.nombre;
+          console.log(userName);
+          User = userName;
+        } catch (error) {
+          console.error('Error parsing user data:', error);
+        }
+      } else {
+        console.error('No user data found in localStorage');
+      }
+
       const data = {
         id_user: entregador[1],
         id_cam: camionSeleccionado[1],
-        declaracion_env: props
+        declaracion_env: props,
+        message : `Detalle declaracion : Generado por ${User}`
       };
 
       try {
