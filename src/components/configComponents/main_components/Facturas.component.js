@@ -103,7 +103,7 @@ function ListFact() {
                         <circle cx="12" cy="12" r="3" />
                     </svg>
                 </div >
-            ), size : 50
+            ), size: 50
         },
         { header: "PEDIDO", accessorKey: "pedidoventa", Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong> },
         { header: "CLIENTE", accessorKey: "clientenombre", Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong> },
@@ -131,7 +131,7 @@ function ListFact() {
     const table = useMaterialReactTable({
         data,
         columns,
-        initialState: { density: 'compact', pagination : { pageSize : 15} }
+        initialState: { density: 'compact', pagination: { pageSize: 15 } }
     });
 
     return (
@@ -145,17 +145,22 @@ function ListFact() {
                 maxWidth: '100%',  // Ancho máximo opcional
                 display: 'flex',
                 justifyContent: 'center',
-                height: 'auto'
+                height: 'auto',
+                borderWidth: 1,
+                borderColor: 'grey',
+                borderRadius : 5,
+                borderStyle: 'solid',  // Añadir borderStyle para que el borde sea visible
+                boxShadow: '0px 4px 8px grey'  // Valores para boxShadow
             }}>
                 <MaterialReactTable table={table} />
             </div>
 
             <div class="modal modal-blur fade show" id="modal-large" tabindex="-1" style={{ paddingRight: "17px" }} aria-modal="true" role="dialog">
-                <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style={{ maxWidth : '60%'}}>
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style={{ maxWidth: '60%' }}>
                     <div className='modal-content'>
                         <div className='modal-header' style={{ backgroundColor: 'black' }}>
                             <h5 class="modal-title" style={{ color: 'white' }}>DETALLE DE FACTURA</h5>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" style={{ color : 'white'}}/>
+                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" style={{ color: 'white' }} />
                         </div>
                         <div className='modal-body'>
                             <AlterFact props={fact} />

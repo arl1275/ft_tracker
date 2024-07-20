@@ -9,15 +9,16 @@ function NavbarMenu() {
 
     return (
         <div>
-            <div className="navbar-expand-md"
+            <div 
                 style={{
                     width: 'auto',
                     height: 'auto',
-                    backgroundColor: 'white'
+                    backgroundColor: 'white',
                 }}>
 
-                <div style={{ borderBottomColor: 'black', borderWidth: 2 }}>
-                    <ul className="navbar-nav" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div>
+                    <ul className="navbar-nav" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', 
+                        justifyContent: 'space-between', borderWidth : 1, borderColor : 'black'}}>
 
                         <li className="nav-item" style={{ alignContent: 'center', marginLeft: 10 }}>
                             <UserLabel />
@@ -53,6 +54,7 @@ function NavbarMenu() {
                                 <Botton_Navbar texto={'DESPACHO'} proppage={page} />
                             </li>
                         </div>
+
                     </ul>
                 </div>
 

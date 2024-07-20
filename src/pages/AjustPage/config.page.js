@@ -8,7 +8,7 @@ import { Routes, Route } from 'react-router-dom';
 export function ConfigPage() {
   
   return (
-    <div style={{ height: '85vh' }}>
+    <div style={{ height: '85vh'}}>
       <AdminNavbar />
       <Routes>
         <Route path='/declaraciones' element={<List_decEnvio />} />

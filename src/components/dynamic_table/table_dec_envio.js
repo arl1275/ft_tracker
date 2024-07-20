@@ -91,9 +91,9 @@ const TableForm_dec_envio = ({ columns, data }) => {
     return (
         <div style={{
             backgroundColor: 'white',
-            margin: '5px 15px 5px 15px',
+            //margin: '5px 15px 5px 15px',
             borderRadius: 10,
-            padding: 5,
+            padding: 0,
             width: '100%',
             height: '85vh',
             boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'
@@ -119,7 +119,7 @@ const TableForm_dec_envio = ({ columns, data }) => {
 
             <div style={{
                 height: '76vh',
-                overflowY: 'auto',
+                overflowY: 'scroll',
                 backgroundColor: 'white'
             }}>
                 <table {...getTableProps()} className="table card-table table-vcenter text-nowrap datatable"
@@ -167,7 +167,7 @@ const TableForm_dec_envio = ({ columns, data }) => {
 
             {/*     THIS PART IS ONLY ABOUT THE MODAL OF DECLARACIONES DE ENVIO*/}
             <div class="modal modal-blur fade show" id="modal-large" tabindex="-1" style={{ paddingRight: "17px" }} aria-modal="true" role="dialog">
-                <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style={{ maxWidth : 1000}}>
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style={{ maxWidth : 950}}>
                     <div className='modal-content'>
 
                         <div className='modal-header' style={{ backgroundColor: 'black' }}>
@@ -199,7 +199,7 @@ const TableForm_dec_envio = ({ columns, data }) => {
                                                     <div 
                                                     style={{ 
                                                         width: '100%', backgroundColor: 'black', display : 'flex', 
-                                                        flexDirection : 'row', justifyContent : 'space-between', padding : 10,
+                                                        flexDirection : 'row', justifyContent : 'space-between', padding : 5,
                                                         }}>
                                                         <div style={{ textAlign: 'left', color: 'white', borderBottom: '2px solid black', marginLeft : 20 }}>DECLARACIÓN DE ENVIO</div>
                                                         <div style={{ textAlign: 'left', color: 'white', borderBottom: '2px solid black', marginRight : 20 }}>{row_ ? row_[0] : null}</div>
@@ -207,22 +207,26 @@ const TableForm_dec_envio = ({ columns, data }) => {
                                                 </div>
 
                                                 <div>
-                                                    <div style={{ display : 'flex', flexDirection : 'row', justifyContent : 'space-between', padding : 10, borderWidth : 3 , borderColor : 'black'}}>
+                                                    <div style={{ 
+                                                        display : 'flex', flexDirection : 'row', justifyContent : 'space-between', 
+                                                        padding : 0, borderWidth : 3 , borderColor : 'black', borderStyle : 'solid', borderWidth : '0px 0px 1px 0px', borderColor : '#E5E7E9'}}>
                                                         <div style={{ textAlign: 'left', backgroundColor: 'white', color: 'black' }}>CREADO</div>
                                                         <div style={{ textAlign: 'left' }}>{row_ ? row_[6] : null}</div>
                                                     </div>
-                                                    <div style={{ display : 'flex', flexDirection : 'row', justifyContent : 'space-between', padding : 10}}>
+                                                    <div style={{ display : 'flex', flexDirection : 'row', justifyContent : 'space-between', padding : 0,
+                                                        borderStyle : 'solid', borderWidth : '0px 0px 1px 0px', borderColor : '#E5E7E9'
+                                                    }}>
                                                         <div style={{ textAlign: 'left', color: 'black' }}>CAMION</div>
                                                         <div style={{ textAlign: 'left' }}>{row_ ? row_[1] : null}</div>
-                                                        <div style={{ textAlign: 'left', color: 'black' }}>ENTREGADOR</div>
+                                                        <div style={{ textAlign: 'left', color: 'black', borderStyle : 'solid', borderWidth : '0px 0px 0px 1px', borderColor : '#E5E7E9'}}>ENTREGADOR</div>
                                                         <div style={{ textAlign: 'left' }}>{row_ ? row_[5] : null}</div>
                                                     </div>
-                                                    <div style={{ display : 'flex', flexDirection : 'row', justifyContent : 'space-between', padding : 10}}>
+                                                    <div style={{ display : 'flex', flexDirection : 'row', justifyContent : 'space-between', padding : 0}}>
                                                         <div style={{ textAlign: 'left', color: 'black' }}>FACTURAS</div>
                                                         <div style={{ textAlign: 'left' }}>{row_ ? row_[2] : null}</div>
-                                                        <div style={{ textAlign: 'left', color: 'black' }}>UNIDADES</div>
+                                                        <div style={{ textAlign: 'left', color: 'black' , borderStyle : 'solid', borderWidth : '0px 0px 0px 1px', borderColor : '#E5E7E9'}}>UNIDADES</div>
                                                         <div style={{ textAlign: 'left' }}>{row_ ? row_[4] : null}</div>
-                                                        <div style={{ textAlign: 'left', color: 'black' }}>CAJAS</div>
+                                                        <div style={{ textAlign: 'left', color: 'black', borderStyle : 'solid', borderWidth : '0px 0px 0px 1px', borderColor : '#E5E7E9' }}>CAJAS</div>
                                                         <div style={{ textAlign: 'left' }}>{row_ ? row_[3] : null}</div>
                                                     </div>
                                                 </div>

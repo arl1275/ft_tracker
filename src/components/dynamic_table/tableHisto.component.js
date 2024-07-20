@@ -34,7 +34,7 @@ const TableForm = ({ data }) => {
   });
 
   return(
-    <div className='card' style={{margin : 10, height : 'autovh' , borderTopColor : 'black' , borderTopWidth : 4 }}>
+    <div className='card' style={{margin : 10, height : 'autovh', borderWidth : 1, borderColor : 'grey' }}>
       <MaterialReactTable table={table} />
     </div>
   ) 

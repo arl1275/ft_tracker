@@ -120,10 +120,10 @@ function DispachView() {
       <div className="card"
         style={{
           backgroundColor: 'white',
-          margin: '15px 10px 15px 10px',
+          margin: '5px 10px 15px 10px',
           boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
           padding: 1,
-          borderWidth: 0,
+          borderWidth: 1,
           borderColor: '#979A9A',
           height: '90vh',
         }}>
