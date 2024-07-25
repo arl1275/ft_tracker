@@ -13,25 +13,25 @@ export const HeadAdvanced = () => {
         <div style={style.card}>
 
             <div style={style.MinCard}>
-                <div style={{ height: 30, width: 'auto', borderStyle: 'solid', borderWidth: 1, borderColor: '#145a32', backgroundColor : '#b2dfdb', margin: '5px 5px 5px 5px', borderRadius: 3, textAlign: 'center', alignContent: 'center', padding: '0px 25px 0px 25px' }}>
+                <button style={{ height: 30, width: 'auto', borderStyle: 'solid', borderWidth: 1, borderColor: '#145a32', backgroundColor : '#b2dfdb', margin: '5px 5px 5px 5px', borderRadius: 3, textAlign: 'center', alignContent: 'center', padding: '0px 25px 0px 25px' }}>
                     FINALIZAR
                     <CheckCircleIcon fontSize="medium" style={{ color: 'green' }} />
-                </div>
-                <div style={{height: 30, width: 'auto', borderStyle: 'solid', borderWidth: 1, borderColor: '#b71c1c', backgroundColor : '#ffcdd2', margin: '5px 5px 5px 5px', borderRadius: 3, textAlign: 'center', alignContent: 'center', padding: '0px 25px 0px 25px' }}>
+                </button>
+                <button style={{height: 30, width: 'auto', borderStyle: 'solid', borderWidth: 1, borderColor: '#b71c1c', backgroundColor : '#ffcdd2', margin: '5px 5px 5px 5px', borderRadius: 3, textAlign: 'center', alignContent: 'center', padding: '0px 25px 0px 25px' }}>
                     BLOQUEAR
                     <BlockIcon fontSize="medium" style={{ color: 'red' }} />
-                </div>
-                <div style={{ height: 30, width: 'auto', borderStyle: 'solid', borderWidth: 1, borderColor: 'blue', backgroundColor : '#b3e5fc', margin: '5px 5px 5px 5px', borderRadius: 3, textAlign: 'center', alignContent: 'center', padding: '0px 25px 0px 25px' }}>
+                </button>
+                <button style={{ height: 30, width: 'auto', borderStyle: 'solid', borderWidth: 1, borderColor: 'blue', backgroundColor : '#b3e5fc', margin: '5px 5px 5px 5px', borderRadius: 3, textAlign: 'center', alignContent: 'center', padding: '0px 25px 0px 25px' }}>
                     DESBLOQUEAR
                     <VpnKeyIcon fontSize="medium" style={{ color: 'blue' }} />
-                </div>
+                </button>
             </div>
 
             <div>
-                <div style={{ height: 30, width: 'auto', borderStyle: 'solid', borderWidth: 1, borderColor: '#880e4f', backgroundColor : '#f48fb1', margin: '5px 5px 5px 5px', borderRadius: 3, textAlign: 'center', alignContent: 'center', padding: '0px 25px 0px 25px' }}>
+                <button style={{ height: 30, width: 'auto', borderStyle: 'solid', borderWidth: 1, borderColor: '#880e4f', backgroundColor : '#f48fb1', margin: '5px 5px 5px 5px', borderRadius: 3, textAlign: 'center', alignContent: 'center', padding: '0px 25px 0px 25px' }}>
                     MOVER CAJAS
                     <OpenInNewOffIcon fontSize="medium" style={{ color: 'pink' }} />
-                </div>
+                </button>
             </div>
 
         </div>

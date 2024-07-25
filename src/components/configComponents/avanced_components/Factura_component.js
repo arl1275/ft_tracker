@@ -27,10 +27,11 @@ export const FacturasLista = ({ facturas }) => {
     return (
         <div>
             <div style={{ alignSelf: 'center', width: '100%', display: 'flex', flexDirection: 'row', height: 'auto' }}>
+                <input type="checkbox" />
                 <div style={styles.borrar}>BORRAR SELECCION</div>
                 <div style={styles.principal}>PRINCIPAL</div>
                 <div style={styles.secundaria}>SECUNDARIA</div>
-                <input type="text" value={searchTerm} onChange={handleSearch}  placeholder="Buscar factura..." style={styles.searchInput}/>
+                <input type="text" value={searchTerm} onChange={handleSearch} placeholder="Buscar factura..." style={styles.searchInput} />
             </div>
 
             <div style={{ margin: '5px 0px 0px 0px', overflowY: 'scroll', height: '60vh', scrollbarColor: 'red' }}>
@@ -41,8 +42,16 @@ export const FacturasLista = ({ facturas }) => {
                                 return (
                                     <div style={styles.row} key={index}>
                                         <input type="checkbox" />
-                                        <div style={{ width: '40%', fontSize: 12, color: 'black' }}>{item.factura}</div>
-                                        <div style={{ width: '40%', fontSize: 12, color: 'black' }}>{item.clientenombre}</div>
+                                        <div style={{ width: '15%', fontSize: 12, color: 'black' }}>{item.pedidoventa}</div>
+                                        <div style={{ width: '15%', fontSize: 12, color: 'black' }}>{item.factura}</div>
+                                        <div style={{ width: '15%', fontSize: 10, color: 'black' }}>{item.clientenombre}</div>
+                                        <div style={{ width: '15%', fontSize: 10, color: 'black' }}>
+                                            {item.albaran.split(',').map((albaran, index) => (
+                                                <div key={index}>{albaran.trim()}</div>
+                                            ))}</div>
+                                        <div style={{ width: '15%', fontSize: 10, color: 'black' }}>{item.lista_empaque.split(',').map((albaran, index) => (
+                                            <div key={index}>{albaran.trim()}</div>
+                                        ))}</div>
                                     </div>)
                             })
                         }</div>
@@ -111,6 +120,6 @@ const styles = {
         fontSize: '10px',
         borderRadius: '3px',
         border: '1px solid #ccc',
-        height : 'auto'
+        height: 'auto'
     }
 };

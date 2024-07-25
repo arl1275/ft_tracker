@@ -41,15 +41,16 @@ export const AdvancedList = () => {
             <HeadAdvanced />
 
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                <div style={{ backgroundColor: 'white', width: '35%', height: '100%', margin: 5, borderRadius: 5, border: '1px solid #cfd8dc' }}>
+                <div style={{ backgroundColor: 'white', width: '50%', height: '100%', margin: 5, borderRadius: 5, border: '1px solid #cfd8dc' }}>
                     <div style={{ width: '100%', fontSize: 15, fontWeight: 'bold', textAlign: 'center', margin: '10px 0px 10px 0px' }}>FACTURAS</div>
                     <FacturasLista facturas={Facturas} />
                 </div>
-                <div style={{ backgroundColor: 'white', width: '35%', height: '100%', margin: 5, borderRadius: 5, border: '1px solid #cfd8dc' }}>
+                <div style={{ backgroundColor: 'white', width: '50%', height: '100%', margin: 5, borderRadius: 5, border: '1px solid #cfd8dc' }}>
                     <div style={{ width: '100%', fontSize: 15, fontWeight: 'bold', textAlign: 'center', margin: '10px 0px 10px 0px' }}>DECLARACIONES</div>
                     <DeclaracionesLista declaraciones={Declaraciones}/>
                 </div>
-                <div style={{ backgroundColor: 'white', width: '35%', height: '100%', margin: 5, borderRadius: 5, border: '1px solid #cfd8dc' }}>EXPORT</div>
+
+                {/* <div style={{ backgroundColor: 'white', width: '35%', height: '100%', margin: 5, borderRadius: 5, border: '1px solid #cfd8dc' }}>EXPORT</div> */}
             </div>
 
 

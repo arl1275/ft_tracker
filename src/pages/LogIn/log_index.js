@@ -41,8 +41,9 @@ const LoginForm = () => {
 
   return (
     <div>
-      <div style={{ position: 'absolute', height: '100vh', backgroundColor: 'black' }}>
-        <div className="container-tight py-6" style={{ backgroundColor: 'black' }}>
+
+      <div style={{ position: 'absolute', top : '50%', right : '50%', transform: 'translate(-50%, -50%)',  height: '70vh'}}>
+        <div className="container-tight py-6" style={{ backgroundColor: 'black', borderRadius : 10}}>
           <form style={{ borderWidth: 0, backgroundColor: 'black' }}>
             <div className="text-center mb-4">
               <a href="."><img src="./static/logo.svg" height="36" alt="" /></a>
@@ -114,8 +115,8 @@ const LoginForm = () => {
                 <div className="form-footer">
                   <button type="submit" className="btn btn-primary w-100" onClick={ValidateUser}
                     style={{
-                      borderRadius: 30,
-                      borderWidth: 1.5,
+                      borderRadius: 7,
+                      borderWidth: 1,
                       marginTop: 70,
                       backgroundColor: 'black',
                       color: 'white',
@@ -146,13 +147,13 @@ const LoginForm = () => {
           width: '100%',
           height: '100%',
           objectFit: 'cover',
-          filter: 'blur(3px) brightness(0.3)'
+          filter: 'blur(0.5px) brightness(0.4)'
         }} />
-        <div style={{ position: 'absolute', right: '40%', top: '70%', width: '30%' }}>
+        {/* <div style={{ position: 'absolute', right: '40%', top: '70%', width: '30%' }}>
           <div style={{ color: 'white', fontSize: 40, fontFamily: 'serif', fontWeight: 'bold' }}>BIENVENIDO</div>
           <div style={{ color: 'white', fontSize: 20, fontFamily: 'serif', fontWeight: 'bold' }}>Favor ingresar su usario y contraseña, para iniciar sesion.</div>
           <p style={{ color: 'grey', borderTopWidth: 1, borderTopColor: 'white' }}>KELLER, es un sistema orientado a la firma digital de facturas para los clientes de INTERMODA S.A.</p>
-        </div>
+        </div> */}
       </div>
     </div>
 
