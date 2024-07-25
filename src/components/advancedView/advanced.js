@@ -8,14 +8,14 @@ function AdvancedView() {
     const [page, setPage] = useState('GENERAL');
 
     return (
-        < div style={{ backgroundColor: 'white', padding: '10px 0px 10px 0px', margin: '0px 20px 0px 20px', borderRadius: 10 }}>
+        <div style={{ backgroundColor: 'white', padding: '5px 0px 5px 0px', margin: '0px 20px 0px 20px', border : '1.2px solid grey', borderRadius: 5 }}>
             <div>
                 <div style={{
                     display: 'flex',
                     flexDirection: 'row',
                     justifyContent : 'space-between',
                     width: 300,
-                    margin : '0px 0px 0px 20px'
+                    margin : '0px 0px 0px 10px',
                 }}>
                     <div onClick={() => { setPage('USUARIOS') }}>
                         <Botton_small_Admin texto={'USUARIOS'} proppage={page} />

@@ -19,7 +19,7 @@ function ListaCamiones() {
   }
 
   return (
-    <div className="card" style={{ margin: 20, color: 'grey' }}>
+    <div className="card" style={{ margin: 10, color: 'grey' }}>
       <div class="card" style={{ width: '50%', margin: 10 }}>
         <div class="table-responsive">
           <table class="table table-vcenter card-table">

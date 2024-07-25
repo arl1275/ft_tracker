@@ -41,7 +41,7 @@ function ListUsuarios() {
 
     return (
         <>
-            <div className="card" style={{ margin: 20, backgroundColor: '#ECF0F1' }}>
+            <div className="card" style={{ margin: 10, backgroundColor: '#ECF0F1' }}>
                 <div class="col-12" style={{ display: 'flex', flexDirection: 'row' }}>
                     <div class="card" style={{ width: '60%', margin: 5 }}>
                         <div class="table-responsive">
