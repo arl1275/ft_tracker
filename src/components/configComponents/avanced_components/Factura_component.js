@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 
-export const FacturasLista = ({ facturas }) => {
-    const [searchTerm, setSearchTerm] = useState('');
+export const FacturasLista = ({ facturas, Selection, ClearSelection, PushItem }) => {
+    const [searchTerm, setSearchTerm] = useState('0');
     const [filteredFacturas, setFilteredFacturas] = useState(facturas);
+    const [Counter, setCounter] = useState(0);
+
+    const PushNewDec = (num) => { PushItem(num); UpdateCounter()};
+    const ClearSelection_ = () => { setCounter(0); ClearSelection(); }
+    const UpdateCounter = () => { Selection.length > Counter ? setCounter(Selection.length + 1) : null }
 
     const handleSearch = (e) => {
         const term = e.target.value;
@@ -27,8 +32,8 @@ export const FacturasLista = ({ facturas }) => {
     return (
         <div>
             <div style={{ alignSelf: 'center', width: '100%', display: 'flex', flexDirection: 'row', height: 'auto' }}>
-                <input type="checkbox" />
-                <div style={styles.borrar}>BORRAR SELECCION</div>
+                <div>{Counter}</div>
+                <button style={styles.borrar} onClick={ClearSelection_}>BORRAR SELECCION</button>
                 <div style={styles.principal}>PRINCIPAL</div>
                 <div style={styles.secundaria}>SECUNDARIA</div>
                 <input type="text" value={searchTerm} onChange={handleSearch} placeholder="Buscar factura..." style={styles.searchInput} />
@@ -39,20 +44,25 @@ export const FacturasLista = ({ facturas }) => {
                     filteredFacturas.length > 0 ?
                         <div>{
                             filteredFacturas.map((item, index) => {
+                                let COLORBACKGROUND = item._closed === true ? '#d4efdf' : (item.isblock ? '#fadbd8' : '');
                                 return (
-                                    <div style={styles.row} key={index}>
-                                        <input type="checkbox" />
-                                        <div style={{ width: '15%', fontSize: 12, color: 'black' }}>{item.pedidoventa}</div>
-                                        <div style={{ width: '15%', fontSize: 12, color: 'black' }}>{item.factura}</div>
-                                        <div style={{ width: '15%', fontSize: 10, color: 'black' }}>{item.clientenombre}</div>
-                                        <div style={{ width: '15%', fontSize: 10, color: 'black' }}>
-                                            {item.albaran.split(',').map((albaran, index) => (
+                                    <div style={{ backgroundColor : COLORBACKGROUND}}>
+                                        <div style={styles.row} key={index}>
+                                            <input type="checkbox" onChange={() => PushNewDec(item.id)} checked={Selection.includes(item.id) ? true : false}/>
+                                            <div style={{ width: '15%', fontSize: 12, color: 'black' }}>{item.pedidoventa}</div>
+                                            <div style={{ width: '15%', fontSize: 12, color: 'black' }}>{item.factura}</div>
+                                            <div style={{ width: '15%', fontSize: 10, color: 'black' }}>{item.clientenombre}</div>
+                                            <div style={{ width: '15%', fontSize: 10, color: 'black' }}>
+                                                {item.albaran.split(',').map((albaran, index) => (
+                                                    <div key={index}>{albaran.trim()}</div>
+                                                ))}</div>
+                                            <div style={{ width: '15%', fontSize: 10, color: 'black' }}>{item.lista_empaque.split(',').map((albaran, index) => (
                                                 <div key={index}>{albaran.trim()}</div>
                                             ))}</div>
-                                        <div style={{ width: '15%', fontSize: 10, color: 'black' }}>{item.lista_empaque.split(',').map((albaran, index) => (
-                                            <div key={index}>{albaran.trim()}</div>
-                                        ))}</div>
-                                    </div>)
+                                            <div style={{ width: '15%', fontSize: 10, color: 'black' }}>{item.id}</div>
+                                        </div>
+                                    </div>
+                                )
                             })
                         }</div>
                         :
