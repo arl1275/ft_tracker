@@ -43,13 +43,14 @@ export const DeclaracionesLista = ({ declaraciones, pushItem, ClearSelection, Se
                     filteredDeclaraciones.length > 0 ?
                         <div>{
                             filteredDeclaraciones.map((item, index) => {
-                                let COLORBACKGROUND = item._closed === true ? '#d4efdf' : '';
+                                let COLORBACKGROUND = item._closed === true ? '#f2d7d5' : '';
                                 return (
                                     <div style={{ backgroundColor: COLORBACKGROUND }} key={index}>
                                         <div style={styles.row}>
                                             <input type="checkbox" onChange={() => PushNewDec(item.id)} checked={Selection.includes(item.id) ? true : false}/>
-                                            <div style={{ width: '40%', fontSize: 12, color: 'black' }}>{item.declaracionenvio}</div>
-                                            <div style={{ width: '40%', fontSize: 12, color: 'black' }}>{item.placa}</div>
+                                            <div style={{ width: '30%', fontSize: 12, color: 'black' }}>{item.declaracionenvio}</div>
+                                            <div style={{ width: '30%', fontSize: 12, color: 'black' }}>{item.placa}</div>
+                                            <div style={{ width: '30%', fontSize: 12, color: 'black' }}>{item.id}</div>
                                         </div>
                                     </div>)
                             })

@@ -9,14 +9,14 @@ export const AdvancedList = () => {
     const [ Facturas, setFacturas] = useState([]);
     const [ Declaraciones, setDeclaraciones] = useState([]);
     const [ SELECTED_IDs_facturas, setSelectedIds_facturas ] = useState([]);
-    const [ SELECTED_IDs_declarac, setSelectedIds_declarac ] = useState([])
+    const [ SELECTED_IDs_declarac, setSelectedIds_declarac ] = useState([]);
 
     const PushNewItemFact = (newItem)=>{ 
-        setSelectedIds_facturas((prevDec) => {
-        if (!prevDec.includes(newItem)) {
-            return [...prevDec, newItem];
+        setSelectedIds_facturas((prevFacts) => {
+        if (!prevFacts.some(item => item.id === newItem.id)) {
+            return [...prevFacts, newItem];
         } else {
-            return prevDec;
+            return prevFacts;
         }
     });};
     const CleanSelectionF = () => ( setSelectedIds_facturas([]));
@@ -43,6 +43,7 @@ export const AdvancedList = () => {
         }
     }
 
+
     useEffect(() => {
         Fullarrays()
     }, [])
@@ -60,7 +61,7 @@ export const AdvancedList = () => {
             alignItems: 'center'
         }}>
 
-            <HeadAdvanced />
+            <HeadAdvanced Declaraciones={SELECTED_IDs_declarac} Facturas={SELECTED_IDs_facturas} />
 
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                 <div style={{ backgroundColor: 'white', width: '50%', height: '100%', margin: 5, borderRadius: 5, border: '1px solid #cfd8dc' }}>
@@ -73,8 +74,6 @@ export const AdvancedList = () => {
                     <DeclaracionesLista declaraciones={Declaraciones} pushItem={PushNewItemDecE} ClearSelection={CleanSelectionD} Selection={SELECTED_IDs_declarac}/>
                 
                 </div>
-
-                {/* <div style={{ backgroundColor: 'white', width: '35%', height: '100%', margin: 5, borderRadius: 5, border: '1px solid #cfd8dc' }}>EXPORT</div> */}
             </div>
 
 

@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
 
 export const FacturasLista = ({ facturas, Selection, ClearSelection, PushItem }) => {
-    const [searchTerm, setSearchTerm] = useState('0');
+    const [searchTerm, setSearchTerm] = useState('');
     const [filteredFacturas, setFilteredFacturas] = useState(facturas);
     const [Counter, setCounter] = useState(0);
 
-    const PushNewDec = (num) => { PushItem(num); UpdateCounter()};
+    const PushNewDec = (num, block, closed) => {
+        let NewItem = { id : num, blocked : block, isClosed : closed} 
+        PushItem(NewItem); 
+        UpdateCounter()
+    };
     const ClearSelection_ = () => { setCounter(0); ClearSelection(); }
-    const UpdateCounter = () => { Selection.length > Counter ? setCounter(Selection.length + 1) : null }
+    const UpdateCounter = () => { Selection.length > Counter ? setCounter(Selection.length + 1) : null };
+    const IsthereCheck = (val) => Selection.some((item) => item.id === val);
 
     const handleSearch = (e) => {
         const term = e.target.value;
         setSearchTerm(term);
 
-        if (term) {
+        if (term.length > 1) {
             const filtered = facturas.filter(factura =>
                 factura.factura.toLowerCase().includes(term.toLowerCase()) ||
                 factura.clientenombre.toLowerCase().includes(term.toLowerCase())
@@ -34,8 +39,6 @@ export const FacturasLista = ({ facturas, Selection, ClearSelection, PushItem })
             <div style={{ alignSelf: 'center', width: '100%', display: 'flex', flexDirection: 'row', height: 'auto' }}>
                 <div>{Counter}</div>
                 <button style={styles.borrar} onClick={ClearSelection_}>BORRAR SELECCION</button>
-                <div style={styles.principal}>PRINCIPAL</div>
-                <div style={styles.secundaria}>SECUNDARIA</div>
                 <input type="text" value={searchTerm} onChange={handleSearch} placeholder="Buscar factura..." style={styles.searchInput} />
             </div>
 
@@ -48,7 +51,7 @@ export const FacturasLista = ({ facturas, Selection, ClearSelection, PushItem })
                                 return (
                                     <div style={{ backgroundColor : COLORBACKGROUND}}>
                                         <div style={styles.row} key={index}>
-                                            <input type="checkbox" onChange={() => PushNewDec(item.id)} checked={Selection.includes(item.id) ? true : false}/>
+                                            <input type="checkbox" onChange={() => PushNewDec(item.id, item.isblock, item._closed)} checked={ IsthereCheck(item.id) ? true : false}/>
                                             <div style={{ width: '15%', fontSize: 12, color: 'black' }}>{item.pedidoventa}</div>
                                             <div style={{ width: '15%', fontSize: 12, color: 'black' }}>{item.factura}</div>
                                             <div style={{ width: '15%', fontSize: 10, color: 'black' }}>{item.clientenombre}</div>
