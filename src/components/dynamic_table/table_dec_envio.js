@@ -37,10 +37,11 @@ function removeTZ(dateString) {
 }
 
 const TableForm_dec_envio = ({ columns, data }) => {
+    const [checkedReport, setCheckedReport] = useState(false);
     const [newCamion, setNewCamion] = useState([]);
     const [newEntregador, setNewEntregador] = useState([]);
     const [dec_, setDec] = useState('');
-    const [row_, setRow_] = useState();
+    const [row_, setRow_] = useState([]);
     const {
         getTableProps,
         getTableBodyProps,
@@ -50,14 +51,10 @@ const TableForm_dec_envio = ({ columns, data }) => {
         state,
         setGlobalFilter,
     } = useTable({ columns, data }, useGlobalFilter); // Use useGlobalFilter
-
-    const handleCamnion = (value) => {
-        setNewCamion(value);
-    }
-
-    const handleEntregador = (value) => {
-        setNewEntregador(value);
-    }
+    const SelectedReport = () =>{ setCheckedReport(!checkedReport);};
+    const handleCamnion = (value) => { setNewCamion(value);}
+    const declaracionValidator = () => { return row_[0] ?  row_[0] : 0 }
+    const handleEntregador = (value) => { setNewEntregador(value) }
     const handleRow = (value) => {
         const { declaracionenvio, placa, nombre, cant_facturas, cant_cajas, cant_unidades, created_at } = value.values;
         let arr = [declaracionenvio, placa, cant_facturas, cant_cajas, cant_unidades, nombre, created_at];
@@ -170,8 +167,8 @@ const TableForm_dec_envio = ({ columns, data }) => {
                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style={{ maxWidth : 950}}>
                     <div className='modal-content'>
 
-                        <div className='modal-header' style={{ backgroundColor: 'black' }}>
-                            <h5 class="modal-title" style={{ color: 'white', backgroundColor: 'black' }}>DECLARACION DE ENVIO : {row_ ? row_[0] : null}</h5>
+                        <div className='modal-header' style={{ backgroundColor: 'blue' }}>
+                            <h5 class="modal-title" style={{ color: 'white' }}>DECLARACION DE ENVIO : {row_ ? row_[0] : null}</h5>
                             <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" />
                         </div>
 
@@ -180,11 +177,11 @@ const TableForm_dec_envio = ({ columns, data }) => {
                         <div >
                             <div class="card">
                                 <ul class="nav nav-tabs" data-toggle="tabs">
-                                    <li class="nav-item">
+                                    <li class="nav-item" defaultChecked={true}>
                                         <a href="#tabs-home-17" class="nav-link active" data-toggle="tab">DETALLE DECLARACION DE ENVIO</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#tabs-profile-18" class="nav-link" data-toggle="tab">REPORT</a>
+                                        <a href="#tabs-profile-18" class="nav-link" data-toggle="tab" onClick={()=> SelectedReport()}>REPORT</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="#tabs-profile-17" class="nav-link" data-toggle="tab">CAMBIO DETALLES</a>
@@ -269,7 +266,7 @@ const TableForm_dec_envio = ({ columns, data }) => {
                                         </div>
 
                                         <div class="tab-pane fade" id="tabs-profile-18" >
-                                            <div><ReporteFacturasDeEnvio declaracion_={row_ ? row_[0] : null} camion={row_ ? row_[1] : null} /></div>
+                                            <div><ReporteFacturasDeEnvio declaracion_={declaracionValidator()} camion={row_ ? row_[1] : null} IsReportChecked={checkedReport}/></div>
                                         </div>
                                     </div>
                                 </div>

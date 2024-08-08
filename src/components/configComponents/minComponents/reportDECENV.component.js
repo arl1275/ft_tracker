@@ -5,7 +5,7 @@ import { PrintableComponent, sumarNumeros } from "../../any_components/ToPrint.c
 import { PrintButton } from "../../any_components/ToPrint.component";
 
 
-export const ReporteFacturasDeEnvio = ({ declaracion_, camion }) => {
+export const ReporteFacturasDeEnvio = ({ declaracion_, camion, IsReportChecked }) => {
     const [facturas, setFacturas] = useState([]);
     const printRef = useRef();
 
@@ -14,9 +14,10 @@ export const ReporteFacturasDeEnvio = ({ declaracion_, camion }) => {
 
     const getData = async () => {
         try {
+            console.log('Declaracion :: ', declaracion_);
             const response = await axios.get(bk_dir + '/decEnv/getfactsdec', { params: { declaracion: declaracion_ } });
+            console.log('brute data :: ', response);
             const data = response.data.data;
-            console.log('data de server :: ', data)
             if (Array.isArray(data) && data.length > 0) {
                 setFacturas(data);
             } else {
@@ -28,10 +29,8 @@ export const ReporteFacturasDeEnvio = ({ declaracion_, camion }) => {
     }
 
     useEffect(() => {
-        if (declaracion_) {
             getData();
-        }
-    }, [declaracion_]);
+    }, [IsReportChecked]);
 
     return (
         <div style={{ display : 'flex', flexDirection : 'column', alignItems : 'center'}}>
