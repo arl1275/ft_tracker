@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Loadingbar } from '../../any_components/loadingbar';
 
 export const FacturasLista = ({ facturas, Selection, ClearSelection, PushItem }) => {
     const [searchTerm, setSearchTerm] = useState('');
-    const [filteredFacturas, setFilteredFacturas] = useState(facturas);
+    const [filteredFacturas, setFilteredFacturas] = useState([]);
     const [Counter, setCounter] = useState(0);
 
+    useEffect(() => { setFilteredFacturas(facturas) }, [facturas]);
+    useEffect(()=>{ Selection.length === 0 ? setCounter(0) : setCounter(prevCounter => prevCounter + 1)}, [Selection])
+
     const PushNewDec = (num, block, closed) => {
-        let NewItem = { id : num, blocked : block, isClosed : closed} 
-        PushItem(NewItem); 
-        UpdateCounter()
+        let NewItem = { id: num, blocked: block, isClosed: closed }
+        PushItem(NewItem);
+        //UpdateCounter()
     };
     const ClearSelection_ = () => { setCounter(0); ClearSelection(); }
-    const UpdateCounter = () => { Selection.length > Counter ? setCounter(Selection.length + 1) : null };
     const IsthereCheck = (val) => Selection.some((item) => item.id === val);
 
     const handleSearch = (e) => {
@@ -49,11 +52,11 @@ export const FacturasLista = ({ facturas, Selection, ClearSelection, PushItem })
                             filteredFacturas.map((item, index) => {
                                 let COLORBACKGROUND = item._closed === true ? '#d4efdf' : (item.isblock ? '#fadbd8' : '');
                                 return (
-                                    <div style={{ backgroundColor : COLORBACKGROUND}}>
+                                    <div style={{ backgroundColor: COLORBACKGROUND }}>
                                         <div style={styles.row} key={index}>
-                                            <input type="checkbox" onChange={() => PushNewDec(item.id, item.isblock, item._closed)} checked={ IsthereCheck(item.id) ? true : false}/>
+                                            <input type="checkbox" onChange={() => PushNewDec(item.id, item.isblock, item._closed)} checked={IsthereCheck(item.id) ? true : false} />
                                             <div style={{ width: '15%', fontSize: 12, color: 'black' }}>{item.pedidoventa}</div>
-                                            <div style={{ width: '15%', fontSize: 12, color: 'black' }}>{item.factura}</div>
+                                            <div style={{ width: '15%', fontSize: 12, color: 'black', fontWeight : 'bold' }}>{item.factura}</div>
                                             <div style={{ width: '15%', fontSize: 10, color: 'black' }}>{item.clientenombre}</div>
                                             <div style={{ width: '15%', fontSize: 10, color: 'black' }}>
                                                 {item.albaran.split(',').map((albaran, index) => (
@@ -62,14 +65,14 @@ export const FacturasLista = ({ facturas, Selection, ClearSelection, PushItem })
                                             <div style={{ width: '15%', fontSize: 10, color: 'black' }}>{item.lista_empaque.split(',').map((albaran, index) => (
                                                 <div key={index}>{albaran.trim()}</div>
                                             ))}</div>
-                                            <div style={{ width: '15%', fontSize: 10, color: 'black' }}>{item.id}</div>
+                                            <div style={{ width: '15%', fontSize: 10, color: 'grey' }}>{item.id}</div>
                                         </div>
                                     </div>
                                 )
                             })
                         }</div>
                         :
-                        <div>null</div>
+                        <div><Loadingbar/></div>
                 }
             </div>
         </div>

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { bk_dir } from "../../conf/configuration.file";
 
-export function UpdateRegisters(facturas_, declaraciones_, case_, tipo) {
+export function UpdateRegisters(facturas_, declaraciones_, case_, tipo ) {
     const BloqF = `${bk_dir}/facturas/admin/blockFacturas`;
     const UnBloqF = `${bk_dir}/facturas/admin/unblockFacturas`;
     const FinalizarFactura = `${bk_dir}/facturas/Admin/finalizarfactura`;

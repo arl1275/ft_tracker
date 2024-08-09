@@ -1,5 +1,4 @@
 import React from "react";
-import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import { useNavigate } from 'react-router-dom';
 import RemoveCircleSharpIcon from '@mui/icons-material/RemoveCircleSharp';
 const logo = require('../../assets/dist/img/images/logo_app.png')
@@ -12,6 +11,8 @@ export const UserLabel = () => {
     const account_data = JSON.parse(account)
     const account_userinfo = account_data.usurario
     const role = account_userinfo.type_ === 1 ? 'Administrador' : 'Supervisor'
+
+    const LogoutUser = () =>{ localStorage.removeItem('dataUser')};
 
     return (
         <div style={styles.logo}>
@@ -27,7 +28,7 @@ export const UserLabel = () => {
                 </div>
             </div>
 
-            <div style={{ justifySelf: 'center', alignSelf: 'center', marginRight: 5 }} onClick={() => { navigate('/'); }}>
+            <div style={{ justifySelf: 'center', alignSelf: 'center', marginRight: 5 }} onClick={() => { LogoutUser(); navigate('/'); }}>
                 <RemoveCircleSharpIcon style={{ fontSize: 20, color: 'red' }} />
             </div>
 

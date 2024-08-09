@@ -28,6 +28,7 @@ const LoginForm = () => {
       } else {
         const response = await axios.get(`${bk_dir}/usuarios/auth/user`, { params: data });
         setDataUser(response.data);
+        
         if (response.status === 200 && response.data.token) {
           localStorage.setItem('dataUser', JSON.stringify(response.data));
           navigate("/main", { replace: true })

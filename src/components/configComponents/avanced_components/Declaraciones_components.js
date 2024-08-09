@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Loadingbar } from "../../any_components/loadingbar";
 
 export const DeclaracionesLista = ({ declaraciones, pushItem, ClearSelection, Selection }) => {
     const [searchTerm, setSearchTerm] = useState('');
-    const [filteredDeclaraciones, setFilteredDeclaraciones] = useState(declaraciones);
+    const [filteredDeclaraciones, setFilteredDeclaraciones] = useState([]);
     const [Counter, setCounter] = useState(0);
 
-    const PushNewDec = (num) => { pushItem(num); UpdateCounter()};
+    const PushNewDec = (num) => { pushItem(num)};
     const ClearSelection_ = () => { setCounter(0); ClearSelection(); }
-    const UpdateCounter = () => { Selection.length > Counter ? setCounter(Selection.length + 1) : null }
+    useEffect(()=>{ Selection.length === 0 ? setCounter(0) : setCounter(prevCounter => prevCounter + 1)}, [Selection])
+    
+    useEffect(()=>{ setFilteredDeclaraciones(declaraciones)}, [declaraciones])
 
     const handleSearch = (e) => {
         const term = e.target.value;
@@ -48,15 +51,15 @@ export const DeclaracionesLista = ({ declaraciones, pushItem, ClearSelection, Se
                                     <div style={{ backgroundColor: COLORBACKGROUND }} key={index}>
                                         <div style={styles.row}>
                                             <input type="checkbox" onChange={() => PushNewDec(item.id)} checked={Selection.includes(item.id) ? true : false}/>
-                                            <div style={{ width: '30%', fontSize: 12, color: 'black' }}>{item.declaracionenvio}</div>
-                                            <div style={{ width: '30%', fontSize: 12, color: 'black' }}>{item.placa}</div>
-                                            <div style={{ width: '30%', fontSize: 12, color: 'black' }}>{item.id}</div>
+                                            <div style={{ width: '30%', fontSize: 12, color: 'black', fontWeight : 'bold' }}>{item.declaracionenvio}</div>
+                                            <div style={{ width: '30%', fontSize: 12, color: 'black', fontWeight : 'bold' }}>{item.placa}</div>
+                                            <div style={{ width: '30%', fontSize: 12, color: 'grey' }}>{item.id}</div>
                                         </div>
                                     </div>)
                             })
                         }</div>
                         :
-                        <div>null</div>
+                        <div><Loadingbar/></div>
                 }
             </div>
         </div>

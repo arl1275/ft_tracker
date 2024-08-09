@@ -42,9 +42,9 @@ function DashboardFacturas() {
         data.length > 0 ?
           <TableForm data={data} columns={columns} />
           :
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{ display: 'flex',  flexDirection : 'column',justifyContent: 'center' }}>
             <Loadingbar />
-            <div style={{ width: '30%', height: '30%' }}>
+            <div style={{ width: '30%', height: '30%', alignSelf : 'center', top : 10}}>
               <img src={loagind} style={{ display: 'block', margin: 'auto' }} />
             </div>
           </div>

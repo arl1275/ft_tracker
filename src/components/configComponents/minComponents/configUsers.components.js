@@ -3,8 +3,13 @@ import axios from "axios";
 import { bk_dir } from "../../../conf/configuration.file";
 
 export const ConfigUser = ({dat}) => {
-    const [data, setData] = useState(dat);
+    const [data, setData] = useState();
     const [isEditing, setIsEditing] = useState(false);
+
+    useEffect(()=>{ setData(dat)}, [dat]);
+
+    const handleEdit = () => { setIsEditing(!isEditing)};
+    const handleChange = (e) => { setData({ ...data, [e.target.name]: e.target.value }); };
 
     const updateUser = async () =>{
         try {
@@ -22,14 +27,7 @@ export const ConfigUser = ({dat}) => {
         }
     }
 
-    const handleEdit = () => {
-        setIsEditing(!isEditing);
-    };
-
-    const handleChange = (e) => {
-        setData({ ...data, [e.target.name]: e.target.value });
-    };
-
+    
     const renderEditableFields = () => {
         return (
             <div className="card">
@@ -38,19 +36,19 @@ export const ConfigUser = ({dat}) => {
                         <tbody>
                             <tr style={{ textAlign : 'left'}}>
                                 <td style={{ alignItems: "start" }}>NOMBRE:</td>
-                                <td><input type="text" name="nombre" value={data.nombre} onChange={handleChange} style={{ border: "none" }} /></td>
+                                <td><input type="text" name="nombre" value={data?.nombre} onChange={handleChange} style={{ border: "none" }} /></td>
                             </tr>
                             <tr style={{ textAlign : 'left'}}>
                                 <td>Cod. Empleado:</td>
-                                <td><input type="text" name="cod_empleado" value={data.cod_empleado} onChange={handleChange} style={{ border: "none" }} disabled /></td>
+                                <td><input type="text" name="cod_empleado" value={data?.cod_empleado} onChange={handleChange} style={{ border: "none" }} disabled /></td>
                             </tr>
                             <tr style={{ textAlign : 'left'}}>
                                 <td>Password:</td>
-                                <td><input type="password" name="_password" value={data._password} onChange={handleChange} style={{ border: "none" }} /></td>
+                                <td><input type="password" name="_password" value={data?._password} onChange={handleChange} style={{ border: "none" }} /></td>
                             </tr>
                             <tr style={{ textAlign : 'left'}}>
                                 <td>QR:</td>
-                                <td><input type="text" name="_qr" value={data._qr} onChange={handleChange} style={{ border: "none" }} /></td>
+                                <td><input type="text" name="_qr" value={data?._qr} onChange={handleChange} style={{ border: "none" }} /></td>
                             </tr>
                         </tbody>
                     </table>
@@ -103,11 +101,11 @@ export const ConfigUser = ({dat}) => {
                                 <tbody>
                                     <tr style={{ textAlign : 'left'}}>
                                         <td>NOMBRE:</td>
-                                        <td>{data.nombre}</td>
+                                        <td>{data?.nombre}</td>
                                     </tr>
                                     <tr style={{ textAlign : 'left'}}>
                                         <td>Cod. Empleado:</td>
-                                        <td>{data.cod_empleado}</td>
+                                        <td>{data?.cod_empleado}</td>
                                     </tr>
                                     <tr style={{ textAlign : 'left'}}>
                                         <td>Password:</td>
@@ -115,7 +113,7 @@ export const ConfigUser = ({dat}) => {
                                     </tr>
                                     <tr style={{ textAlign : 'left'}}>
                                         <td>QR:</td>
-                                        <td>{data._qr}</td>
+                                        <td>{data?._qr}</td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -11,7 +11,7 @@ export function ConfigPage() {
     <div style={{ height: '85vh'}}>
       <AdminNavbar />
       <Routes>
-        <Route path='/declaraciones' element={<List_decEnvio />} />
+      <Route path='/declaraciones' element={<List_decEnvio />} />
         <Route path='/facturas' element={<ListFact />} />
         <Route path='/avanzado' element={<AdvancedView/>}/>
       </Routes>

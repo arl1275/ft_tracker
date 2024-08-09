@@ -6,20 +6,24 @@ import { FacturasLista } from "../avanced_components/Factura_component";
 import { DeclaracionesLista } from "../avanced_components/Declaraciones_components";
 
 export const AdvancedList = () => {
-    const [ Facturas, setFacturas] = useState([]);
-    const [ Declaraciones, setDeclaraciones] = useState([]);
-    const [ SELECTED_IDs_facturas, setSelectedIds_facturas ] = useState([]);
-    const [ SELECTED_IDs_declarac, setSelectedIds_declarac ] = useState([]);
+    const [Facturas, setFacturas] = useState([]);
+    const [Declaraciones, setDeclaraciones] = useState([]);
+    const [SELECTED_IDs_facturas, setSelectedIds_facturas] = useState([]);
+    const [SELECTED_IDs_declarac, setSelectedIds_declarac] = useState([]);
 
-    const PushNewItemFact = (newItem)=>{ 
+    const PushNewItemFact = (newItem) => {
         setSelectedIds_facturas((prevFacts) => {
-        if (!prevFacts.some(item => item.id === newItem.id)) {
-            return [...prevFacts, newItem];
-        } else {
-            return prevFacts;
-        }
-    });};
-    const CleanSelectionF = () => ( setSelectedIds_facturas([]));
+            if (!prevFacts.some(item => item.id === newItem.id)) {
+                return [...prevFacts, newItem];
+            } else {
+                return prevFacts;
+            }
+        });
+    };
+    
+    const CleanSelectionF = () => (setSelectedIds_facturas([]));
+    const CleanSelectionD = () => (setSelectedIds_declarac([]));
+    const CleanAll = () => { CleanSelectionD(), CleanSelectionF() };
 
     const PushNewItemDecE = (newItem) => {
         setSelectedIds_declarac((prevDec) => {
@@ -30,7 +34,7 @@ export const AdvancedList = () => {
             }
         });
     };
-    const CleanSelectionD = () => ( setSelectedIds_declarac([]));
+    
 
     const Fullarrays = async () => {
         try {
@@ -70,9 +74,9 @@ export const AdvancedList = () => {
                 </div>
                 <div style={{ backgroundColor: 'white', width: '50%', height: '100%', margin: 5, borderRadius: 5, border: '1px solid #cfd8dc' }}>
                     <div style={{ width: '100%', fontSize: 15, fontWeight: 'bold', textAlign: 'center', margin: '10px 0px 10px 0px' }}>DECLARACIONES</div>
-                    
-                    <DeclaracionesLista declaraciones={Declaraciones} pushItem={PushNewItemDecE} ClearSelection={CleanSelectionD} Selection={SELECTED_IDs_declarac}/>
-                
+
+                    <DeclaracionesLista declaraciones={Declaraciones} pushItem={PushNewItemDecE} ClearSelection={CleanSelectionD} Selection={SELECTED_IDs_declarac} />
+
                 </div>
             </div>
 

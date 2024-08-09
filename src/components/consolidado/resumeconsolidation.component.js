@@ -34,7 +34,7 @@ const ResumenConsolidado = ({ props, clearArray }) => {
         try {
           const user = JSON.parse(userString);
           const userName = user.usurario.nombre;
-          console.log(userName);
+          //console.log(userName);
           User = userName;
         } catch (error) {
           console.error('Error parsing user data:', error);
